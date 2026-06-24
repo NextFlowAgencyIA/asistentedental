@@ -249,14 +249,9 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 
 /* ================== DATOS DEMO (ficticios) ================== */
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxRUhxbxsazERRLA8wPR9L8EWlqbDFJAxga2JIgnG7ZZEDXR6cG7GQa92LSpvsGA0djcw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbzsufyA61BiJcomKiwX4aDudcBHx_VjokK2ovcn5ntUXhgGkc0KnxyPpaHttgj0owpbvg/exec";
 
 async function guardarCitaDemo() {
-
-  const codigoLocal = "DEMO-" + Date.now();
-
- async function guardarCitaDemo() {
-
   const codigoLocal = "DEMO-" + Date.now();
 
   const params = new URLSearchParams({
@@ -271,16 +266,21 @@ async function guardarCitaDemo() {
     horaPreferida: st.hora || ""
   });
 
-  await fetch(API_URL + "?" + params.toString(), {
-    method: "GET",
-    mode: "no-cors"
-  });
+  try {
+    await fetch(API_URL + "?" + params.toString(), {
+      method: "GET",
+      mode: "no-cors"
+    });
+  } catch(e) {
+    console.log("Error al guardar:", e);
+  }
 
   return {
     status: "ok",
     codigoCita: codigoLocal
   };
 }
+
 const DATA = {
   servicios: ['Valoración gratuita','Limpieza / Blanqueamiento','Ortodoncia','Coronas','Extracción muela del juicio'],
   ciudades: {
