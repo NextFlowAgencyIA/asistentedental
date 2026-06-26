@@ -252,12 +252,11 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 const API_URL = "https://script.google.com/macros/s/AKfycbzz4eewW_L4GPm_PfnkDwqsrOepCoNEaxTiEzbmEERFjkT0kcEufZ_RwAWmHL92TKEj3Q/exec";
 
 async function guardarCitaDemo() {
-  const codigoLocal = "DEMO-" + Date.now();
-
   const params = new URLSearchParams({
-    accion: "guardarDemo",
+    accion: "guardarCitaCompleta",
     nombre: st.nombre || "",
     telefono: st.tel || "",
+    codigoPaciente: st.codigoPaciente || "",
     municipio: st.ciudad || "",
     sucursal: st.sucursal || "",
     tratamiento: st.servicio || "",
@@ -267,18 +266,50 @@ async function guardarCitaDemo() {
   });
 
   try {
-    await fetch(API_URL + "?" + params.toString(), {
-      method: "GET",
-      mode: "no-cors"
+    const response = await fetch(API_URL + "?" + params.toString(), {
+      method: "GET"
     });
+    const data = await response.json();
+    return data;
   } catch(e) {
     console.log("Error al guardar:", e);
+    return {
+      status: "error",
+      message: "No se pudo conectar al servidor"
+    };
   }
+}
 
-  return {
-    status: "ok",
-    codigoCita: codigoLocal
-  };
+
+async function buscarPacientePorTelefono(telefono) {
+  const params = new URLSearchParams({
+    accion: "buscarPacientePorTelefono",
+    telefono: telefono
+  });
+
+  try {
+    const response = await fetch(API_URL + "?" + params.toString());
+    return await response.json();
+  } catch(e) {
+    console.log("Error al buscar:", e);
+    return { status: "error" };
+  }
+}
+
+
+async function buscarPacientePorNombre(nombre) {
+  const params = new URLSearchParams({
+    accion: "buscarPacientePorNombre",
+    nombre: nombre
+  });
+
+  try {
+    const response = await fetch(API_URL + "?" + params.toString());
+    return await response.json();
+  } catch(e) {
+    console.log("Error al buscar:", e);
+    return { status: "error" };
+  }
 }
 
 const DATA = {
@@ -319,7 +350,7 @@ let st = {};
 let folio = 1041;
 const chat = document.getElementById('chat');
 
-function reset(){ st = { paso:'servicio', servicio:null, ciudad:null, sucursal:null, doctor:null, fecha:null, hora:null, nombre:null, tel:null }; }
+function reset(){ st = { paso:'tipoPaciente', tipoPaciente:null, codigoPaciente:null, servicio:null, ciudad:null, sucursal:null, doctor:null, fecha:null, hora:null, nombre:null, tel:null }; }
 
 /* ================== UTILIDADES DE CHAT ================== */
 function hora(){ const d=new Date(); return d.toLocaleTimeString('es-MX',{hour:'numeric',minute:'2-digit'}); }
@@ -376,10 +407,85 @@ function ocupadasPara(doctor,fecha){
 /* ================== FLUJO ================== */
 function inicio(){
   reset();
-  botSay('¡Hola! 😁 Soy el asistente virtual de Los Dentistas. Puedo agendarte una cita en menos de un minuto, y también responder tus dudas.\n\n¿Qué servicio te interesa?', ()=>{
+  botSay('¡Hola! 😁 Soy el asistente virtual de Los Dentistas. Puedo agendarte una cita en menos de un minuto, y también responder tus dudas.\n\n¿Eres paciente nuevo o ya nos visitaste antes?', ()=>{
+    showChips(['🆕 Soy paciente nuevo','👋 Ya soy paciente regular'], pick=>{
+      if(pick.includes('nuevo')){
+        st.tipoPaciente = 'nuevo';
+        pasoNombreNuevo();
+      } else {
+        st.tipoPaciente = 'regular';
+        pasoTelefonoRegular();
+      }
+    });
+  });
+}
+
+function pasoNombreNuevo(){
+  st.paso='nombreNuevo';
+  botSay('¡Bienvenido! 😊 Para agendar tu cita necesito algunos datos.\n\n¿Cuál es tu nombre completo?');
+}
+
+function pasoTelefonoNuevo(){
+  st.paso='telefonoNuevo';
+  botSay('Gracias '+st.nombre.split(' ')[0]+'. ¿Cuál es tu teléfono a 10 dígitos?');
+}
+
+function pasoTelefonoRegular(){
+  st.paso='telefonoRegular';
+  botSay('¡Qué gusto verte de nuevo! 😊\n\n¿Cuál es tu teléfono?');
+}
+
+async function buscarPacienteEnSistema(telefono){
+  botSay('Déjame buscarte en el sistema un momento... 🔍');
+  
+  const resultado = await buscarPacientePorTelefono(telefono);
+  
+  if(resultado.status === 'ok'){
+    // Lo encontró por teléfono
+    st.nombre = resultado.nombre;
+    st.tel = telefono;
+    st.codigoPaciente = resultado.codigoPaciente || 'TEL-' + telefono.replace(/\D/g,'');
+    botSay('¡Te encontré '+st.nombre+'! 😊 Vamos a agendar tu cita.', ()=>{
+      pasoServicio();
+    });
+  } else {
+    // No lo encontró - pedir nombre para buscar de otra forma
+    st.tel = telefono;
+    botSay('Mmm, no encuentro ese teléfono 🤔 ¿Será que cambiaste de número?\n\nDame tu nombre completo y te busco de otra forma.', ()=>{
+      st.paso = 'nombreParaBuscar';
+    });
+  }
+}
+
+async function buscarPacientePorNombreEnSistema(nombre){
+  botSay('Buscando... 🔍');
+  
+  const resultado = await buscarPacientePorNombre(nombre);
+  
+  if(resultado.status === 'ok'){
+    // Encontró por nombre - actualizar teléfono
+    st.nombre = resultado.nombre;
+    st.codigoPaciente = resultado.codigoPaciente || 'TEL-' + st.tel.replace(/\D/g,'');
+    botSay('¡Te encontré '+st.nombre+'! 😊\n\nVeo que antes tu teléfono era '+resultado.telefonoAnterior+'. Voy a actualizarlo a tu teléfono nuevo. Continuemos con tu cita.', ()=>{
+      pasoServicio();
+    });
+  } else {
+    // No existe - crear paciente nuevo
+    st.nombre = nombre;
+    st.codigoPaciente = 'TEL-' + st.tel.replace(/\D/g,'');
+    botSay('Parece que es la primera vez con nosotros 😊 Te creo un registro nuevo. Continuemos.', ()=>{
+      pasoServicio();
+    });
+  }
+}
+
+function pasoServicio(){
+  st.paso='servicio';
+  botSay('¿Qué servicio te interesa?', ()=>{
     showChips(DATA.servicios, pick=>{ st.servicio=pick; pasoCiudad(); });
   });
 }
+
 function pasoCiudad(){
   st.paso='ciudad';
   botSay('¡Perfecto! Tenemos más de 30 sucursales. ¿En qué ciudad te queda mejor?', ()=>{
@@ -413,7 +519,7 @@ function pasoHora(){
   st.paso='hora';
   const busy=ocupadasPara(st.doctor,st.fecha);
   botSay('Disponibilidad de '+st.doctor+' para el '+st.fecha+' (los tachados ya están ocupados):', ()=>{
-    showChips(DATA.horas, pick=>{ st.hora=pick; pasoNombre(); }, busy);
+    showChips(DATA.horas, pick=>{ st.hora=pick; pasoConfirmar(); }, busy);
   });
 }
 function pasoNombre(){
@@ -440,6 +546,21 @@ async function agendar(){
   botSay('Estoy registrando tu solicitud en el sistema... 😊');
 
   const resultado = await guardarCitaDemo();
+  
+  if(resultado.status === 'duplicado'){
+    botSay('Ups 😅 '+resultado.message+'\n\nSi quieres cambiar tu cita actual, escríbenos por WhatsApp.', ()=>{
+      showChips(['Agendar otra cita'], ()=>inicio());
+    });
+    return;
+  }
+  
+  if(resultado.status === 'error'){
+    botSay('Hubo un problema al registrar 😔 Por favor inténtalo de nuevo o contáctanos por WhatsApp.', ()=>{
+      showChips(['Intentar de nuevo'], ()=>inicio());
+    });
+    return;
+  }
+  
   const f = resultado.codigoCita || 'LD-'+(folio++);
 
   botSay(
@@ -474,6 +595,43 @@ function sendFree(){
   inp.value=''; removeChips(); addMe(v);
   const low=v.toLowerCase();
 
+  // 🆕 Paciente nuevo - pidiendo nombre
+  if(st.paso==='nombreNuevo'){
+    if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
+    st.nombre = v;
+    pasoTelefonoNuevo();
+    return;
+  }
+  
+  // 🆕 Paciente nuevo - pidiendo teléfono
+  if(st.paso==='telefonoNuevo'){
+    const dig=v.replace(/\D/g,'');
+    if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos? (ej. 8112345678)'); return; }
+    st.tel = dig.slice(-10);
+    st.codigoPaciente = 'TEL-' + st.tel;
+    botSay('¡Listo '+st.nombre.split(' ')[0]+'! 😊 Ya estás en nuestro sistema.', ()=>{
+      pasoServicio();
+    });
+    return;
+  }
+  
+  // 🆕 Paciente regular - pidiendo teléfono para buscar
+  if(st.paso==='telefonoRegular'){
+    const dig=v.replace(/\D/g,'');
+    if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos?'); return; }
+    const telLimpio = dig.slice(-10);
+    buscarPacienteEnSistema(telLimpio);
+    return;
+  }
+  
+  // 🆕 Buscar paciente por nombre (caso B1)
+  if(st.paso==='nombreParaBuscar'){
+    if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
+    buscarPacientePorNombreEnSistema(v);
+    return;
+  }
+  
+  // Flujo viejo (por si alguien sigue con 'nombre' o 'tel' antiguos)
   if(st.paso==='nombre'){
     if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
     st.nombre=v; pasoTel(); return;
@@ -484,6 +642,7 @@ function sendFree(){
     st.tel=dig.slice(-10).replace(/(\d{2})(\d{4})(\d{4})/,'$1 $2 $3');
     pasoConfirmar(); return;
   }
+
   // atajos por palabra clave (solo si NO es una pregunta de precio)
   const esPreguntaPrecio = /precio|costo|cu[aá]nto|cuesta|vale|cobran/i.test(low);
   const svc=DATA.servicios.find(s=>low.includes(s.toLowerCase().split(' ')[0].toLowerCase()));
@@ -492,6 +651,7 @@ function sendFree(){
   if(st.paso==='ciudad' && ciu){ st.ciudad=ciu; pasoSucursal(); return; }
   if(/hola|buen/i.test(low) && (st.paso==='servicio')){ botSay('¡Hola! 😁 Elige una opción para comenzar:', ()=>showChips(DATA.servicios, p=>{st.servicio=p;pasoCiudad();})); return; }
   /* ===== Preguntas frecuentes (se revisan antes que precios/agendado) ===== */
+ 
   function continuar(){ 
     const r={servicio:()=>showChips(DATA.servicios,p=>{st.servicio=p;pasoCiudad();}),
              ciudad:()=>showChips(Object.keys(DATA.ciudades),p=>{st.ciudad=p;pasoSucursal();}),
