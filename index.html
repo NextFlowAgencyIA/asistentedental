@@ -19,11 +19,9 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;-
 img{max-width:100%;display:block}
 h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 
-/* Banda de demo */
 .demo-ribbon{background:var(--teal-deep);color:var(--mint);text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.4px;padding:7px 14px}
 .demo-ribbon b{color:#fff}
 
-/* Header recreado */
 .ld-head{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid #eef2f4;display:flex;align-items:center;justify-content:space-between;padding:12px 26px;box-shadow:0 2px 14px rgba(20,136,204,.06)}
 .ld-logo{display:flex;align-items:center;gap:11px;font-family:'Poppins';font-weight:800;font-size:20px;color:var(--brand-deep);letter-spacing:.4px}
 .ld-logo .tooth{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--brand-deep));display:flex;align-items:center;justify-content:center;font-size:20px}
@@ -33,7 +31,6 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .ld-cta{background:var(--brand);color:#fff;padding:10px 20px;border-radius:24px;font-weight:600;font-size:14.5px;text-decoration:none}
 @media(max-width:840px){.ld-nav a{display:none}.ld-nav .ld-cta{display:inline-block}}
 
-/* Hero */
 .hero{background:linear-gradient(160deg,#EAF6FD 0%,#D3ECFA 100%);padding:64px 26px 78px;position:relative;overflow:hidden}
 .hero-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .hero h1{font-size:clamp(34px,5vw,56px);color:var(--brand-deep);font-weight:800;margin-bottom:18px}
@@ -50,7 +47,6 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .hero-card .exp{margin-top:14px;font-size:13.5px;color:var(--muted)}
 @media(max-width:840px){.hero-inner{grid-template-columns:1fr;gap:30px}.hero-art{order:-1}}
 
-/* Servicios */
 .section{max-width:1120px;margin:0 auto;padding:66px 26px}
 .kicker{text-align:center;color:var(--brand);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;margin-bottom:8px}
 .section h2{text-align:center;font-size:clamp(26px,3.4vw,38px);color:var(--ink);margin-bottom:38px}
@@ -64,13 +60,11 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .serv p{font-size:13px;color:var(--muted)}
 @media(max-width:900px){.serv-grid{grid-template-columns:repeat(2,1fr)}}
 
-/* Banda valoración */
 .valband{background:linear-gradient(120deg,var(--brand-deep),var(--brand));color:#fff;text-align:center;padding:58px 26px}
 .valband h2{color:#fff;font-size:clamp(24px,3vw,34px);margin-bottom:14px}
 .valband p{max-width:60ch;margin:0 auto 24px;opacity:.93;font-size:16px}
 .valband .btn-wa{background:#fff;color:var(--brand-deep)}
 
-/* FAQ */
 .faq{max-width:820px;margin:0 auto;padding:66px 26px}
 .faq-item{border-bottom:1px solid #e8eef1;padding:18px 4px}
 .faq-q{font-weight:600;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;cursor:pointer}
@@ -79,7 +73,6 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .faq-item.open .faq-q span{transform:rotate(45deg)}
 .faq-q span{transition:.2s;color:var(--brand);font-weight:400}
 
-/* Footer */
 .ld-foot{background:#0E2A38;color:#cfe2ec;padding:46px 26px;text-align:center}
 .ld-foot .fl{font-family:'Poppins';font-weight:800;font-size:22px;color:#fff;margin-bottom:10px}
 .ld-foot p{font-size:14px;opacity:.8;max-width:50ch;margin:0 auto}
@@ -90,7 +83,6 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .ld-social svg{width:20px;height:20px;fill:#fff}
 .ld-foot .copy{margin-top:24px;font-size:12.5px;opacity:.55}
 
-/* ======= CHAT WIDGET ======= */
 #wa-float{position:fixed;left:22px;bottom:22px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 26px rgba(37,211,102,.5);transition:transform .18s;animation:wapulse 2.4s infinite}
 #wa-float:hover{transform:scale(1.08)}
 #wa-float svg{width:34px;height:34px;fill:#fff}
@@ -173,58 +165,27 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
   </div>
 </section>
 
-<section class="section" id="servicios">
-  <div class="kicker">Nuestros servicios</div>
-  <h2>Convertimos tu tratamiento en una experiencia positiva</h2>
-  <div class="serv-grid">
-    <div class="serv"><div class="ic"><svg viewBox="0 0 100 100"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4FC3F7"/><stop offset="1" stop-color="#1976D2"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#g1)"/><path d="M50 26c-6 0-9 3.2-13.4 3.2S29.2 26 24.8 26C19.5 26 16 30 16 36.5c0 5 1.8 8.4 3 12 1.1 3.3 1.4 7 2 11 .5 3 1.1 6 3.2 6 2.2 0 2.7-3 3.1-6.2.4-3 1-5.8 3.6-5.8h12.2c2.6 0 3.2 2.8 3.6 5.8.4 3.2.9 6.2 3.1 6.2 2.1 0 2.7-3 3.2-6 .6-4 .9-7.7 2-11 1.2-3.6 3-7 3-12C60 30 56.5 26 51.2 26 48.8 26 46 29.2 50 26z" fill="#fff"/><path d="M50 26c-6 0-9 3.2-13.4 3.2S29.2 26 24.8 26C19.5 26 16 30 16 36.5c0 5 1.8 8.4 3 12 1.1 3.3 1.4 7 2 11 .5 3 1.1 6 3.2 6 2.2 0 2.7-3 3.1-6.2.4-3 1-5.8 3.6-5.8h12.2c2.6 0 3.2 2.8 3.6 5.8.4 3.2.9 6.2 3.1 6.2 2.1 0 2.7-3 3.2-6 .6-4 .9-7.7 2-11 1.2-3.6 3-7 3-12C60 30 56.5 26 51.2 26 48.8 26 46 29.2 50 29.2 47.8 29.2 46 26 50 26z" fill="#fff"/><rect x="33" y="40" width="8" height="7" rx="1.5" fill="#5AB0E8"/><rect x="46" y="40" width="8" height="7" rx="1.5" fill="#5AB0E8"/><rect x="59" y="40" width="8" height="7" rx="1.5" fill="#5AB0E8"/><rect x="30" y="42.5" width="40" height="2" rx="1" fill="#90A4AE"/></svg></div><h3>Ortodoncia</h3><p>Corrige tu sonrisa con precisión y comodidad.</p></div>
-    <div class="serv"><div class="ic"><svg viewBox="0 0 100 100"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD54F"/><stop offset="1" stop-color="#F39C12"/></linearGradient><linearGradient id="g2b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8E1"/><stop offset="1" stop-color="#FFE082"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#g2)"/><path d="M26 40l8 8 16-18 16 18 8-8v26a4 4 0 0 1-4 4H30a4 4 0 0 1-4-4V40z" fill="url(#g2b)" stroke="#E67E22" stroke-width="1.5"/><circle cx="26" cy="37" r="4" fill="#FFF8E1" stroke="#E67E22" stroke-width="1.5"/><circle cx="50" cy="20" r="4" fill="#FFF8E1" stroke="#E67E22" stroke-width="1.5"/><circle cx="74" cy="37" r="4" fill="#FFF8E1" stroke="#E67E22" stroke-width="1.5"/><circle cx="42" cy="58" r="3" fill="#F39C12"/><circle cx="58" cy="58" r="3" fill="#F39C12"/></svg></div><h3>Coronas</h3><p>Protege y cuida la salud de tus dientes con coronas duraderas.</p></div>
-    <div class="serv"><div class="ic"><svg viewBox="0 0 100 100"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4DD0B1"/><stop offset="1" stop-color="#16A085"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#g3)"/><path d="M28 38c0-4 5-7 22-7s22 3 22 7c0 3-2 4-3 7-1.5 4-4 14-9 14-3 0-3.5-5-5-5h-10c-1.5 0-2 5-5 5-5 0-7.5-10-9-14-1-3-3-4-3-7z" fill="#fff"/><path d="M30 40h40" stroke="#B2DFDB" stroke-width="1.5"/><line x1="40" y1="40" x2="40" y2="52" stroke="#B2DFDB" stroke-width="1.5"/><line x1="50" y1="40" x2="50" y2="53" stroke="#B2DFDB" stroke-width="1.5"/><line x1="60" y1="40" x2="60" y2="52" stroke="#B2DFDB" stroke-width="1.5"/><path d="M34 36c2-2 4-2 6 0" stroke="#16A085" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M60 36c2-2 4-2 6 0" stroke="#16A085" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div><h3>Prótesis</h3><p>Recupera tu sonrisa y su funcionalidad con prótesis de alta calidad.</p></div>
-    <div class="serv"><div class="ic"><svg viewBox="0 0 100 100"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4FC3F7"/><stop offset="1" stop-color="#29B6F6"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#g4)"/><path d="M50 28c-6 0-9 3.2-13.4 3.2S29.2 28 24.8 28C19.5 28 16 32 16 38.5c0 5 1.8 8.4 3 12 1.1 3.3 1.4 7 2 11 .5 3 1.1 6 3.2 6 2.2 0 2.7-3 3.1-6.2.4-3 1-5.8 3.6-5.8h12.2c2.6 0 3.2 2.8 3.6 5.8.4 3.2.9 6.2 3.1 6.2 2.1 0 2.7-3 3.2-6 .6-4 .9-7.7 2-11 1.2-3.6 3-7 3-12C60 32 56.5 28 51.2 28 48.8 28 46 31.2 50 28z" fill="#fff"/><path d="M50 28c-6 0-9 3.2-13.4 3.2S29.2 28 24.8 28C19.5 28 16 32 16 38.5c0 5 1.8 8.4 3 12 1.1 3.3 1.4 7 2 11 .5 3 1.1 6 3.2 6 2.2 0 2.7-3 3.1-6.2.4-3 1-5.8 3.6-5.8h12.2c2.6 0 3.2 2.8 3.6 5.8.4 3.2.9 6.2 3.1 6.2 2.1 0 2.7-3 3.2-6 .6-4 .9-7.7 2-11 1.2-3.6 3-7 3-12C60 32 56.5 28 50 28z" fill="#fff"/><g fill="#FFEB3B"><path d="M74 24l1.8 5 5 1.8-5 1.8L74 38l-1.8-5.4-5-1.8 5-1.8z"/><path d="M30 58l1.2 3.3 3.3 1.2-3.3 1.2L30 68l-1.2-3.3-3.3-1.2 3.3-1.2z"/></g></svg></div><h3>Blanqueamiento y Limpieza</h3><p>Mantén tu sonrisa siempre saludable.</p></div>
-    <div class="serv"><div class="ic"><svg viewBox="0 0 100 100"><defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B39DDB"/><stop offset="1" stop-color="#7B5BBE"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="url(#g5)"/><path d="M38 24c-7 0-12 4-12 10 0 4 2 6.5 3 9.5 1 3 1 6 1.5 9.5.6 4.5 1.2 11 4 11 2.3 0 2.6-4.5 2.9-8.3.2-2.5.6-4.3 2.1-4.3s1.9 1.8 2.1 4.3c.3 3.8.6 8.3 2.9 8.3 2.8 0 3.4-6.5 4-11 .5-3.5.5-6.5 1.5-9.5 1-3 3-5.5 3-9.5 0-6-5-10-12-10z" fill="#fff"/><circle cx="68" cy="32" r="13" fill="#fff"/><path d="M63 27l10 10m0-10l-10 10" stroke="#7B5BBE" stroke-width="3" stroke-linecap="round"/></svg></div><h3>Muela del Juicio</h3><p>Extracción segura y sin complicaciones.</p></div>
-  </div>
-</section>
-
 <section class="valband">
   <h2>Agenda tu cita de valoración sin costo</h2>
   <p>Creemos que la prevención es clave para una sonrisa saludable. Nuestro equipo de expertos evaluará tu salud bucal y te dará un diagnóstico completo y personalizado, sin costo.</p>
   <a href="#" class="btn-wa" onclick="openChat();return false;">💬 Hablar con el asistente</a>
 </section>
 
-<section class="faq" id="faq">
-  <div class="kicker" style="text-align:left">FAQs</div>
-  <h2 style="text-align:left">Preguntas más frecuentes</h2>
-  <div class="faq-item"><div class="faq-q" onclick="this.parentNode.classList.toggle('open')">¿Cómo agendar una consulta de valoración sin costo? <span>+</span></div><div class="faq-a">Ponte en contacto con nuestro equipo por cualquiera de nuestros medios. Te apoyaremos a agendar tu cita en la sucursal más cercana a ti.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="this.parentNode.classList.toggle('open')">¿Con qué frecuencia debo visitar al dentista? <span>+</span></div><div class="faq-a">Se recomienda una visita cada seis meses para una limpieza profesional y un chequeo general, aunque puede variar según cada paciente.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="this.parentNode.classList.toggle('open')">¿Qué opciones de pago y financiamiento están disponibles? <span>+</span></div><div class="faq-a">Aceptamos tarjetas de crédito y débito, y contamos con planes de financiamiento accesibles.</div></div>
-  <div class="faq-item"><div class="faq-q" onclick="this.parentNode.classList.toggle('open')">¿Los tratamientos dentales son dolorosos? <span>+</span></div><div class="faq-a">Nos comprometemos a una experiencia cómoda, con tecnología avanzada y anestesia moderna para minimizar molestias.</div></div>
-</section>
-
 <footer class="ld-foot" id="sucursales">
   <div class="fl">🦷 LOS DENTISTAS</div>
   <p>Tu atención a bajo costo. Contamos con más de 30 sucursales en el Noreste del país.</p>
-  <div class="zones"><span>📍 Monterrey y área metro</span><span>📍 Torreón, Coah.</span><span>📍 Gómez Palacio, Dgo.</span><span>📍 Saltillo, Coah.</span></div>
-  <div class="ld-social">
-    <a href="#" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94z"/></svg></a>
-    <a href="#" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zm0 1.62c-3.15 0-3.52.01-4.76.07-.95.04-1.47.2-1.81.34-.46.18-.78.39-1.12.73-.34.34-.55.66-.73 1.12-.14.34-.3.86-.34 1.81-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.04.95.2 1.47.34 1.81.18.46.39.78.73 1.12.34.34.66.55 1.12.73.34.14.86.3 1.81.34 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.95-.04 1.47-.2 1.81-.34.46-.18.78-.39 1.12-.73.34-.34.55-.66.73-1.12.14-.34.3-.86.34-1.81.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.95-.2-1.47-.34-1.81a3.02 3.02 0 0 0-.73-1.12 3.02 3.02 0 0 0-1.12-.73c-.34-.14-.86-.3-1.81-.34-1.24-.06-1.61-.07-4.76-.07zm0 2.76a5.46 5.46 0 1 1 0 10.92 5.46 5.46 0 0 1 0-10.92zm0 1.62a3.84 3.84 0 1 0 0 7.68 3.84 3.84 0 0 0 0-7.68zm5.64-2.86a1.28 1.28 0 1 1 0 2.56 1.28 1.28 0 0 1 0-2.56z"/></svg></a>
-    <a href="#" title="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.8a3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
-  </div>
   <div class="copy">Copyright © 2024 Los Dentistas · Todos los derechos reservados</div>
 </footer>
 
-<!-- ===== Botón WhatsApp (su canal actual) ===== -->
-<a id="wa-float" href="https://api.whatsapp.com/send?phone=5218123855727&text=%C2%A1Hola!%20me%20interesa%20una%20cita%20de%20valoraci%C3%B3n%20%F0%9F%98%81" target="_blank" rel="noopener" title="Escríbenos por WhatsApp" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zM12.04 20.15h-.004a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+<a id="wa-float" href="https://api.whatsapp.com/send?phone=5218123855727" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zM12.04 20.15h-.004a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23z"/></svg>
 </a>
 
-<!-- ===== Asistente ===== -->
 <div class="launcher-tip" id="launcher-tip">👋 ¿Agendamos tu cita?</div>
 <button id="chat-launcher" onclick="openChat()" title="Abrir asistente">
   <span class="pulse"></span>
   <svg viewBox="0 0 48 48" aria-hidden="true">
-    <!-- burbuja de chat -->
     <path d="M24 6C13.5 6 5 13.2 5 22.1c0 4.6 2.3 8.7 6 11.6-.3 2.6-1.3 5-2.9 7 .0 0 4.8-.6 8.3-2.9 2.3.8 4.9 1.3 7.6 1.3 10.5 0 19-7.2 19-16.1C43 13.2 34.5 6 24 6z"/>
-    <!-- muelita (en hueco, color del boton) -->
     <path fill="var(--teal)" d="M24 13.5c-2.1 0-3.2 1.1-4.7 1.1-1.5 0-2.6-1.1-4.2-1.1-2.2 0-3.9 1.9-3.9 4.8 0 2.1.7 3.6 1.3 5.3.5 1.4.6 3 .9 4.6.2 1.2.5 2.5 1.4 2.5 1 0 1.2-1.3 1.4-2.7.2-1.4.5-2.6 1.6-2.6h3.4c1.1 0 1.4 1.2 1.6 2.6.2 1.4.4 2.7 1.4 2.7.9 0 1.2-1.3 1.4-2.5.3-1.6.4-3.2.9-4.6.6-1.7 1.3-3.2 1.3-5.3 0-2.9-1.7-4.8-3.9-4.8-1.6 0-2.7 1.1-4.2 1.1-1.5 0-2.6-1.1-4.7-1.1z"/>
   </svg>
 </button>
@@ -246,17 +207,65 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 </div>
 
 <script>
-
-/* ================== DATOS DEMO (ficticios) ================== */
-
 const API_URL = "https://script.google.com/macros/s/AKfycbzz4eewW_L4GPm_PfnkDwqsrOepCoNEaxTiEzbmEERFjkT0kcEufZ_RwAWmHL92TKEj3Q/exec";
 
+/* ================== CACHE de datos consultados ================== */
+let CACHE = {
+  ciudades: null,
+  sucursalesPorCiudad: {},
+  doctoresPorSucursal: {},
+  tratamientos: null
+};
+
+/* ================== HORAS FIJAS (etapa 1) ================== */
+const HORAS = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+
+/* ================== FUNCIONES DE API ================== */
+async function apiCall(params) {
+  try {
+    const response = await fetch(API_URL + "?" + new URLSearchParams(params).toString());
+    return await response.json();
+  } catch(e) {
+    console.log("Error API:", e);
+    return { status: "error", message: "Error de conexión" };
+  }
+}
+
+async function obtenerCiudades() {
+  if (CACHE.ciudades) return CACHE.ciudades;
+  const r = await apiCall({ accion: "obtenerCiudades" });
+  if (r.status === "ok") CACHE.ciudades = r.ciudades;
+  return r.ciudades || [];
+}
+
+async function obtenerSucursales(ciudad) {
+  if (CACHE.sucursalesPorCiudad[ciudad]) return CACHE.sucursalesPorCiudad[ciudad];
+  const r = await apiCall({ accion: "obtenerSucursalesPorCiudad", ciudad: ciudad });
+  if (r.status === "ok") CACHE.sucursalesPorCiudad[ciudad] = r.sucursales;
+  return r.sucursales || [];
+}
+
+async function obtenerDoctores(sucursal) {
+  if (CACHE.doctoresPorSucursal[sucursal]) return CACHE.doctoresPorSucursal[sucursal];
+  const r = await apiCall({ accion: "obtenerDoctoresPorSucursal", sucursal: sucursal });
+  if (r.status === "ok") CACHE.doctoresPorSucursal[sucursal] = r.doctores;
+  return r.doctores || [];
+}
+
+async function obtenerTratamientos() {
+  if (CACHE.tratamientos) return CACHE.tratamientos;
+  const r = await apiCall({ accion: "obtenerTratamientos" });
+  if (r.status === "ok") CACHE.tratamientos = r.tratamientos;
+  return r.tratamientos || [];
+}
+
 async function guardarCitaDemo() {
-  const params = new URLSearchParams({
+  return await apiCall({
     accion: "guardarCitaCompleta",
     nombre: st.nombre || "",
     telefono: st.tel || "",
     codigoPaciente: st.codigoPaciente || "",
+    codigoDoctor: st.codigoDoctor || "",
     municipio: st.ciudad || "",
     sucursal: st.sucursal || "",
     tratamiento: st.servicio || "",
@@ -264,93 +273,22 @@ async function guardarCitaDemo() {
     fechaPreferida: st.fecha || "",
     horaPreferida: st.hora || ""
   });
-
-  try {
-    const response = await fetch(API_URL + "?" + params.toString(), {
-      method: "GET"
-    });
-    const data = await response.json();
-    return data;
-  } catch(e) {
-    console.log("Error al guardar:", e);
-    return {
-      status: "error",
-      message: "No se pudo conectar al servidor"
-    };
-  }
 }
-
 
 async function buscarPacientePorTelefono(telefono) {
-  const params = new URLSearchParams({
-    accion: "buscarPacientePorTelefono",
-    telefono: telefono
-  });
-
-  try {
-    const response = await fetch(API_URL + "?" + params.toString());
-    return await response.json();
-  } catch(e) {
-    console.log("Error al buscar:", e);
-    return { status: "error" };
-  }
+  return await apiCall({ accion: "buscarPacientePorTelefono", telefono: telefono });
 }
-
 
 async function buscarPacientePorNombre(nombre) {
-  const params = new URLSearchParams({
-    accion: "buscarPacientePorNombre",
-    nombre: nombre
-  });
-
-  try {
-    const response = await fetch(API_URL + "?" + params.toString());
-    return await response.json();
-  } catch(e) {
-    console.log("Error al buscar:", e);
-    return { status: "error" };
-  }
+  return await apiCall({ accion: "buscarPacientePorNombre", nombre: nombre });
 }
-
-const DATA = {
-  servicios: ['Valoración gratuita','Limpieza / Blanqueamiento','Ortodoncia','Coronas','Extracción muela del juicio'],
-  ciudades: {
-    'Monterrey y área metro': ['Suc. Centro MTY','Suc. Guadalupe','Suc. San Nicolás'],
-    'Torreón': ['Suc. Torreón Centro','Suc. Torreón Oriente'],
-    'Gómez Palacio': ['Suc. Gómez Palacio'],
-    'Saltillo': ['Suc. Saltillo Norte','Suc. Saltillo Centro']
-  },
-  doctores: {
-    'Suc. Centro MTY': [{n:'Dra. Mariana López',e:'Ortodoncia'},{n:'Dr. Carlos Treviño',e:'Odontología general'}],
-    'Suc. Guadalupe': [{n:'Dr. Luis Garza',e:'Cirugía oral'},{n:'Dra. Paola Marín',e:'Odontología general'}],
-    'Suc. San Nicolás': [{n:'Dra. Andrea Solís',e:'Odontología general'}],
-    'Suc. Torreón Centro': [{n:'Dr. Jorge Ramos',e:'Ortodoncia'},{n:'Dra. Karla Núñez',e:'Odontología general'}],
-    'Suc. Torreón Oriente': [{n:'Dr. Iván Cepeda',e:'Odontología general'}],
-    'Suc. Gómez Palacio': [{n:'Dra. Sofía Aguirre',e:'Odontología general'},{n:'Dr. Rubén Salas',e:'Cirugía oral'}],
-    'Suc. Saltillo Norte': [{n:'Dra. Elena Ríos',e:'Odontología general'}],
-    'Suc. Saltillo Centro': [{n:'Dr. Mauricio Vela',e:'Ortodoncia'},{n:'Dra. Lucía Cantú',e:'Odontología general'}]
-  },
-  horas: ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','4:00 PM','5:00 PM','6:00 PM'],
-  precios: [
-    {kw:['valoracion','valoración','consulta','revision','revisión','diagnostico','diagnóstico'], n:'Cita de valoración', p:'sin costo', d:'El doctor revisa tu caso y te da un diagnóstico y presupuesto personalizado.'},
-    {kw:['limpieza','profilaxis'], n:'Limpieza dental', p:'desde $450 MXN', d:'Recomendada cada 6 meses para mantener tu sonrisa saludable.'},
-    {kw:['blanqueamiento'], n:'Blanqueamiento', p:'desde $1,800 MXN', d:'Aclara varios tonos en una sola sesión.'},
-    {kw:['circonia','zirconia'], n:'Corona de circonia', p:'desde $4,500 MXN', d:'Nuestra opción más estética y duradera, libre de metal.'},
-    {kw:['corona'], n:'Corona porcelana-metal', p:'desde $2,800 MXN', d:'Excelente relación calidad-precio para restaurar tu diente.'},
-    {kw:['ortodoncia','brackets','frenos'], n:'Ortodoncia (brackets)', p:'desde $1,200 MXN al mes', d:'Incluye ajustes mensuales. También manejamos opciones estéticas.'},
-    {kw:['muela','juicio','extraccion','extracción'], n:'Extracción de muela del juicio', p:'desde $1,500 MXN', d:'Procedimiento seguro con anestesia moderna, sin complicaciones.'},
-    {kw:['protesis','prótesis','placa'], n:'Prótesis dental', p:'desde $3,500 MXN', d:'Recupera la funcionalidad y estética de tu sonrisa.'},
-    {kw:['implante'], n:'Implante dental', p:'desde $9,500 MXN', d:'La solución más completa para reemplazar un diente perdido.'},
-    {kw:['resina','caries','empaste','relleno'], n:'Resina (curación de caries)', p:'desde $550 MXN', d:'Restauración estética del color de tu diente.'}
-  ]
-};
 
 /* ================== ESTADO ================== */
 let st = {};
 let folio = 1041;
 const chat = document.getElementById('chat');
 
-function reset(){ st = { paso:'tipoPaciente', tipoPaciente:null, codigoPaciente:null, servicio:null, ciudad:null, sucursal:null, doctor:null, fecha:null, hora:null, nombre:null, tel:null }; }
+function reset(){ st = { paso:'tipoPaciente', tipoPaciente:null, codigoPaciente:null, servicio:null, ciudad:null, sucursal:null, doctor:null, codigoDoctor:null, fecha:null, hora:null, nombre:null, tel:null }; }
 
 /* ================== UTILIDADES DE CHAT ================== */
 function hora(){ const d=new Date(); return d.toLocaleTimeString('es-MX',{hour:'numeric',minute:'2-digit'}); }
@@ -383,24 +321,30 @@ function showChips(items, onPick, busySet){
   chat.appendChild(box); scrollChat();
 }
 
-/* ================== DISPONIBILIDAD SIMULADA ================== */
+/* ================== DISPONIBILIDAD SIMULADA (etapa 1) ================== */
 function proxDias(n){
   const out=[]; let d=new Date();
+  const diasSemana = ["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
+  const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
   while(out.length<n){
     d=new Date(d.getTime()+86400000);
-    if(d.getDay()!==0){ // cerrado domingos
-      out.push(d.toLocaleDateString('es-MX',{weekday:'short',day:'numeric',month:'short'}).replace(/\./g,''));
+    if(d.getDay()!==0){
+      const diaSemana = diasSemana[d.getDay()];
+      const dia = d.getDate();
+      const mes = meses[d.getMonth()];
+      const anio = d.getFullYear();
+      out.push(diaSemana + " " + dia + " de " + mes + " de " + anio);
     }
   }
   return out;
 }
+
 function ocupadasPara(doctor,fecha){
-  // pseudo-aleatorio estable: mismo doctor+fecha => mismas horas ocupadas
   let h=0; const s=doctor+fecha;
   for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))>>>0; }
   const busy=new Set();
-  DATA.horas.forEach((hr,i)=>{ if(((h>>i)&3)===0) busy.add(hr); });
-  if(busy.size>=DATA.horas.length) busy.delete(DATA.horas[0]);
+  HORAS.forEach((hr,i)=>{ if(((h>>i)&3)===0) busy.add(hr); });
+  if(busy.size>=HORAS.length) busy.delete(HORAS[0]);
   return busy;
 }
 
@@ -441,7 +385,6 @@ async function buscarPacienteEnSistema(telefono){
   const resultado = await buscarPacientePorTelefono(telefono);
   
   if(resultado.status === 'ok'){
-    // Lo encontró por teléfono
     st.nombre = resultado.nombre;
     st.tel = telefono;
     st.codigoPaciente = resultado.codigoPaciente || 'TEL-' + telefono.replace(/\D/g,'');
@@ -449,7 +392,6 @@ async function buscarPacienteEnSistema(telefono){
       pasoServicio();
     });
   } else {
-    // No lo encontró - pedir nombre para buscar de otra forma
     st.tel = telefono;
     botSay('Mmm, no encuentro ese teléfono 🤔 ¿Será que cambiaste de número?\n\nDame tu nombre completo y te busco de otra forma.', ()=>{
       st.paso = 'nombreParaBuscar';
@@ -463,14 +405,12 @@ async function buscarPacientePorNombreEnSistema(nombre){
   const resultado = await buscarPacientePorNombre(nombre);
   
   if(resultado.status === 'ok'){
-    // Encontró por nombre - actualizar teléfono
     st.nombre = resultado.nombre;
     st.codigoPaciente = resultado.codigoPaciente || 'TEL-' + st.tel.replace(/\D/g,'');
     botSay('¡Te encontré '+st.nombre+'! 😊\n\nVeo que antes tu teléfono era '+resultado.telefonoAnterior+'. Voy a actualizarlo a tu teléfono nuevo. Continuemos con tu cita.', ()=>{
       pasoServicio();
     });
   } else {
-    // No existe - crear paciente nuevo
     st.nombre = nombre;
     st.codigoPaciente = 'TEL-' + st.tel.replace(/\D/g,'');
     botSay('Parece que es la primera vez con nosotros 😊 Te creo un registro nuevo. Continuemos.', ()=>{
@@ -479,57 +419,112 @@ async function buscarPacientePorNombreEnSistema(nombre){
   }
 }
 
-function pasoServicio(){
+/* 🆕 PASO SERVICIO - ahora consulta tratamientos reales */
+async function pasoServicio(){
   st.paso='servicio';
-  botSay('¿Qué servicio te interesa?', ()=>{
-    showChips(DATA.servicios, pick=>{ st.servicio=pick; pasoCiudad(); });
-  });
-}
-
-function pasoCiudad(){
-  st.paso='ciudad';
-  botSay('¡Perfecto! Tenemos más de 30 sucursales. ¿En qué ciudad te queda mejor?', ()=>{
-    showChips(Object.keys(DATA.ciudades), pick=>{ st.ciudad=pick; pasoSucursal(); });
-  });
-}
-function pasoSucursal(){
-  st.paso='sucursal';
-  const sucs=DATA.ciudades[st.ciudad];
-  botSay('Estas son nuestras sucursales en '+st.ciudad+'. ¿Cuál prefieres?', ()=>{
-    showChips(sucs, pick=>{ st.sucursal=pick; pasoDoctor(); });
-  });
-}
-function pasoDoctor(){
-  st.paso='doctor';
-  const docs=DATA.doctores[st.sucursal].map(d=>d.n+' · '+d.e);
-  botSay('En '+st.sucursal+' te pueden atender:', ()=>{
-    showChips(docs.concat(['El primero disponible 👍']), pick=>{
-      st.doctor = pick.startsWith('El primero') ? DATA.doctores[st.sucursal][0].n : pick.split(' · ')[0];
-      pasoFecha();
+  botSay('Estoy revisando nuestros servicios disponibles... 🔍', async ()=>{
+    const tratamientos = await obtenerTratamientos();
+    
+    if(!tratamientos || tratamientos.length === 0){
+      botSay('Disculpa 😔 no hay tratamientos disponibles en este momento. Intenta más tarde o contáctanos por WhatsApp.');
+      return;
+    }
+    
+    const nombres = tratamientos.map(t => t.tratamiento);
+    botSay('¿Qué servicio te interesa?', ()=>{
+      showChips(nombres, pick=>{
+        st.servicio = pick;
+        pasoCiudad();
+      });
     });
   });
 }
+
+/* 🆕 PASO CIUDAD - ahora consulta ciudades reales */
+async function pasoCiudad(){
+  st.paso='ciudad';
+  botSay('Permíteme revisar nuestras sucursales... 🔍', async ()=>{
+    const ciudades = await obtenerCiudades();
+    
+    if(!ciudades || ciudades.length === 0){
+      botSay('Disculpa 😔 no hay sucursales disponibles en este momento.');
+      return;
+    }
+    
+    botSay('¡Perfecto! Tenemos sucursales en varias ciudades. ¿En cuál te queda mejor?', ()=>{
+      showChips(ciudades, pick=>{ st.ciudad=pick; pasoSucursal(); });
+    });
+  });
+}
+
+/* 🆕 PASO SUCURSAL - ahora consulta sucursales reales */
+async function pasoSucursal(){
+  st.paso='sucursal';
+  botSay('Buscando sucursales en '+st.ciudad+'... 🔍', async ()=>{
+    const sucursales = await obtenerSucursales(st.ciudad);
+    
+    if(!sucursales || sucursales.length === 0){
+      botSay('Disculpa 😔 no hay sucursales disponibles en '+st.ciudad+' por el momento.', ()=>{
+        showChips(['Elegir otra ciudad'], ()=>pasoCiudad());
+      });
+      return;
+    }
+    
+    const nombres = sucursales.map(s => s.sucursal);
+    botSay('Estas son nuestras sucursales en '+st.ciudad+'. ¿Cuál prefieres?', ()=>{
+      showChips(nombres, pick=>{ st.sucursal=pick; pasoDoctor(); });
+    });
+  });
+}
+
+/* 🆕 PASO DOCTOR - ahora consulta doctores reales */
+async function pasoDoctor(){
+  st.paso='doctor';
+  botSay('Revisando doctores disponibles... 🔍', async ()=>{
+    const doctores = await obtenerDoctores(st.sucursal);
+    
+    if(!doctores || doctores.length === 0){
+      botSay('Disculpa 😔 no hay doctores disponibles en esa sucursal por el momento.', ()=>{
+        showChips(['Elegir otra sucursal'], ()=>pasoSucursal());
+      });
+      return;
+    }
+    
+    const opciones = doctores.map(d => d.nombreDoctor + (d.especialidad ? ' · ' + d.especialidad : ''));
+    opciones.push('El primero disponible 👍');
+    
+    botSay('En '+st.sucursal+' te pueden atender:', ()=>{
+      showChips(opciones, pick=>{
+        if(pick.startsWith('El primero')){
+          st.doctor = doctores[0].nombreDoctor;
+          st.codigoDoctor = doctores[0].codigoDoctor;
+        } else {
+          const nombreElegido = pick.split(' · ')[0];
+          const doc = doctores.find(d => d.nombreDoctor === nombreElegido);
+          st.doctor = doc.nombreDoctor;
+          st.codigoDoctor = doc.codigoDoctor;
+        }
+        pasoFecha();
+      });
+    });
+  });
+}
+
 function pasoFecha(){
   st.paso='fecha';
   botSay('¿Qué día te gustaría? Estos son los próximos días con atención (domingos cerramos):', ()=>{
     showChips(proxDias(5), pick=>{ st.fecha=pick; pasoHora(); });
   });
 }
+
 function pasoHora(){
   st.paso='hora';
   const busy=ocupadasPara(st.doctor,st.fecha);
   botSay('Disponibilidad de '+st.doctor+' para el '+st.fecha+' (los tachados ya están ocupados):', ()=>{
-    showChips(DATA.horas, pick=>{ st.hora=pick; pasoConfirmar(); }, busy);
+    showChips(HORAS, pick=>{ st.hora=pick; pasoConfirmar(); }, busy);
   });
 }
-function pasoNombre(){
-  st.paso='nombre';
-  botSay('¡Excelente elección! ✨ ¿A nombre de quién agendo la cita?');
-}
-function pasoTel(){
-  st.paso='tel';
-  botSay('Gracias, '+st.nombre.split(' ')[0]+'. ¿Me compartes un teléfono de contacto a 10 dígitos?');
-}
+
 function pasoConfirmar(){
   st.paso='confirmar';
   botSay('Confírmame por favor:\n\n🦷 '+st.servicio+'\n📍 '+st.sucursal+' ('+st.ciudad+')\n👩‍⚕️ '+st.doctor+'\n📅 '+st.fecha+' · '+st.hora+'\n🙋 '+st.nombre+'\n📞 '+st.tel+'\n\n¿Agendamos así?', ()=>{
@@ -547,16 +542,38 @@ async function agendar(){
 
   const resultado = await guardarCitaDemo();
   
-  if(resultado.status === 'duplicado'){
-    botSay('Ups 😅 '+resultado.message+'\n\nSi quieres cambiar tu cita actual, escríbenos por WhatsApp.', ()=>{
-      showChips(['Agendar otra cita'], ()=>inicio());
-    });
-    return;
-  }
-  
-  if(resultado.status === 'error'){
-    botSay('Hubo un problema al registrar 😔 Por favor inténtalo de nuevo o contáctanos por WhatsApp.', ()=>{
-      showChips(['Intentar de nuevo'], ()=>inicio());
+  /* ================== CANCELAR CITA ================== */
+if(resultado.status === 'duplicado'){
+    botSay('Veo que ya tienes una cita registrada 📋\n\n📅 '+st.fecha+'\n🕐 '+st.hora+'\n📍 '+st.sucursal+'\n👩‍⚕️ '+st.doctor+'\n\n¿Qué te gustaría hacer?', ()=>{
+      showChips(
+        ['📅 Cambiar fecha/hora', '❌ Cancelar mi cita', '💬 Hablar con asistente'],
+        pick=>{
+          if(pick.startsWith('📅')){
+            // Re-agendar
+            botSay('¡Perfecto! Vamos a buscarte un nuevo horario 😊', ()=>{
+              st.fecha = null;
+              st.hora = null;
+              pasoFecha();
+            });
+          } else if(pick.startsWith('❌')){
+            // Cancelar la cita REAL (en la BD)
+            confirmarCancelacion();
+          } else {
+            // Hablar con asistente
+            const mensaje = encodeURIComponent(
+              'Hola, soy ' + st.nombre + ' (tel: ' + st.tel + '). ' +
+              'Tengo una cita registrada para el ' + st.fecha + ' a las ' + st.hora +
+              ' en ' + st.sucursal + ' con ' + st.doctor + '. ' +
+              'Me gustaría hablar con un asistente antes de hacer cambios. ¿Me pueden ayudar?'
+            );
+            const urlWhatsApp = 'https://api.whatsapp.com/send?phone=5218123855727&text=' + mensaje;
+            botSay('¡Claro! Te abro WhatsApp con un mensaje listo. Solo da clic en "Enviar" cuando se abra. 😊', ()=>{
+              window.open(urlWhatsApp, '_blank');
+              showChips(['Agendar otra cita'], ()=>inicio());
+            });
+          }
+        }
+      );
     });
     return;
   }
@@ -572,20 +589,9 @@ async function agendar(){
     '\n👩‍⚕️ ' + st.doctor +
     '\n\nUna asesora revisará la solicitud y te contactará para confirmar. 😁',
     ()=>{
-      showChips(
-        ['Agendar otra cita'],
-        ()=>inicio()
-      );
+      showChips(['Agendar otra cita'], ()=>inicio());
     }
   );
-}
-
-function agregarAgenda(f){
-  const body=document.getElementById('agenda-body');
-  const empty=body.querySelector('.agenda-empty'); if(empty) empty.parentElement.remove();
-  const tr=document.createElement('tr'); tr.className='fresh';
-  tr.innerHTML='<td>'+f+'</td><td>'+esc(st.nombre)+'</td><td>'+esc(st.tel)+'</td><td>'+esc(st.servicio)+'</td><td>'+esc(st.sucursal)+'</td><td>'+esc(st.doctor)+'</td><td>'+esc(st.fecha)+' · '+esc(st.hora)+'</td><td><span class="badge-conf">Agendada por bot</span></td>';
-  body.insertBefore(tr, body.firstChild);
 }
 
 /* ================== TEXTO LIBRE ================== */
@@ -595,7 +601,6 @@ function sendFree(){
   inp.value=''; removeChips(); addMe(v);
   const low=v.toLowerCase();
 
-  // 🆕 Paciente nuevo - pidiendo nombre
   if(st.paso==='nombreNuevo'){
     if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
     st.nombre = v;
@@ -603,7 +608,6 @@ function sendFree(){
     return;
   }
   
-  // 🆕 Paciente nuevo - pidiendo teléfono
   if(st.paso==='telefonoNuevo'){
     const dig=v.replace(/\D/g,'');
     if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos? (ej. 8112345678)'); return; }
@@ -615,7 +619,6 @@ function sendFree(){
     return;
   }
   
-  // 🆕 Paciente regular - pidiendo teléfono para buscar
   if(st.paso==='telefonoRegular'){
     const dig=v.replace(/\D/g,'');
     if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos?'); return; }
@@ -624,110 +627,64 @@ function sendFree(){
     return;
   }
   
-  // 🆕 Buscar paciente por nombre (caso B1)
   if(st.paso==='nombreParaBuscar'){
     if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
     buscarPacientePorNombreEnSistema(v);
     return;
   }
-  
-  // Flujo viejo (por si alguien sigue con 'nombre' o 'tel' antiguos)
-  if(st.paso==='nombre'){
-    if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
-    st.nombre=v; pasoTel(); return;
-  }
-  if(st.paso==='tel'){
-    const dig=v.replace(/\D/g,'');
-    if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos? (ej. 8112345678)'); return; }
-    st.tel=dig.slice(-10).replace(/(\d{2})(\d{4})(\d{4})/,'$1 $2 $3');
-    pasoConfirmar(); return;
-  }
 
-  // atajos por palabra clave (solo si NO es una pregunta de precio)
-  const esPreguntaPrecio = /precio|costo|cu[aá]nto|cuesta|vale|cobran/i.test(low);
-  const svc=DATA.servicios.find(s=>low.includes(s.toLowerCase().split(' ')[0].toLowerCase()));
-  if(st.paso==='servicio' && svc && !esPreguntaPrecio){ st.servicio=svc; pasoCiudad(); return; }
-  const ciu=Object.keys(DATA.ciudades).find(c=>low.includes(c.toLowerCase().split(' ')[0]));
-  if(st.paso==='ciudad' && ciu){ st.ciudad=ciu; pasoSucursal(); return; }
-  if(/hola|buen/i.test(low) && (st.paso==='servicio')){ botSay('¡Hola! 😁 Elige una opción para comenzar:', ()=>showChips(DATA.servicios, p=>{st.servicio=p;pasoCiudad();})); return; }
-  /* ===== Preguntas frecuentes (se revisan antes que precios/agendado) ===== */
- 
-  function continuar(){ 
-    const r={servicio:()=>showChips(DATA.servicios,p=>{st.servicio=p;pasoCiudad();}),
-             ciudad:()=>showChips(Object.keys(DATA.ciudades),p=>{st.ciudad=p;pasoSucursal();}),
-             sucursal:()=>showChips(DATA.ciudades[st.ciudad],p=>{st.sucursal=p;pasoDoctor();})};
-    if(r[st.paso]) r[st.paso]();
-  }
-  // Diferencias / comparaciones
-  if(/diferencia|diferen|mejor que|vs |versus|comparac/i.test(low) && /circonia|zirconia|corona/i.test(low)){
-    botSay('¡Buena pregunta! 🦷 Te explico rápido:\n\n• Corona porcelana-metal (desde $2,800): muy resistente, con base metálica interna. Excelente opción funcional.\n\n• Corona de circonia (desde $4,500): 100% libre de metal, más estética (luce como diente natural), biocompatible y muy duradera. Ideal para dientes frontales.\n\nEn tu valoración GRATIS el doctor te recomienda la ideal para tu caso. ¿Te agendo? 😊', ()=>{
-      if(st.paso==='servicio') showChips(['Sí, agendar valoración 📅'], ()=>{ st.servicio='Valoración gratuita'; pasoCiudad(); });
-      else continuar();
-    });
-    return;
-  }
-  // Cuantas sucursales / donde estan
-  if(/cu[aá]ntas?|d[oó]nde|ubicaci|direcci/i.test(low) && /sucursal|cl[ií]nica|consultorio/i.test(low)){
-    botSay('Tenemos más de 30 sucursales en el Noreste del país 📍\n\n• Monterrey y área metropolitana\n• Torreón, Coah.\n• Gómez Palacio, Dgo.\n• Saltillo, Coah.\n\nCuando agendes tu cita te muestro las sucursales de tu ciudad para que elijas la más cercana. ¿Continuamos?', continuar);
-    return;
-  }
-  // Horarios de atencion
-  if(/horario|a qu[eé] hora|abren|cierran|d[ií]as.*(atien|abren)/i.test(low)){
-    botSay('Nuestro horario de atención es de lunes a sábado, de 9:00 AM a 6:00 PM 🕘 (domingos cerramos).\n\n¿Te agendo una cita en el horario que mejor te quede?', continuar);
-    return;
-  }
-  // Duele / miedo / anestesia
-  if(/duele|dolor|miedo|anestesia|molest/i.test(low)){
-    botSay('Te entiendo, es la duda más común 😊 Nos comprometemos a que tu experiencia sea lo más cómoda posible: usamos tecnología avanzada y anestesia moderna para minimizar cualquier molestia.\n\nAdemás, en tu valoración GRATIS el doctor te explica todo el procedimiento antes de hacer nada. ¿Te agendo una?', ()=>{
-      if(st.paso==='servicio') showChips(['Sí, agendar valoración 📅'], ()=>{ st.servicio='Valoración gratuita'; pasoCiudad(); });
-      else continuar();
-    });
-    return;
-  }
-  // Formas de pago
-  if(/pago|tarjeta|financ|msi|meses|efectivo|transferencia/i.test(low)){
-    botSay('Aceptamos efectivo, tarjetas de crédito y débito 💳 y contamos con planes de financiamiento accesibles para que recibas tu tratamiento sin preocupaciones.\n\n¿Te agendo tu cita?', continuar);
-    return;
-  }
-  const precioHit = DATA.precios.find(item => item.kw.some(k => low.includes(k)));
-  if(precioHit && /precio|costo|cu[aá]nto|cuesta|vale|cobran/i.test(low)){
-    const esGratis = precioHit.p === 'sin costo';
-    botSay('💲 ' + precioHit.n + ': ' + precioHit.p + '.\n\n' + precioHit.d + (esGratis ? '' : '\n\nEl precio exacto depende de tu caso — por eso la cita de valoración es GRATIS, ahí el doctor te da tu presupuesto final sin compromiso.') + '\n\n¿Te agendo tu cita? 😊', ()=>{
-      if(st.paso==='servicio') showChips(['Sí, agendar cita 📅'].concat([]), ()=>{ st.servicio = esGratis ? 'Valoración gratuita' : precioHit.n; pasoCiudad(); });
-    });
-    return;
-  }
-  if(precioHit && st.paso==='servicio' && !/qu[eé] es|c[oó]mo|por qu[eé]|cu[aá]l|sirve|dura|tarda/i.test(low)){
-    botSay('¡Claro! Para ' + precioHit.n.toLowerCase() + ' (' + precioHit.p + ') te agendo con gusto. ¿En qué ciudad te queda mejor?', ()=>{
-      st.servicio = precioHit.n;
-      showChips(Object.keys(DATA.ciudades), pick=>{ st.ciudad=pick; pasoSucursal(); });
-    });
-    return;
-  }
-  if(/precio|costo|cu[aá]nto|cuesta|vale|cobran/i.test(low)){
-    botSay('Estos son algunos de nuestros precios de referencia 💲\n\n' + DATA.precios.slice(0,7).map(x=>'• '+x.n+': '+x.p).join('\n') + '\n\nRecuerda que la cita de valoración es GRATIS y ahí te dan tu presupuesto exacto. ¿Te agendo una?', ()=>{
-      if(st.paso==='servicio') showChips(['Sí, agendar cita 📅'], ()=>{ st.servicio='Valoración gratuita'; pasoCiudad(); });
-    });
-    return;
-  }
-  if(/humano|persona|asesor/i.test(low)){ botSay('¡Claro! En el sistema real, aquí mismo te conecto con una persona del equipo. (En este demo continúo yo 😄)'); return; }
-  // Pregunta abierta no reconocida: respuesta honesta de demo
-  if(/\?|qu[eé]|c[oó]mo|por qu[eé]|cu[aá]l|cu[aá]ndo/i.test(low) && low.length>12 && ['servicio','ciudad','sucursal'].includes(st.paso)){
-    botSay('¡Buena pregunta! 😄 En la versión final, este asistente usa inteligencia artificial para responder cualquier duda como la tuya. Y lo que siempre te puedo asegurar: en tu valoración GRATIS el doctor resuelve todas tus preguntas en persona.\n\nSigamos con tu cita 👇', continuar);
-    return;
-  }
-  // recordatorio del paso actual
-  const recordar={
-    servicio:()=>botSay('Elige el servicio que te interesa para continuar 👇', ()=>showChips(DATA.servicios, p=>{st.servicio=p;pasoCiudad();})),
-    ciudad:()=>botSay('Selecciona tu ciudad 👇', ()=>showChips(Object.keys(DATA.ciudades), p=>{st.ciudad=p;pasoSucursal();})),
-    sucursal:()=>botSay('Elige la sucursal 👇', ()=>showChips(DATA.ciudades[st.ciudad], p=>{st.sucursal=p;pasoDoctor();})),
-    doctor:()=>pasoDoctor(),
-    fecha:()=>pasoFecha(),
-    hora:()=>pasoHora(),
-    confirmar:()=>pasoConfirmar(),
-    listo:()=>botSay('Tu cita ya quedó agendada ✅ ¿Quieres agendar otra?', ()=>showChips(['Agendar otra cita'],()=>inicio()))
-  };
-  (recordar[st.paso]||inicio)();
+  // Por defecto, regresar al inicio
+  botSay('Para agendar tu cita, sigue las opciones que te muestro 👇', ()=>{
+    if(st.paso === 'servicio') pasoServicio();
+    else if(st.paso === 'ciudad') pasoCiudad();
+    else if(st.paso === 'sucursal') pasoSucursal();
+    else if(st.paso === 'doctor') pasoDoctor();
+    else if(st.paso === 'fecha') pasoFecha();
+    else if(st.paso === 'hora') pasoHora();
+    else inicio();
+  });
+}
+
+/* ================== CANCELAR CITA ================== */
+function confirmarCancelacion(){
+  botSay('Para confirmar, ¿estás seguro de cancelar tu cita?\n\n📅 '+st.fecha+'\n🕐 '+st.hora+'\n📍 '+st.sucursal, ()=>{
+    showChips(
+      ['✅ Sí, cancelar mi cita', '↩️ No, déjala como está'],
+      async pick=>{
+        if(pick.startsWith('✅')){
+          botSay('Cancelando tu cita... 🔄');
+          
+          const resultado = await apiCall({
+            accion: "cancelarCitaPorDatos",
+            telefono: st.tel,
+            fechaPreferida: st.fecha,
+            horaPreferida: st.hora,
+            sucursal: st.sucursal
+          });
+          
+          if(resultado.status === 'ok'){
+            botSay('✅ Tu cita ha sido cancelada exitosamente.\n\nUna asesora será notificada del cambio. Si deseas, puedes agendar una nueva cita cuando gustes. 😊', ()=>{
+              showChips(['Agendar nueva cita', 'Salir'], pick2=>{
+                if(pick2.startsWith('Agendar')) inicio();
+                else botSay('¡Gracias por contactarnos! 😊 Que tengas un excelente día.');
+              });
+            });
+          } else {
+            botSay('Hubo un problema al cancelar 😔 Por favor escríbenos por WhatsApp para que te ayudemos.', ()=>{
+              showChips(['Agendar otra cita'], ()=>inicio());
+            });
+          }
+        } else {
+          botSay('Perfecto, tu cita sigue activa 😊', ()=>{
+            showChips(['Agendar nueva cita', 'Salir'], pick2=>{
+              if(pick2.startsWith('Agendar')) inicio();
+              else botSay('¡Gracias! Que tengas un excelente día 😊');
+            });
+          });
+        }
+      }
+    );
+  });
 }
 
 /* control de apertura/cierre */
