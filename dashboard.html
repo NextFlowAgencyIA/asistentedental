@@ -1,0 +1,2513 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1d4ed8" />
+  <title>Panel Administrativo · Los Dentistas</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root{
+      --green-950:#0c2461;
+      --green-900:#1e3a8a;
+      --green-800:#1d4ed8;
+      --green-700:#2563eb;
+      --green-600:#3b82f6;
+      --green-500:#60a5fa;
+      --green-100:#dbeafe;
+      --green-50:#eff6ff;
+      --ink:#13251d;
+      --muted:#607067;
+      --cream:#fbfaf4;
+      --white:#ffffff;
+      --line:#e5ece8;
+      --line-strong:#cfddd6;
+      --bg:#f5f8f6;
+      --bg-card:#ffffff;
+      --shadow-sm:0 1px 3px rgba(7,58,41,.06);
+      --shadow:0 8px 24px rgba(7,58,41,.08);
+      --shadow-lg:0 18px 45px rgba(7,58,41,.13);
+      --red:#e53e3e;
+      --amber:#dd8a02;
+      --blue:#1968d2;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.5;
+      font-size:14px;
+    }
+    button, input, select, textarea{font:inherit;color:inherit}
+    a{color:inherit;text-decoration:none}
+
+    /* ============ LOGIN ============ */
+    .login-screen{
+      position:fixed;
+      inset:0;
+      background:linear-gradient(135deg, var(--green-950), var(--green-800));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:1000;
+    }
+    .login-card{
+      background:white;
+      border-radius:18px;
+      padding:40px 36px;
+      width:100%;
+      max-width:380px;
+      box-shadow:var(--shadow-lg);
+    }
+    .login-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:28px;
+    }
+    .login-brand-icon{
+      width:46px;
+      height:46px;
+      background:var(--green-700);
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:white;
+      font-size:1.05rem;
+      letter-spacing:-.05em;
+      flex:0 0 auto;
+    }
+    .login-brand-text strong{
+      display:block;
+      font-size:1.05rem;
+      font-weight:900;
+    }
+    .login-brand-text small{
+      color:var(--muted);
+      font-size:.78rem;
+    }
+    .login-card h1{
+      font-size:1.3rem;
+      font-weight:900;
+      margin:0 0 4px;
+      letter-spacing:-.02em;
+    }
+    .login-card p.subtitle{
+      color:var(--muted);
+      margin:0 0 24px;
+      font-size:.88rem;
+    }
+    .login-field{margin-bottom:16px}
+    .login-field label{
+      display:block;
+      font-size:.8rem;
+      font-weight:800;
+      margin-bottom:6px;
+      color:var(--green-900);
+    }
+    .login-field input{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:11px 13px;
+      outline:0;
+      font-size:.92rem;
+      transition:border-color .15s ease;
+    }
+    .login-field input:focus{border-color:var(--green-500)}
+    .login-btn{
+      width:100%;
+      background:var(--green-700);
+      color:white;
+      border:0;
+      border-radius:10px;
+      padding:12px;
+      font-weight:800;
+      font-size:.92rem;
+      cursor:pointer;
+      transition:background .15s ease;
+      margin-top:6px;
+    }
+    .login-btn:hover{background:var(--green-800)}
+    .login-btn:disabled{opacity:.6;cursor:default}
+    .login-error{
+      background:#fce4e4;
+      color:#a72424;
+      padding:10px 13px;
+      border-radius:8px;
+      font-size:.84rem;
+      margin-bottom:16px;
+      display:none;
+    }
+    .login-error.show{display:block}
+
+    /* ============ LAYOUT ============ */
+    .app{
+      display:none;
+      grid-template-columns:240px 1fr;
+      min-height:100vh;
+    }
+    .app.ready{display:grid}
+
+    /* ============ SIDEBAR ============ */
+    .sidebar{
+      background:var(--green-950);
+      color:#bfdbfe;
+      padding:20px 0;
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow-y:auto;
+    }
+
+    .sidebar-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:4px 20px 26px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .sidebar-brand-icon{
+      width:40px;
+      height:40px;
+      background:var(--green-600);
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:white;
+      font-size:.9rem;
+      letter-spacing:-.05em;
+      flex:0 0 auto;
+    }
+    .sidebar-brand-text{line-height:1.1}
+    .sidebar-brand-text strong{
+      display:block;
+      color:white;
+      font-size:.95rem;
+      font-weight:900;
+    }
+    .sidebar-brand-text small{
+      color:#93c5fd;
+      font-size:.66rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:700;
+    }
+
+    .sidebar-section{
+      padding:16px 20px 8px;
+      font-size:.66rem;
+      color:#93c5fd;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+    }
+
+    .sidebar-link{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:11px 20px;
+      cursor:pointer;
+      transition:background .15s ease;
+      font-size:.92rem;
+      font-weight:600;
+      border-left:3px solid transparent;
+    }
+    .sidebar-link:hover{background:rgba(255,255,255,.04)}
+    .sidebar-link.active{
+      background:rgba(32,189,124,.12);
+      color:white;
+      border-left-color:var(--green-500);
+      font-weight:800;
+    }
+    .sidebar-icon{
+      width:18px;
+      height:18px;
+      flex:0 0 auto;
+    }
+
+    .sidebar-footer{
+      position:sticky;
+      bottom:0;
+      padding:16px 20px;
+      background:var(--green-950);
+      border-top:1px solid rgba(255,255,255,.08);
+      margin-top:20px;
+    }
+    .user-chip{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+    }
+    .user-avatar{
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--green-500), var(--green-700));
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:white;
+      flex:0 0 auto;
+    }
+    .user-info{line-height:1.1;min-width:0;flex:1}
+    .user-info strong{color:white;font-size:.88rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .user-info small{color:#93c5fd;font-size:.7rem}
+    .logout-btn{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.18);
+      color:#bfdbfe;
+      border-radius:8px;
+      padding:6px 10px;
+      font-size:.74rem;
+      font-weight:700;
+      cursor:pointer;
+      margin-top:10px;
+      width:100%;
+      transition:background .15s ease;
+    }
+    .logout-btn:hover{background:rgba(255,255,255,.08)}
+
+    /* ============ MAIN AREA ============ */
+    .main{
+      padding:0;
+      min-width:0;
+      max-width:100%;
+    }
+
+    .topbar{
+      background:white;
+      border-bottom:1px solid var(--line);
+      padding:18px 32px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    .topbar h1{
+      font-size:1.5rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin:0;
+    }
+    .topbar p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:.86rem;
+    }
+
+    .topbar-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .icon-btn{
+      width:38px;
+      height:38px;
+      border-radius:10px;
+      border:1px solid var(--line);
+      background:white;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-size:1.05rem;
+      transition:border-color .15s ease;
+      position:relative;
+    }
+    .icon-btn:hover{border-color:var(--green-500)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      border:0;
+      border-radius:10px;
+      padding:9px 16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .12s ease, box-shadow .12s ease;
+      font-size:.88rem;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      background:var(--green-700);
+      color:white;
+    }
+    .btn-primary:hover{background:var(--green-800)}
+    .btn-secondary{
+      background:white;
+      color:var(--ink);
+      border:1px solid var(--line);
+    }
+    .btn-secondary:hover{border-color:var(--green-500)}
+    .btn-danger{
+      background:white;
+      color:var(--red);
+      border:1px solid #f4cccc;
+    }
+    .btn-danger:hover{background:#fdf0f0}
+    .btn-small{padding:6px 11px;font-size:.8rem}
+    .btn:disabled{opacity:.6;cursor:default}
+
+    /* ============ CONTENT ============ */
+    .content{
+      padding:28px 32px 60px;
+    }
+
+    .view{display:none}
+    .view.active{display:block}
+
+    /* ============ STAT CARDS ============ */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:16px;
+      margin-bottom:28px;
+    }
+    .stat-card{
+      background:var(--bg-card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px 20px;
+      box-shadow:var(--shadow-sm);
+    }
+    .stat-card-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .stat-icon{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      font-size:1rem;
+    }
+    .stat-icon.green{background:var(--green-100);color:var(--green-800)}
+    .stat-icon.blue{background:#dfeefe;color:var(--blue)}
+    .stat-icon.amber{background:#fdf2d8;color:var(--amber)}
+    .stat-icon.purple{background:#ebe5ff;color:#5b3fc0}
+    .stat-label{
+      font-size:.75rem;
+      color:var(--muted);
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+    .stat-value{
+      font-size:1.85rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      margin-bottom:4px;
+    }
+    .stat-trend{
+      font-size:.78rem;
+      color:var(--muted);
+      display:flex;
+      align-items:center;
+      gap:4px;
+    }
+    .stat-trend strong{color:var(--green-700);font-weight:800}
+
+    /* ============ CARDS GENERICAS ============ */
+    .card{
+      background:var(--bg-card);
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+    }
+    .card-head{
+      padding:18px 22px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .card-head h3{
+      margin:0;
+      font-size:1.02rem;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .card-head p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:.82rem;
+    }
+    .card-body{padding:22px}
+
+    /* ============ TABLA ============ */
+    .toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    .filter-pills{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background:white;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:.8rem;
+      font-weight:700;
+      cursor:pointer;
+      color:var(--muted);
+      transition:all .12s ease;
+    }
+    .pill:hover{border-color:var(--green-500)}
+    .pill.active{
+      background:var(--green-800);
+      color:white;
+      border-color:var(--green-800);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    thead th{
+      text-align:left;
+      padding:13px 22px;
+      background:var(--green-50);
+      font-size:.74rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      color:var(--green-900);
+      border-bottom:1px solid var(--green-100);
+    }
+    tbody td{
+      padding:14px 22px;
+      border-bottom:1px solid var(--line);
+      vertical-align:middle;
+      font-size:.88rem;
+    }
+    tbody tr:hover{background:var(--green-50)}
+    tbody tr:last-child td{border-bottom:0}
+
+    .product-cell{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .product-icon{
+      width:40px;
+      height:40px;
+      border-radius:10px;
+      background:var(--green-100);
+      display:grid;
+      place-items:center;
+      font-size:1.3rem;
+      flex:0 0 auto;
+    }
+    .product-cell strong{
+      display:block;
+      font-weight:800;
+    }
+    .product-cell small{color:var(--muted);font-size:.78rem}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:.74rem;
+      font-weight:800;
+    }
+    .badge-success{background:#dcfae6;color:#0a6e3d}
+    .badge-warning{background:#fdf2d8;color:#8a5a00}
+    .badge-danger{background:#fce4e4;color:#a72424}
+    .badge-neutral{background:#eef2f0;color:#4a5b54}
+    select.badge-select{
+      border:0;
+      cursor:pointer;
+      appearance:none;
+      padding-right:18px;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23607067'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 4px center;
+    }
+
+    .row-actions{
+      display:flex;
+      gap:4px;
+      justify-content:flex-end;
+    }
+    .row-action-btn{
+      width:30px;
+      height:30px;
+      border-radius:8px;
+      border:1px solid transparent;
+      background:transparent;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-size:.9rem;
+      transition:all .12s ease;
+    }
+    .row-action-btn:hover{background:var(--green-100);border-color:var(--green-100)}
+    .row-action-btn.danger:hover{background:#fce4e4;border-color:#fce4e4}
+
+    .empty-state{
+      text-align:center;
+      padding:60px 20px;
+      color:var(--muted);
+    }
+    .empty-state strong{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
+
+    /* ============ MODAL ============ */
+    .modal-bg{
+      position:fixed;
+      inset:0;
+      background:rgba(8,60,44,.5);
+      backdrop-filter:blur(4px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:100;
+    }
+    .modal-bg.open{display:flex}
+    .modal-card{
+      background:white;
+      border-radius:16px;
+      max-width:520px;
+      width:100%;
+      max-height:88vh;
+      overflow-y:auto;
+      box-shadow:var(--shadow-lg);
+    }
+    .modal-head{
+      padding:20px 24px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .modal-head h3{
+      margin:0;
+      font-weight:900;
+      letter-spacing:-.01em;
+    }
+    .close-btn{
+      width:32px;
+      height:32px;
+      border-radius:8px;
+      border:0;
+      background:transparent;
+      cursor:pointer;
+      font-size:1.4rem;
+      color:var(--muted);
+    }
+    .close-btn:hover{background:var(--bg)}
+    .modal-body{padding:24px}
+    .modal-foot{
+      padding:16px 24px;
+      border-top:1px solid var(--line);
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+    }
+
+    .field{margin-bottom:16px}
+    .field label{
+      display:block;
+      font-size:.8rem;
+      font-weight:800;
+      margin-bottom:6px;
+      color:var(--green-900);
+    }
+    .field input,.field select,.field textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:10px 12px;
+      outline:0;
+      font-size:.9rem;
+      transition:border-color .15s ease;
+      background:white;
+    }
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:var(--green-500);
+    }
+    .field-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+    .field-hint{
+      font-size:.74rem;
+      color:var(--muted);
+      margin-top:5px;
+    }
+    .form-error{
+      background:#fce4e4;
+      color:#a72424;
+      padding:9px 12px;
+      border-radius:8px;
+      font-size:.82rem;
+      margin-bottom:14px;
+      display:none;
+    }
+    .form-error.show{display:block}
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1100px){
+      .stats{grid-template-columns:repeat(2, 1fr)}
+    }
+    @media (max-width: 820px){
+      .app{grid-template-columns:1fr}
+      .sidebar{
+        position:fixed;
+        left:-260px;
+        top:0;
+        height:100vh;
+        z-index:200;
+        width:240px;
+        transition:left .25s ease;
+      }
+      .sidebar.open{left:0}
+      .content{padding:20px 16px 60px}
+      .topbar{padding:14px 16px}
+      .stats{grid-template-columns:1fr}
+      .topbar h1{font-size:1.2rem}
+      .field-row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== PANTALLA DE LOGIN ========== -->
+  <div class="login-screen" id="login-screen">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="login-brand-icon">LD</div>
+        <div class="login-brand-text">
+          <strong>Los Dentistas</strong>
+          <small>Panel administrativo</small>
+        </div>
+      </div>
+      <h1>Iniciar sesión</h1>
+      <p class="subtitle">Accede con tu correo y contraseña de sucursal</p>
+
+      <div class="login-error" id="login-error"></div>
+
+      <form id="login-form">
+        <div class="login-field">
+          <label>Correo</label>
+          <input type="email" id="login-email" placeholder="tu@correo.mx" required autocomplete="username" />
+        </div>
+        <div class="login-field">
+          <label>Contraseña</label>
+          <div style="position:relative">
+            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password" style="padding-right:42px" />
+            <button type="button" id="toggle-password" title="Mostrar/ocultar contraseña" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:transparent;border:0;cursor:pointer;font-size:1.1rem;color:var(--muted);padding:4px;line-height:1">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="login-btn" id="login-submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== APP (oculta hasta autenticar) ========== -->
+  <div class="app" id="app">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">LD</div>
+        <div class="sidebar-brand-text">
+          <strong>los dentistas</strong>
+          <small>Panel admin</small>
+        </div>
+      </div>
+
+      <div class="sidebar-section">Principal</div>
+      <a class="sidebar-link active" data-view="dashboard">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+        Resumen
+      </a>
+      <a class="sidebar-link" data-view="citas">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Citas
+      </a>
+      <a class="sidebar-link" data-view="doctores">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Doctores
+      </a>
+      <a class="sidebar-link" data-view="tratamientos">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 7.27 12 12l-8.5-4.73"/><path d="M12 22V12"/><path d="m3.5 7.27 8.5 4.73 8.5-4.73-8.5-4.54Z"/></svg>
+        Tratamientos
+      </a>
+
+      <div class="sidebar-section" id="owner-section">Configuración</div>
+      <a class="sidebar-link owner-only" data-view="sucursales">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Sucursales
+      </a>
+      <a class="sidebar-link owner-only" data-view="usuarios">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Usuarios
+      </a>
+
+      <div class="sidebar-footer">
+        <div class="user-chip">
+          <div class="user-avatar" id="user-avatar">A</div>
+          <div class="user-info">
+            <strong id="user-name">Cargando…</strong>
+            <small id="user-role">—</small>
+          </div>
+        </div>
+        <button class="logout-btn" id="logout-btn">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1 id="page-title">Resumen</h1>
+          <p id="page-subtitle">Vista general</p>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" title="Ayuda">❓</button>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- ========== VISTA: DASHBOARD ========== -->
+        <section class="view active" data-view="dashboard">
+          <div class="stats">
+            <div class="stat-card">
+              <div class="stat-card-head">
+                <span class="stat-label">Citas hoy</span>
+                <div class="stat-icon green">📅</div>
+              </div>
+              <div class="stat-value" id="stat-citas-hoy">—</div>
+              <div class="stat-trend">de tu sucursal</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-head">
+                <span class="stat-label">Citas pendientes</span>
+                <div class="stat-icon blue">⏳</div>
+              </div>
+              <div class="stat-value" id="stat-citas-pendientes">—</div>
+              <div class="stat-trend">por confirmar</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-head">
+                <span class="stat-label">Doctores activos</span>
+                <div class="stat-icon amber">🩺</div>
+              </div>
+              <div class="stat-value" id="stat-doctores">—</div>
+              <div class="stat-trend" id="stat-doctores-sub">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-head">
+                <span class="stat-label">Tratamientos disponibles</span>
+                <div class="stat-icon purple">🦷</div>
+              </div>
+              <div class="stat-value" id="stat-tratamientos">—</div>
+              <div class="stat-trend">en tu sucursal</div>
+            </div>
+          </div>
+
+          <!-- Gráfica de citas por sucursal (solo visible para owner) -->
+          <div class="card owner-only" id="card-grafica-sucursales" style="margin-bottom:28px;display:none">
+            <div class="card-head">
+              <div>
+                <h3>Citas por sucursal</h3>
+                <p id="grafica-subtitle">Cargando datos…</p>
+              </div>
+              <select id="grafica-mes-selector" class="btn btn-secondary btn-small">
+              </select>
+            </div>
+            <div style="padding:24px 28px">
+              <div id="grafica-barras" style="display:flex;flex-direction:column;gap:10px;min-height:80px">
+                <p style="color:var(--muted);font-size:.86rem;text-align:center;padding:20px 0">Cargando…</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>Próximas citas</h3>
+                <p id="resumen-citas-subtitle">Las siguientes 8 citas agendadas</p>
+              </div>
+              <div class="filter-pills" id="resumen-filtros">
+                <button class="pill active" data-filter="todas">Todas</button>
+                <button class="pill" data-filter="pendiente">Pendientes</button>
+                <button class="pill" data-filter="confirmada">Confirmadas</button>
+                <button class="pill" data-filter="atendida">Atendidas</button>
+              </div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha / hora</th>
+                  <th>Paciente</th>
+                  <th>Sucursal</th>
+                  <th>Doctor</th>
+                  <th>Tratamiento</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="resumen-citas-body">
+                <tr><td colspan="6" class="empty-state">Cargando citas…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== VISTA: CITAS ========== -->
+        <section class="view" data-view="citas">
+          <div class="toolbar">
+            <div class="filter-pills" id="citas-filtros">
+              <button class="pill active" data-filter="todas">Todas</button>
+              <button class="pill" data-filter="hoy">Hoy</button>
+              <button class="pill" data-filter="semana">Esta semana</button>
+              <button class="pill" data-filter="pendiente">Pendientes</button>
+            </div>
+            <button class="btn btn-primary sucursal-only" id="open-add-cita" style="display:none">+ Nueva cita</button>
+          </div>
+
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Paciente</th>
+                  <th>Sucursal</th>
+                  <th>Doctor</th>
+                  <th>Tratamiento</th>
+                  <th>Origen</th>
+                  <th>Estado</th>
+                  <th style="text-align:right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="citas-body">
+                <tr><td colspan="9" class="empty-state">Cargando citas…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== VISTA: DOCTORES ========== -->
+        <section class="view" data-view="doctores">
+          <div class="toolbar">
+            <p style="margin:0;color:var(--muted)">Doctores de tu sucursal.</p>
+            <button class="btn btn-primary" id="open-add-doctor">+ Nuevo doctor</button>
+          </div>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Doctor</th>
+                  <th>Especialidad</th>
+                  <th>Sucursal</th>
+                  <th>Estado</th>
+                  <th style="text-align:right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="doctores-body">
+                <tr><td colspan="5" class="empty-state">Cargando doctores…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== VISTA: TRATAMIENTOS ========== -->
+        <section class="view" data-view="tratamientos">
+          <div class="toolbar">
+            <p style="margin:0;color:var(--muted)" id="tratamientos-subtitle">Catálogo de tratamientos.</p>
+            <button class="btn btn-primary owner-only" id="open-add-tratamiento" style="display:none">+ Nuevo tratamiento</button>
+          </div>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tratamiento</th>
+                  <th>Especialidad</th>
+                  <th>Precio</th>
+                  <th>Duración</th>
+                  <th>Disponible en tu sucursal</th>
+                  <th style="text-align:right" id="th-acciones-trat" class="owner-only" style="display:none">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tratamientos-body">
+                <tr><td colspan="6" class="empty-state">Cargando tratamientos…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== VISTA: SUCURSALES (solo owner) ========== -->
+        <section class="view" data-view="sucursales">
+          <div class="toolbar">
+            <p style="margin:0;color:var(--muted)">Todas las sucursales de la red.</p>
+            <button class="btn btn-primary" id="open-add-sucursal">+ Nueva sucursal</button>
+          </div>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sucursal</th>
+                  <th>Ciudad</th>
+                  <th>Dirección</th>
+                  <th>WhatsApp</th>
+                  <th>Estado</th>
+                  <th style="text-align:right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="sucursales-body">
+                <tr><td colspan="6" class="empty-state">Cargando sucursales…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ========== VISTA: USUARIOS (solo owner) ========== -->
+        <section class="view" data-view="usuarios">
+          <div class="toolbar">
+            <p style="margin:0;color:var(--muted)">Accesos al panel administrativo.</p>
+            <button class="btn btn-primary" id="open-add-usuario">+ Invitar usuario</button>
+          </div>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Rol</th>
+                  <th>Sucursal</th>
+                  <th style="text-align:right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="usuarios-body">
+                <tr><td colspan="5" class="empty-state">Cargando usuarios…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ========== MODAL: NUEVA / EDITAR CITA ========== -->
+  <div class="modal-bg" id="cita-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="cita-modal-title">Nueva cita</h3>
+        <button class="close-btn" id="close-cita-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-error" id="cita-form-error"></div>
+        <div class="field">
+          <label>Nombre del paciente *</label>
+          <input type="text" id="cita-paciente" placeholder="Ej. Juan Pérez" />
+        </div>
+        <div class="field">
+          <label>Teléfono</label>
+          <input type="tel" id="cita-telefono" placeholder="81xxxxxxxx" />
+        </div>
+        <div class="field owner-only-cita">
+          <label>Sucursal *</label>
+          <select id="cita-sucursal"></select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Doctor *</label>
+            <select id="cita-doctor"></select>
+          </div>
+          <div class="field">
+            <label>Tratamiento *</label>
+            <select id="cita-tratamiento"></select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Fecha *</label>
+            <input type="date" id="cita-fecha" />
+          </div>
+          <div class="field">
+            <label>Hora *</label>
+            <input type="time" id="cita-hora" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Estado</label>
+          <select id="cita-estado">
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="atendida">Atendida</option>
+            <option value="cancelada">Cancelada</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Notas</label>
+          <textarea id="cita-notas" rows="2" placeholder="Opcional"></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" id="cancel-cita-modal">Cancelar</button>
+        <button class="btn btn-primary" id="save-cita-btn">Guardar cita</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: NUEVA / EDITAR SUCURSAL ========== -->
+  <div class="modal-bg" id="sucursal-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="sucursal-modal-title">Nueva sucursal</h3>
+        <button class="close-btn" id="close-sucursal-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-error" id="sucursal-form-error"></div>
+        <div class="field">
+          <label>Nombre de la sucursal *</label>
+          <input type="text" id="suc-nombre" placeholder="Ej. Los Dentistas San Pedro" />
+        </div>
+        <div class="field">
+          <label>Ciudad *</label>
+          <input type="text" id="suc-ciudad" placeholder="Ej. Monterrey y Área Metropolitana" />
+          <div class="field-hint">Esta es la ciudad que verá el paciente en el bot al elegir zona.</div>
+        </div>
+        <div class="field">
+          <label>Dirección</label>
+          <input type="text" id="suc-direccion" placeholder="Ej. Av. Vasconcelos 210, San Pedro" />
+        </div>
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="tel" id="suc-whatsapp" placeholder="Ej. 8134026211" />
+          <div class="field-hint">Solo números, sin espacios ni guiones.</div>
+        </div>
+        <div class="field">
+          <label>Estado</label>
+          <select id="suc-activa">
+            <option value="true">Activa</option>
+            <option value="false">Inactiva</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-danger" id="delete-sucursal-btn" style="margin-right:auto;display:none">🗑️ Eliminar</button>
+        <button class="btn btn-secondary" id="cancel-sucursal-modal">Cancelar</button>
+        <button class="btn btn-primary" id="save-sucursal-btn">Guardar sucursal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: NUEVO / EDITAR USUARIO ========== -->
+  <div class="modal-bg" id="usuario-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="usuario-modal-title">Invitar usuario</h3>
+        <button class="close-btn" id="close-usuario-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-error" id="usuario-form-error"></div>
+        <div class="field">
+          <label>Nombre *</label>
+          <input type="text" id="usr-nombre" placeholder="Ej. Admin San Pedro" />
+        </div>
+        <div class="field">
+          <label>Correo *</label>
+          <input type="email" id="usr-email" placeholder="Ej. sanpedro@losdentistas.mx" />
+          <div class="field-hint" id="usr-email-hint">Este será su usuario para iniciar sesión.</div>
+        </div>
+        <div class="field" id="usr-password-field">
+          <label>Contraseña temporal *</label>
+          <input type="text" id="usr-password" placeholder="Ej. Dentista2026!" />
+          <div class="field-hint">El usuario podrá cambiarla después de su primer acceso.</div>
+        </div>
+        <div class="field">
+          <label>Rol *</label>
+          <select id="usr-rol">
+            <option value="sucursal">Admin de sucursal</option>
+            <option value="owner">Propietario (acceso total)</option>
+          </select>
+        </div>
+        <div class="field" id="usr-sucursal-field">
+          <label>Sucursal asignada *</label>
+          <select id="usr-sucursal"></select>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-danger" id="delete-usuario-btn" style="margin-right:auto;display:none">🗑️ Eliminar usuario</button>
+        <button class="btn btn-secondary" id="cancel-usuario-modal">Cancelar</button>
+        <button class="btn btn-primary" id="save-usuario-btn">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: NUEVO / EDITAR DOCTOR (con horarios integrados) ========== -->
+  <div class="modal-bg" id="doctor-modal">
+    <div class="modal-card" style="max-width:580px">
+      <div class="modal-head">
+        <h3 id="doctor-modal-title">Nuevo doctor</h3>
+        <button class="close-btn" id="close-doctor-modal">×</button>
+      </div>
+
+      <!-- Pestañas — horarios solo aparece al editar -->
+      <div id="doctor-tabs" style="display:none;border-bottom:1px solid var(--line);padding:0 24px;display:flex;gap:0">
+        <button class="doc-tab active" data-tab="info" style="padding:12px 18px;border:0;background:transparent;font-weight:700;font-size:.88rem;cursor:pointer;border-bottom:3px solid var(--green-700);color:var(--green-800)">📋 Información</button>
+        <button class="doc-tab" data-tab="horarios" style="padding:12px 18px;border:0;background:transparent;font-weight:600;font-size:.88rem;cursor:pointer;border-bottom:3px solid transparent;color:var(--muted)">📅 Horarios</button>
+      </div>
+
+      <!-- Pestaña: Información -->
+      <div id="doc-tab-info" class="modal-body">
+        <div class="form-error" id="doctor-form-error"></div>
+        <div class="field">
+          <label>Nombre completo *</label>
+          <input type="text" id="doc-nombre" placeholder="Ej. Dra. Laura Treviño" />
+        </div>
+        <div class="field">
+          <label>Especialidad</label>
+          <input type="text" id="doc-especialidad" placeholder="Ej. Ortodoncia, General…" />
+        </div>
+        <div class="field owner-only-field">
+          <label>Sucursal *</label>
+          <select id="doc-sucursal"></select>
+        </div>
+        <div class="field">
+          <label>Estado</label>
+          <select id="doc-activo">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Pestaña: Horarios -->
+      <div id="doc-tab-horarios" class="modal-body" style="display:none">
+        <div class="form-error" id="horarios-form-error"></div>
+        <p style="color:var(--muted);font-size:.86rem;margin:0 0 14px">Define los días y bloques de horario disponibles para citas.</p>
+        <div id="horarios-lista" style="margin-bottom:16px"></div>
+        <div style="background:var(--green-50);border:1px solid var(--green-100);border-radius:10px;padding:16px">
+          <p style="margin:0 0 12px;font-weight:800;font-size:.88rem;color:var(--green-900)">+ Agregar horario</p>
+          <div class="field-row">
+            <div class="field" style="margin-bottom:8px">
+              <label>Día</label>
+              <select id="h-dia">
+                <option value="1">Lunes</option>
+                <option value="2">Martes</option>
+                <option value="3">Miércoles</option>
+                <option value="4">Jueves</option>
+                <option value="5">Viernes</option>
+                <option value="6">Sábado</option>
+                <option value="0">Domingo</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:8px">
+              <label>Duración de cita (min)</label>
+              <select id="h-duracion">
+                <option value="15">15 min</option>
+                <option value="20">20 min</option>
+                <option value="30" selected>30 min</option>
+                <option value="45">45 min</option>
+                <option value="60">60 min</option>
+                <option value="90">90 min</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field" style="margin-bottom:8px">
+              <label>Hora inicio</label>
+              <input type="time" id="h-inicio" value="09:00" />
+            </div>
+            <div class="field" style="margin-bottom:8px">
+              <label>Hora fin</label>
+              <input type="time" id="h-fin" value="14:00" />
+            </div>
+          </div>
+          <button class="btn btn-primary btn-small" id="add-horario-btn" style="width:100%">+ Agregar este horario</button>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn btn-danger" id="delete-doctor-btn" style="margin-right:auto;display:none">🗑️ Eliminar</button>
+        <button class="btn btn-secondary" id="cancel-doctor-modal">Cancelar</button>
+        <button class="btn btn-primary" id="save-doctor-btn">Guardar doctor</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: NUEVO / EDITAR TRATAMIENTO ========== -->
+  <div class="modal-bg" id="tratamiento-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="tratamiento-modal-title">Nuevo tratamiento</h3>
+        <button class="close-btn" id="close-tratamiento-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-error" id="tratamiento-form-error"></div>
+        <div class="field">
+          <label>Nombre *</label>
+          <input type="text" id="trat-nombre" placeholder="Ej. Limpieza dental" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Especialidad</label>
+            <input type="text" id="trat-especialidad" placeholder="Ej. General" />
+          </div>
+          <div class="field">
+            <label>Ícono (emoji)</label>
+            <input type="text" id="trat-icono" placeholder="🦷" maxlength="4" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Precio (MXN) *</label>
+            <input type="number" id="trat-precio" placeholder="250" min="0" />
+          </div>
+          <div class="field">
+            <label>Duración (minutos)</label>
+            <input type="number" id="trat-duracion" placeholder="30" min="5" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Descripción</label>
+          <input type="text" id="trat-descripcion" placeholder="Ej. Profilaxis dental completa" />
+        </div>
+        <div class="field">
+          <label>Estado</label>
+          <select id="trat-activo">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-danger" id="delete-tratamiento-btn" style="margin-right:auto;display:none">🗑️ Eliminar</button>
+        <button class="btn btn-secondary" id="cancel-tratamiento-modal">Cancelar</button>
+        <button class="btn btn-primary" id="save-tratamiento-btn">Guardar tratamiento</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PANTALLA: SUCURSAL INACTIVA ========== -->
+  <div class="login-screen" id="inactiva-screen" style="display:none">
+    <div class="login-card" style="text-align:center">
+      <div style="font-size:3rem;margin-bottom:16px">🔒</div>
+      <h1 style="font-size:1.3rem;margin-bottom:8px">Acceso suspendido</h1>
+      <p style="color:var(--muted);margin-bottom:24px;font-size:.92rem">
+        Tu sucursal se encuentra temporalmente inactiva.<br>
+        Por favor contacta a tu administrador para más información.
+      </p>
+      <div style="background:var(--green-50);border:1px solid var(--green-100);border-radius:10px;padding:16px;margin-bottom:20px;font-size:.86rem;color:var(--muted)">
+        Si crees que esto es un error, escríbele a tu administrador<br>o llámale directamente.
+      </div>
+      <button class="login-btn" onclick="sb.auth.signOut().then(()=>location.reload())" style="background:var(--muted)">
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================
+    // CONFIGURACIÓN DE SUPABASE
+    // =========================================================
+    const SUPABASE_URL = 'https://ebfkculntzhmygbuvbbr.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_Cv3uKdIShlPM0wmPvCQfRg_wc4FubVJ';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Estado global de la sesión
+    let perfil = null; // { id, nombre, email, rol, sucursal_id }
+    let citaEditandoId = null; // id de la cita en edición, null si es nueva
+
+    // =========================================================
+    // LOGIN
+    // =========================================================
+    const loginScreen = document.getElementById('login-screen');
+    const appEl = document.getElementById('app');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+    const loginSubmit = document.getElementById('login-submit');
+
+    // Ojito para mostrar/ocultar contraseña
+    document.getElementById('toggle-password').addEventListener('click', () => {
+      const input = document.getElementById('login-password');
+      const btn = document.getElementById('toggle-password');
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+      }
+    });
+
+    function showLoginError(msg){
+      loginError.textContent = msg;
+      loginError.classList.add('show');
+    }
+    function hideLoginError(){
+      loginError.classList.remove('show');
+    }
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideLoginError();
+      loginSubmit.disabled = true;
+      loginSubmit.textContent = 'Entrando…';
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        showLoginError('Correo o contraseña incorrectos.');
+        loginSubmit.disabled = false;
+        loginSubmit.textContent = 'Entrar';
+        return;
+      }
+
+      await iniciarApp(data.user);
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await sb.auth.signOut();
+      window.location.reload();
+    });
+
+    // =========================================================
+    // INICIO DE LA APP (tras login exitoso)
+    // =========================================================
+    async function obtenerPerfil(userId) {
+      const { data, error } = await sb
+        .from('usuarios_admin')
+        .select('id, nombre, email, rol, sucursal_id')
+        .eq('id', userId)
+        .single();
+      if (error) {
+        console.error('Error obteniendo perfil:', error);
+        return null;
+      }
+      return data;
+    }
+
+    async function iniciarApp(user) {
+      perfil = await obtenerPerfil(user.id);
+
+      if (!perfil) {
+        showLoginError('Tu usuario no tiene un perfil asignado en el sistema. Contacta al administrador.');
+        loginSubmit.disabled = false;
+        loginSubmit.textContent = 'Entrar';
+        await sb.auth.signOut();
+        return;
+      }
+
+      // Verificar si la sucursal está activa (solo para admins de sucursal, el owner siempre pasa)
+      if (perfil.rol !== 'owner' && perfil.sucursal_id) {
+        const { data: sucursal } = await sb
+          .from('sucursales')
+          .select('activa')
+          .eq('id', perfil.sucursal_id)
+          .single();
+
+        if (sucursal && sucursal.activa === false) {
+          loginScreen.style.display = 'none';
+          document.getElementById('inactiva-screen').style.display = 'flex';
+          return;
+        }
+      }
+
+      // Mostrar app, ocultar login
+      loginScreen.style.display = 'none';
+      appEl.classList.add('ready');
+
+      // Pintar datos del usuario en el sidebar
+      document.getElementById('user-name').textContent = perfil.nombre;
+      document.getElementById('user-role').textContent = perfil.rol === 'owner' ? 'Propietario' : 'Admin de sucursal';
+      document.getElementById('user-avatar').textContent = perfil.nombre.charAt(0).toUpperCase();
+
+      // Ocultar secciones exclusivas de owner si el rol es sucursal
+      if (perfil.rol !== 'owner') {
+        document.querySelectorAll('.owner-only').forEach(el => el.style.display = 'none');
+        document.getElementById('owner-section').style.display = 'none';
+        // Mostrar elementos exclusivos de sucursal
+        document.querySelectorAll('.sucursal-only').forEach(el => el.style.display = '');
+      }
+
+      // Cargar todos los datos
+      await cargarTodo();
+    }
+
+    // Verificar si ya hay sesión activa al cargar la página
+    (async () => {
+      const { data: { session } } = await sb.auth.getSession();
+      if (session) {
+        await iniciarApp(session.user);
+      }
+    })();
+
+    // =========================================================
+    // NAVEGACIÓN ENTRE VISTAS
+    // =========================================================
+    const titles = {
+      dashboard: { title: "Resumen", subtitle: "Vista general" },
+      citas: { title: "Citas", subtitle: "Gestiona las citas agendadas" },
+      doctores: { title: "Doctores", subtitle: "Doctores y horarios" },
+      tratamientos: { title: "Tratamientos", subtitle: "Catálogo de tratamientos" },
+      sucursales: { title: "Sucursales", subtitle: "Todas las sucursales de la red" },
+      usuarios: { title: "Usuarios", subtitle: "Accesos al panel administrativo" }
+    };
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const view = link.dataset.view;
+
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.querySelector(`.view[data-view="${view}"]`).classList.add('active');
+
+        document.getElementById('page-title').textContent = titles[view].title;
+        document.getElementById('page-subtitle').textContent = titles[view].subtitle;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // =========================================================
+    // CARGA DE DATOS
+    // =========================================================
+    let doctoresCache = [];
+    let tratamientosCache = [];
+    let sucursalesCache = [];
+
+    async function cargarTodo() {
+      await Promise.all([
+        cargarDoctores(),
+        cargarTratamientos(),
+        cargarCitas(),
+      ]);
+      if (perfil.rol === 'owner') {
+        cargarSucursales();
+        cargarUsuarios();
+      }
+      actualizarResumen();
+    }
+
+    async function cargarDoctores() {
+      const { data, error } = await sb
+        .from('doctores')
+        .select('id, nombre, especialidad, activo, sucursal_id, sucursales(nombre)')
+        .order('nombre');
+      if (error) { console.error(error); return; }
+      doctoresCache = data || [];
+
+      const tbody = document.getElementById('doctores-body');
+      if (!doctoresCache.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-state"><strong>Sin doctores</strong>Aún no hay doctores registrados.</td></tr>';
+      } else {
+        tbody.innerHTML = doctoresCache.map(d => `
+          <tr>
+            <td><strong>${escapeHtml(d.nombre)}</strong></td>
+            <td>${escapeHtml(d.especialidad || '—')}</td>
+            <td>${escapeHtml(d.sucursales?.nombre || '—')}</td>
+            <td><span class="badge ${d.activo ? 'badge-success' : 'badge-neutral'}">${d.activo ? '● Activo' : '● Inactivo'}</span></td>
+            <td class="row-actions">
+              <button class="row-action-btn" title="Editar (incluye horarios)" onclick="abrirEditarDoctor('${d.id}')">✏️</button>
+              <button class="row-action-btn danger" title="Eliminar" onclick="eliminarDoctor('${d.id}','${escapeHtml(d.nombre)}')">🗑️</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      const selectDoctor = document.getElementById('cita-doctor');
+      selectDoctor.innerHTML = doctoresCache.map(d => `<option value="${d.id}">${escapeHtml(d.nombre)}</option>`).join('');
+      llenarSelectSucursalesDoctor();
+    }
+
+    function llenarSelectSucursalesDoctor() {
+      const sel = document.getElementById('doc-sucursal');
+      if (!sel) return;
+      sel.innerHTML = sucursalesCache.map(s => `<option value="${s.id}">${escapeHtml(s.nombre)}${s.ciudad ? ' · ' + escapeHtml(s.ciudad) : ''}</option>`).join('');
+    }
+
+    // =========================================================
+    // MODAL DOCTORES (con pestañas Info / Horarios)
+    // =========================================================
+    const doctorModal = document.getElementById('doctor-modal');
+    const doctorFormError = document.getElementById('doctor-form-error');
+    let doctorEditandoId = null;
+    let doctorHorarioId = null;
+    let horariosCache = [];
+    const diasNombre = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+    function showDoctorError(msg) { doctorFormError.textContent = msg; doctorFormError.classList.add('show'); }
+    function hideDoctorError() { doctorFormError.classList.remove('show'); }
+
+    function activarPestana(tab) {
+      document.querySelectorAll('.doc-tab').forEach(t => {
+        const isActive = t.dataset.tab === tab;
+        t.style.borderBottomColor = isActive ? 'var(--green-700)' : 'transparent';
+        t.style.color = isActive ? 'var(--green-800)' : 'var(--muted)';
+        t.style.fontWeight = isActive ? '700' : '600';
+      });
+      document.getElementById('doc-tab-info').style.display = tab === 'info' ? '' : 'none';
+      document.getElementById('doc-tab-horarios').style.display = tab === 'horarios' ? '' : 'none';
+      document.getElementById('save-doctor-btn').style.display = tab === 'info' ? '' : 'none';
+      if (tab === 'horarios') renderHorarios();
+    }
+
+    document.getElementById('doctor-tabs').addEventListener('click', (e) => {
+      const tab = e.target.closest('.doc-tab');
+      if (tab) activarPestana(tab.dataset.tab);
+    });
+
+    function abrirNuevoDoctor() {
+      doctorEditandoId = null;
+      document.getElementById('doctor-modal-title').textContent = 'Nuevo doctor';
+      document.getElementById('doc-nombre').value = '';
+      document.getElementById('doc-especialidad').value = '';
+      document.getElementById('doc-activo').value = 'true';
+      llenarSelectSucursalesDoctor();
+      if (perfil.rol !== 'owner') {
+        document.getElementById('doc-sucursal').value = perfil.sucursal_id;
+        document.querySelector('.owner-only-field') && (document.querySelector('.owner-only-field').style.display = 'none');
+      } else {
+        document.querySelector('.owner-only-field') && (document.querySelector('.owner-only-field').style.display = '');
+      }
+      document.getElementById('delete-doctor-btn').style.display = 'none';
+      document.getElementById('doctor-tabs').style.display = 'none';
+      activarPestana('info');
+      hideDoctorError();
+      doctorModal.classList.add('open');
+    }
+
+    window.abrirEditarDoctor = function(id) {
+      const d = doctoresCache.find(x => x.id === id);
+      if (!d) return;
+      doctorEditandoId = id;
+      doctorHorarioId = id;
+      document.getElementById('doctor-modal-title').textContent = 'Editar doctor';
+      document.getElementById('doc-nombre').value = d.nombre || '';
+      document.getElementById('doc-especialidad').value = d.especialidad || '';
+      document.getElementById('doc-activo').value = d.activo ? 'true' : 'false';
+      llenarSelectSucursalesDoctor();
+      document.getElementById('doc-sucursal').value = d.sucursal_id || '';
+      if (perfil.rol !== 'owner') {
+        document.querySelector('.owner-only-field') && (document.querySelector('.owner-only-field').style.display = 'none');
+      }
+      document.getElementById('delete-doctor-btn').style.display = '';
+      document.getElementById('doctor-tabs').style.display = 'flex';
+      activarPestana('info');
+      hideDoctorError();
+      doctorModal.classList.add('open');
+    };
+
+    window.eliminarDoctor = async function(id, nombre) {
+      if (!confirm(`¿Eliminar al doctor "${nombre}"? También se eliminarán sus horarios.`)) return;
+      const { error } = await sb.from('doctores').delete().eq('id', id);
+      if (error) { alert('No se pudo eliminar: ' + error.message); return; }
+      doctorModal.classList.remove('open');
+      await cargarDoctores();
+    };
+
+    document.getElementById('open-add-doctor').addEventListener('click', abrirNuevoDoctor);
+    document.getElementById('close-doctor-modal').addEventListener('click', () => doctorModal.classList.remove('open'));
+    document.getElementById('cancel-doctor-modal').addEventListener('click', () => doctorModal.classList.remove('open'));
+    doctorModal.addEventListener('click', e => { if (e.target === doctorModal) doctorModal.classList.remove('open'); });
+    document.getElementById('delete-doctor-btn').addEventListener('click', async () => {
+      const nombre = document.getElementById('doc-nombre').value;
+      doctorModal.classList.remove('open');
+      await eliminarDoctor(doctorEditandoId, nombre);
+    });
+
+    document.getElementById('save-doctor-btn').addEventListener('click', async () => {
+      hideDoctorError();
+      const nombre = document.getElementById('doc-nombre').value.trim();
+      const especialidad = document.getElementById('doc-especialidad').value.trim();
+      const activo = document.getElementById('doc-activo').value === 'true';
+      const sucursalId = perfil.rol === 'owner'
+        ? document.getElementById('doc-sucursal').value
+        : perfil.sucursal_id;
+
+      if (!nombre) { showDoctorError('El nombre del doctor es obligatorio.'); return; }
+      if (!sucursalId) { showDoctorError('Selecciona una sucursal.'); return; }
+
+      const saveBtn = document.getElementById('save-doctor-btn');
+      saveBtn.disabled = true; saveBtn.textContent = 'Guardando…';
+
+      const payload = { nombre, especialidad: especialidad || null, activo, sucursal_id: sucursalId };
+      let error;
+      if (doctorEditandoId) {
+        ({ error } = await sb.from('doctores').update(payload).eq('id', doctorEditandoId));
+      } else {
+        ({ error } = await sb.from('doctores').insert(payload));
+      }
+
+      saveBtn.disabled = false; saveBtn.textContent = 'Guardar doctor';
+      if (error) { showDoctorError('No se pudo guardar: ' + error.message); return; }
+      doctorModal.classList.remove('open');
+      await cargarDoctores();
+    });
+
+    // =========================================================
+    // HORARIOS (pestaña dentro del modal de doctor)
+    // =========================================================
+    async function renderHorarios() {
+      if (!doctorHorarioId) return;
+      const { data, error } = await sb
+        .from('horarios_doctores')
+        .select('id, dia_semana, hora_inicio, hora_fin, duracion_cita_min')
+        .eq('doctor_id', doctorHorarioId)
+        .order('dia_semana');
+      if (error) { console.error(error); return; }
+      horariosCache = data || [];
+
+      const lista = document.getElementById('horarios-lista');
+      if (!horariosCache.length) {
+        lista.innerHTML = '<p style="color:var(--muted);font-size:.86rem;text-align:center;padding:12px 0">Sin horarios registrados todavía.</p>';
+        return;
+      }
+      lista.innerHTML = horariosCache.map(h => `
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:white;border:1px solid var(--line);border-radius:10px;margin-bottom:8px">
+          <span style="font-weight:800;min-width:80px;color:var(--green-900)">${diasNombre[h.dia_semana]}</span>
+          <span style="flex:1;color:var(--muted)">${h.hora_inicio?.slice(0,5)} – ${h.hora_fin?.slice(0,5)} · cada ${h.duracion_cita_min} min</span>
+          <button class="row-action-btn danger" onclick="eliminarHorario('${h.id}')" title="Eliminar">🗑️</button>
+        </div>
+      `).join('');
+    }
+
+    window.eliminarHorario = async function(id) {
+      if (!confirm('¿Eliminar este horario?')) return;
+      await sb.from('horarios_doctores').delete().eq('id', id);
+      await renderHorarios();
+    };
+
+    document.getElementById('add-horario-btn').addEventListener('click', async () => {
+      const dia = parseInt(document.getElementById('h-dia').value);
+      const inicio = document.getElementById('h-inicio').value;
+      const fin = document.getElementById('h-fin').value;
+      const duracion = parseInt(document.getElementById('h-duracion').value);
+      const errEl = document.getElementById('horarios-form-error');
+
+      if (!inicio || !fin) { errEl.textContent = 'Define la hora de inicio y fin.'; errEl.classList.add('show'); return; }
+      if (inicio >= fin) { errEl.textContent = 'La hora de inicio debe ser antes de la hora de fin.'; errEl.classList.add('show'); return; }
+      errEl.classList.remove('show');
+
+      const { error } = await sb.from('horarios_doctores').insert({
+        doctor_id: doctorHorarioId, dia_semana: dia,
+        hora_inicio: inicio, hora_fin: fin, duracion_cita_min: duracion
+      });
+      if (error) { errEl.textContent = 'Error: ' + error.message; errEl.classList.add('show'); return; }
+      await renderHorarios();
+    });
+
+    let citasCache = [];
+
+    async function cargarTratamientos() {
+      const { data: tratamientos, error } = await sb
+        .from('tratamientos')
+        .select('id, nombre, especialidad, precio, duracion_min, activo, icono')
+        .order('nombre');
+      if (error) { console.error(error); return; }
+      tratamientosCache = tratamientos || [];
+
+      const btnNuevoTrat = document.getElementById('open-add-tratamiento');
+      if (btnNuevoTrat) btnNuevoTrat.style.display = perfil.rol === 'owner' ? '' : 'none';
+      const thAcciones = document.getElementById('th-acciones-trat');
+      if (thAcciones) thAcciones.style.display = perfil.rol === 'owner' ? '' : 'none';
+
+      let disponibles = new Set();
+      if (perfil.rol !== 'owner' && perfil.sucursal_id) {
+        const { data: st } = await sb
+          .from('sucursal_tratamientos')
+          .select('tratamiento_id')
+          .eq('sucursal_id', perfil.sucursal_id)
+          .eq('disponible', true);
+        disponibles = new Set((st || []).map(x => x.tratamiento_id));
+      }
+
+      const tbody = document.getElementById('tratamientos-body');
+      const subtitle = document.getElementById('tratamientos-subtitle');
+      subtitle.textContent = perfil.rol === 'owner'
+        ? 'Catálogo completo de la red. Solo tú puedes editarlo.'
+        : 'Tratamientos disponibles en tu sucursal.';
+
+      tbody.innerHTML = tratamientosCache.map(t => {
+        const disp = perfil.rol === 'owner' ? true : disponibles.has(t.id);
+        const accionesTd = perfil.rol === 'owner' ? `
+          <td class="row-actions">
+            <button class="row-action-btn" title="Editar" onclick="abrirEditarTratamiento('${t.id}')">✏️</button>
+            <button class="row-action-btn danger" title="Eliminar" onclick="eliminarTratamiento('${t.id}','${escapeHtml(t.nombre)}')">🗑️</button>
+          </td>` : '';
+        return `
+          <tr>
+            <td><div class="product-cell"><div class="product-icon">${t.icono || '🦷'}</div><strong>${escapeHtml(t.nombre)}</strong></div></td>
+            <td>${escapeHtml(t.especialidad || '—')}</td>
+            <td><strong>$${Number(t.precio).toFixed(2)}</strong></td>
+            <td>${t.duracion_min} min</td>
+            <td><span class="badge ${disp ? 'badge-success' : 'badge-neutral'}">${disp ? '● Disponible' : '● No disponible'}</span></td>
+            ${accionesTd}
+          </tr>
+        `;
+      }).join('');
+
+      const selectTrat = document.getElementById('cita-tratamiento');
+      const listaParaSelect = perfil.rol === 'owner'
+        ? tratamientosCache
+        : tratamientosCache.filter(t => disponibles.has(t.id));
+      selectTrat.innerHTML = listaParaSelect.map(t =>
+        `<option value="${t.id}">${escapeHtml(t.nombre)} — $${Number(t.precio).toFixed(2)}</option>`
+      ).join('');
+    }
+
+    async function cargarCitas() {
+      const { data, error } = await sb
+        .from('citas')
+        .select(`
+          id, fecha, hora, estado, origen, paciente_nombre, paciente_telefono, notas,
+          doctor_id, tratamiento_id,
+          doctores ( nombre ),
+          tratamientos ( nombre, precio ),
+          sucursales ( nombre )
+        `)
+        .order('fecha', { ascending: true })
+        .order('hora', { ascending: true });
+
+      if (error) { console.error(error); return; }
+      citasCache = data || [];
+      renderCitas(document.querySelector('#citas-filtros .pill.active')?.dataset.filter || 'todas');
+      const filtroResumen = document.querySelector('#resumen-filtros .pill.active')?.dataset.filter || 'todas';
+      renderResumenCitas(filtroResumen);
+    }
+
+    function renderCitas(filtro) {
+      const tbody = document.getElementById('citas-body');
+      const hoy = new Date().toISOString().slice(0, 10);
+      const en7dias = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+
+      let lista = citasCache;
+      if (filtro === 'hoy') lista = citasCache.filter(c => c.fecha === hoy);
+      if (filtro === 'semana') lista = citasCache.filter(c => c.fecha >= hoy && c.fecha <= en7dias);
+      if (filtro === 'pendiente') lista = citasCache.filter(c => c.estado === 'pendiente');
+
+      if (!lista.length) {
+        tbody.innerHTML = '<tr><td colspan="9" class="empty-state"><strong>No hay citas</strong>No se encontraron citas con este filtro.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = lista.map(c => `
+        <tr>
+          <td>${formatFecha(c.fecha)}</td>
+          <td>${c.hora?.slice(0,5) || '—'}</td>
+          <td><strong>${escapeHtml(c.paciente_nombre)}</strong>${c.paciente_telefono ? `<br><small style="color:var(--muted)">${escapeHtml(c.paciente_telefono)}</small>` : ''}</td>
+          <td><small style="color:var(--muted)">${escapeHtml(c.sucursales?.nombre?.replace('Los Dentistas ','') || '—')}</small></td>
+          <td>${escapeHtml(c.doctores?.nombre || '—')}</td>
+          <td>${escapeHtml(c.tratamientos?.nombre || '—')}</td>
+          <td><span class="badge ${c.origen === 'bot' ? 'badge-neutral' : 'badge-success'}">${c.origen === 'bot' ? '🤖 Bot' : '🖥️ Dashboard'}</span></td>
+          <td>${estadoBadge(c.estado)}</td>
+          <td class="row-actions">
+            <button class="row-action-btn" title="Editar" onclick="abrirEditarCita('${c.id}')">✏️</button>
+            <button class="row-action-btn danger" title="Cancelar" onclick="cancelarCita('${c.id}')">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderResumenCitas(filtro = 'todas') {
+      const tbody = document.getElementById('resumen-citas-body');
+      const subtitle = document.getElementById('resumen-citas-subtitle');
+
+      let lista = citasCache.filter(c => c.estado !== 'cancelada');
+      if (filtro !== 'todas') lista = citasCache.filter(c => c.estado === filtro);
+      const proximas = lista.slice(0, 10);
+
+      const labelFiltro = filtro === 'todas' ? 'sin canceladas' : filtro + 's';
+      subtitle.textContent = `Mostrando ${proximas.length} cita${proximas.length !== 1 ? 's' : ''} · ${labelFiltro}`;
+
+      if (!proximas.length) {
+        tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><strong>Sin citas</strong>No hay citas ${filtro !== 'todas' ? filtro + 's' : ''} registradas.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = proximas.map(c => `
+        <tr>
+          <td>${formatFecha(c.fecha)} · ${c.hora?.slice(0,5) || ''}</td>
+          <td>${escapeHtml(c.paciente_nombre)}</td>
+          <td><small style="color:var(--muted)">${escapeHtml(c.sucursales?.nombre?.replace('Los Dentistas ','') || '—')}</small></td>
+          <td>${escapeHtml(c.doctores?.nombre || '—')}</td>
+          <td>${escapeHtml(c.tratamientos?.nombre || '—')}</td>
+          <td>${estadoBadge(c.estado)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function actualizarResumen() {
+      const hoy = new Date().toISOString().slice(0, 10);
+      document.getElementById('stat-citas-hoy').textContent = citasCache.filter(c => c.fecha === hoy).length;
+      document.getElementById('stat-citas-pendientes').textContent = citasCache.filter(c => c.estado === 'pendiente').length;
+      document.getElementById('stat-doctores').textContent = doctoresCache.filter(d => d.activo).length;
+      document.getElementById('stat-doctores-sub').textContent = perfil.rol === 'owner' ? 'en toda la red' : 'en tu sucursal';
+      document.getElementById('stat-tratamientos').textContent = document.getElementById('tratamientos-body').querySelectorAll('tr').length;
+
+      // Mostrar gráfica solo para owner
+      if (perfil.rol === 'owner') {
+        const card = document.getElementById('card-grafica-sucursales');
+        if (card) card.style.display = '';
+        iniciarGraficaSucursales();
+      }
+    }
+
+    // =========================================================
+    // GRÁFICA DE CITAS POR SUCURSAL
+    // =========================================================
+    function iniciarGraficaSucursales() {
+      // Llenar selector de meses (mes actual + 5 anteriores)
+      const sel = document.getElementById('grafica-mes-selector');
+      if (sel.options.length === 0) {
+        const ahora = new Date();
+        const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                       'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+        for (let i = 0; i < 6; i++) {
+          const d = new Date(ahora.getFullYear(), ahora.getMonth() - i, 1);
+          const val = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+          const label = `${meses[d.getMonth()]} ${d.getFullYear()}`;
+          const opt = document.createElement('option');
+          opt.value = val; opt.textContent = label;
+          sel.appendChild(opt);
+        }
+        sel.addEventListener('change', () => cargarGraficaMes(sel.value));
+      }
+      cargarGraficaMes(sel.value);
+    }
+
+    async function cargarGraficaMes(mesYear) {
+      const [year, mes] = mesYear.split('-').map(Number);
+      const inicio = `${year}-${String(mes).padStart(2,'0')}-01`;
+      const fin = new Date(year, mes, 0).toISOString().slice(0,10); // último día del mes
+
+      const { data, error } = await sb
+        .from('citas')
+        .select('sucursal_id, sucursales(nombre)')
+        .gte('fecha', inicio)
+        .lte('fecha', fin)
+        .neq('estado', 'cancelada');
+
+      if (error) { console.error(error); return; }
+
+      // Agrupar por sucursal
+      const conteo = {};
+      (data || []).forEach(c => {
+        const nombre = c.sucursales?.nombre || 'Sin nombre';
+        conteo[nombre] = (conteo[nombre] || 0) + 1;
+      });
+
+      // Ordenar por cantidad desc, tomar top 10
+      const sorted = Object.entries(conteo)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10);
+
+      const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                     'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+      const subtitleEl = document.getElementById('grafica-subtitle');
+      subtitleEl.textContent = sorted.length
+        ? `${meses[mes-1]} ${year} · Top ${sorted.length} sucursales por citas agendadas`
+        : `${meses[mes-1]} ${year} · Sin citas registradas este mes`;
+
+      const contenedor = document.getElementById('grafica-barras');
+      if (!sorted.length) {
+        contenedor.innerHTML = '<p style="color:var(--muted);font-size:.86rem;text-align:center;padding:24px 0">No hay citas registradas para este mes.</p>';
+        return;
+      }
+
+      const max = sorted[0][1];
+      const colores = ['#1d4ed8','#2563eb','#3b82f6','#60a5fa','#93c5fd',
+                       '#1d4ed8','#2563eb','#3b82f6','#60a5fa','#93c5fd'];
+
+      contenedor.innerHTML = sorted.map(([nombre, cantidad], i) => {
+        const pct = Math.round((cantidad / max) * 100);
+        const nombreCorto = nombre.replace('Los Dentistas ', '');
+        return `
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="min-width:120px;max-width:150px;font-size:.82rem;font-weight:700;color:var(--ink);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escapeHtml(nombreCorto)}">${escapeHtml(nombreCorto)}</span>
+            <div style="flex:1;background:var(--green-50);border-radius:6px;height:24px;overflow:hidden">
+              <div style="height:100%;width:${pct}%;background:${colores[i]};border-radius:6px;transition:width .4s ease;display:flex;align-items:center;padding-left:8px;min-width:30px">
+              </div>
+            </div>
+            <span style="min-width:30px;font-size:.88rem;font-weight:900;color:var(--green-900)">${cantidad}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function cargarSucursales() {
+      const { data, error } = await sb.from('sucursales').select('id, nombre, ciudad, direccion, whatsapp, activa').order('ciudad').order('nombre');
+      if (error) { console.error(error); return; }
+      sucursalesCache = data || [];
+      const tbody = document.getElementById('sucursales-body');
+      if (!data || !data.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><strong>Sin sucursales</strong>Aún no hay sucursales registradas.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.map(s => `
+        <tr>
+          <td><strong>${escapeHtml(s.nombre)}</strong></td>
+          <td><small style="color:var(--muted)">${escapeHtml(s.ciudad || '—')}</small></td>
+          <td>${escapeHtml(s.direccion || '—')}</td>
+          <td>${s.whatsapp ? `<a href="https://wa.me/${escapeHtml(s.whatsapp)}" target="_blank" style="color:var(--green-700);font-weight:700;">📱 ${escapeHtml(s.whatsapp)}</a>` : '—'}</td>
+          <td><span class="badge ${s.activa ? 'badge-success' : 'badge-neutral'}">${s.activa ? '● Activa' : '● Inactiva'}</span></td>
+          <td class="row-actions">
+            <button class="row-action-btn" title="Editar" onclick="abrirEditarSucursal(${s.id})">✏️</button>
+            <button class="row-action-btn danger" title="Eliminar" onclick="eliminarSucursal(${s.id}, '${escapeHtml(s.nombre)}')">🗑️</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // =========================================================
+    // MODAL DE SUCURSALES (crear / editar)
+    // =========================================================
+    const sucursalModal = document.getElementById('sucursal-modal');
+    const sucursalFormError = document.getElementById('sucursal-form-error');
+    let sucursalEditandoId = null;
+
+    function showSucursalError(msg) {
+      sucursalFormError.textContent = msg;
+      sucursalFormError.classList.add('show');
+    }
+    function hideSucursalError() {
+      sucursalFormError.classList.remove('show');
+    }
+
+    function abrirNuevaSucursal() {
+      sucursalEditandoId = null;
+      document.getElementById('sucursal-modal-title').textContent = 'Nueva sucursal';
+      document.getElementById('suc-nombre').value = '';
+      document.getElementById('suc-ciudad').value = '';
+      document.getElementById('suc-direccion').value = '';
+      document.getElementById('suc-whatsapp').value = '';
+      document.getElementById('suc-activa').value = 'true';
+      document.getElementById('delete-sucursal-btn').style.display = 'none';
+      hideSucursalError();
+      sucursalModal.classList.add('open');
+    }
+
+    window.abrirEditarSucursal = function(id) {
+      const s = sucursalesCache.find(x => x.id === id);
+      if (!s) return;
+      sucursalEditandoId = id;
+      document.getElementById('sucursal-modal-title').textContent = 'Editar sucursal';
+      document.getElementById('suc-nombre').value = s.nombre || '';
+      document.getElementById('suc-ciudad').value = s.ciudad || '';
+      document.getElementById('suc-direccion').value = s.direccion || '';
+      document.getElementById('suc-whatsapp').value = s.whatsapp || '';
+      document.getElementById('suc-activa').value = s.activa ? 'true' : 'false';
+      document.getElementById('delete-sucursal-btn').style.display = '';
+      hideSucursalError();
+      sucursalModal.classList.add('open');
+    };
+
+    window.eliminarSucursal = async function(id, nombre) {
+      if (!confirm(`¿Eliminar la sucursal "${nombre}"?\n\nEsta acción no se puede deshacer y eliminará también sus citas y doctores asociados.`)) return;
+      const { error } = await sb.from('sucursales').delete().eq('id', id);
+      if (error) { alert('No se pudo eliminar: ' + error.message); return; }
+      await cargarSucursales();
+    };
+
+    document.getElementById('open-add-sucursal').addEventListener('click', abrirNuevaSucursal);
+    document.getElementById('close-sucursal-modal').addEventListener('click', () => sucursalModal.classList.remove('open'));
+    document.getElementById('cancel-sucursal-modal').addEventListener('click', () => sucursalModal.classList.remove('open'));
+    sucursalModal.addEventListener('click', e => { if (e.target === sucursalModal) sucursalModal.classList.remove('open'); });
+
+    document.getElementById('delete-sucursal-btn').addEventListener('click', async () => {
+      const nombre = document.getElementById('suc-nombre').value;
+      sucursalModal.classList.remove('open');
+      await eliminarSucursal(sucursalEditandoId, nombre);
+    });
+
+    document.getElementById('save-sucursal-btn').addEventListener('click', async () => {
+      hideSucursalError();
+      const nombre = document.getElementById('suc-nombre').value.trim();
+      const ciudad = document.getElementById('suc-ciudad').value.trim();
+      const direccion = document.getElementById('suc-direccion').value.trim();
+      const whatsapp = document.getElementById('suc-whatsapp').value.trim();
+      const activa = document.getElementById('suc-activa').value === 'true';
+
+      if (!nombre) { showSucursalError('El nombre de la sucursal es obligatorio.'); return; }
+      if (!ciudad) { showSucursalError('La ciudad es obligatoria para que el bot pueda mostrarla.'); return; }
+
+      const payload = { nombre, ciudad: ciudad || null, direccion: direccion || null, whatsapp: whatsapp || null, activa };
+
+      const saveBtn = document.getElementById('save-sucursal-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Guardando…';
+
+      let error;
+      if (sucursalEditandoId) {
+        ({ error } = await sb.from('sucursales').update(payload).eq('id', sucursalEditandoId));
+      } else {
+        ({ error } = await sb.from('sucursales').insert(payload));
+      }
+
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Guardar sucursal';
+
+      if (error) { showSucursalError('No se pudo guardar: ' + error.message); return; }
+
+      sucursalModal.classList.remove('open');
+      await cargarSucursales();
+    });
+
+    let usuariosCache = [];
+
+    async function cargarUsuarios() {
+      const { data, error } = await sb
+        .from('usuarios_admin')
+        .select('id, nombre, email, rol, sucursal_id, sucursales(nombre)')
+        .order('nombre');
+      if (error) { console.error(error); return; }
+      usuariosCache = data || [];
+      const tbody = document.getElementById('usuarios-body');
+      tbody.innerHTML = usuariosCache.map(u => `
+        <tr>
+          <td><strong>${escapeHtml(u.nombre)}</strong></td>
+          <td>${escapeHtml(u.email)}</td>
+          <td><span class="badge ${u.rol === 'owner' ? 'badge-success' : 'badge-neutral'}">${u.rol === 'owner' ? '● Propietario' : '● Sucursal'}</span></td>
+          <td>${escapeHtml(u.sucursales?.nombre || 'Todas')}</td>
+          <td class="row-actions">
+            <button class="row-action-btn" title="Editar" onclick="abrirEditarUsuario('${u.id}')">✏️</button>
+            ${u.rol !== 'owner' ? `<button class="row-action-btn danger" title="Eliminar" onclick="eliminarUsuario('${u.id}', '${escapeHtml(u.nombre)}')">🗑️</button>` : ''}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // =========================================================
+    // MODAL DE USUARIOS (crear / editar)
+    // =========================================================
+    const usuarioModal = document.getElementById('usuario-modal');
+    const usuarioFormError = document.getElementById('usuario-form-error');
+    let usuarioEditandoId = null;
+
+    function showUsuarioError(msg) {
+      usuarioFormError.textContent = msg;
+      usuarioFormError.classList.add('show');
+    }
+    function hideUsuarioError() { usuarioFormError.classList.remove('show'); }
+
+    function llenarSelectSucursales() {
+      const sel = document.getElementById('usr-sucursal');
+      sel.innerHTML = sucursalesCache.map(s =>
+        `<option value="${s.id}">${escapeHtml(s.nombre)}${s.ciudad ? ' · ' + escapeHtml(s.ciudad) : ''}</option>`
+      ).join('');
+    }
+
+    function abrirNuevoUsuario() {
+      usuarioEditandoId = null;
+      document.getElementById('usuario-modal-title').textContent = 'Invitar usuario';
+      document.getElementById('usr-nombre').value = '';
+      document.getElementById('usr-email').value = '';
+      document.getElementById('usr-password').value = '';
+      document.getElementById('usr-rol').value = 'sucursal';
+      document.getElementById('usr-password-field').style.display = '';
+      document.getElementById('usr-email-hint').textContent = 'Este será su usuario para iniciar sesión.';
+      document.getElementById('usr-sucursal-field').style.display = '';
+      document.getElementById('delete-usuario-btn').style.display = 'none';
+      llenarSelectSucursales();
+      hideUsuarioError();
+      usuarioModal.classList.add('open');
+    }
+
+    window.abrirEditarUsuario = function(id) {
+      const u = usuariosCache.find(x => x.id === id);
+      if (!u) return;
+      usuarioEditandoId = id;
+      document.getElementById('usuario-modal-title').textContent = 'Editar usuario';
+      document.getElementById('usr-nombre').value = u.nombre || '';
+      document.getElementById('usr-email').value = u.email || '';
+      document.getElementById('usr-password').value = '';
+      document.getElementById('usr-rol').value = u.rol || 'sucursal';
+      document.getElementById('usr-password-field').style.display = '';
+      document.getElementById('usr-email-hint').textContent = 'Cambia el correo si lo necesitas.';
+      document.getElementById('usr-sucursal-field').style.display = u.rol === 'owner' ? 'none' : '';
+      llenarSelectSucursales();
+      if (u.sucursal_id) document.getElementById('usr-sucursal').value = u.sucursal_id;
+      document.getElementById('delete-usuario-btn').style.display = u.rol === 'owner' ? 'none' : '';
+      hideUsuarioError();
+      usuarioModal.classList.add('open');
+    };
+
+    // Mostrar/ocultar campo sucursal según el rol elegido
+    document.getElementById('usr-rol').addEventListener('change', (e) => {
+      document.getElementById('usr-sucursal-field').style.display =
+        e.target.value === 'owner' ? 'none' : '';
+    });
+
+    window.eliminarUsuario = async function(id, nombre) {
+      if (!confirm(`¿Eliminar el usuario "${nombre}"?\nPerderá acceso al dashboard inmediatamente.`)) return;
+      const { error } = await sb.from('usuarios_admin').delete().eq('id', id);
+      if (error) { alert('No se pudo eliminar: ' + error.message); return; }
+      await cargarUsuarios();
+    };
+
+    document.getElementById('open-add-usuario').addEventListener('click', abrirNuevoUsuario);
+    document.getElementById('close-usuario-modal').addEventListener('click', () => usuarioModal.classList.remove('open'));
+    document.getElementById('cancel-usuario-modal').addEventListener('click', () => usuarioModal.classList.remove('open'));
+    usuarioModal.addEventListener('click', e => { if (e.target === usuarioModal) usuarioModal.classList.remove('open'); });
+
+    document.getElementById('delete-usuario-btn').addEventListener('click', async () => {
+      const nombre = document.getElementById('usr-nombre').value;
+      usuarioModal.classList.remove('open');
+      await eliminarUsuario(usuarioEditandoId, nombre);
+    });
+
+    document.getElementById('save-usuario-btn').addEventListener('click', async () => {
+      hideUsuarioError();
+      const nombre = document.getElementById('usr-nombre').value.trim();
+      const email = document.getElementById('usr-email').value.trim();
+      const password = document.getElementById('usr-password').value.trim();
+      const rol = document.getElementById('usr-rol').value;
+      const sucursalId = rol === 'owner' ? null : document.getElementById('usr-sucursal').value || null;
+
+      if (!nombre || !email) { showUsuarioError('Nombre y correo son obligatorios.'); return; }
+      if (!usuarioEditandoId && !password) { showUsuarioError('La contraseña temporal es obligatoria al crear un usuario nuevo.'); return; }
+      if (rol !== 'owner' && !sucursalId) { showUsuarioError('Selecciona la sucursal que administrará este usuario.'); return; }
+
+      const saveBtn = document.getElementById('save-usuario-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Guardando…';
+
+      let error;
+      if (usuarioEditandoId) {
+        // Solo actualiza el perfil en usuarios_admin (el correo y contraseña
+        // en Auth hay que cambiarlos desde Supabase directamente por ahora)
+        ({ error } = await sb.from('usuarios_admin').update({
+          nombre, email, rol, sucursal_id: sucursalId
+        }).eq('id', usuarioEditandoId));
+      } else {
+        // Crear usuario nuevo: primero en Auth (requiere service_role desde el cliente,
+        // por eso aquí solo insertamos en usuarios_admin y mostramos instrucciones)
+        showUsuarioError('Para crear usuarios nuevos usa el script altas_masivas.js o el panel de Supabase Auth → Users → Add user. Luego edítalo aquí para asignarle sucursal y rol.');
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Guardar';
+        return;
+      }
+
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Guardar';
+
+      if (error) { showUsuarioError('No se pudo guardar: ' + error.message); return; }
+
+      usuarioModal.classList.remove('open');
+      await cargarUsuarios();
+    });
+
+    // =========================================================
+    // FILTROS DE CITAS
+    // =========================================================
+    document.getElementById('citas-filtros').addEventListener('click', (e) => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      document.querySelectorAll('#citas-filtros .pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      renderCitas(pill.dataset.filter);
+    });
+
+    document.getElementById('resumen-filtros').addEventListener('click', (e) => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      document.querySelectorAll('#resumen-filtros .pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      renderResumenCitas(pill.dataset.filter);
+    });
+
+    // =========================================================
+    // MODAL DE CITAS (crear / editar)
+    // =========================================================
+    const citaModal = document.getElementById('cita-modal');
+    const citaFormError = document.getElementById('cita-form-error');
+
+    function showCitaError(msg) {
+      citaFormError.textContent = msg;
+      citaFormError.classList.add('show');
+    }
+    function hideCitaError() {
+      citaFormError.classList.remove('show');
+    }
+
+    function abrirNuevaCita() {
+      citaEditandoId = null;
+      document.getElementById('cita-modal-title').textContent = 'Nueva cita';
+      document.getElementById('cita-paciente').value = '';
+      document.getElementById('cita-telefono').value = '';
+      document.getElementById('cita-fecha').value = '';
+      document.getElementById('cita-hora').value = '';
+      document.getElementById('cita-estado').value = 'pendiente';
+      document.getElementById('cita-notas').value = '';
+      // Llenar select de sucursal y mostrar solo para owner
+      const sucField = document.querySelector('.owner-only-cita');
+      if (perfil.rol === 'owner') {
+        sucField.style.display = '';
+        const sel = document.getElementById('cita-sucursal');
+        sel.innerHTML = sucursalesCache.map(s => `<option value="${s.id}">${escapeHtml(s.nombre)}${s.ciudad ? ' · ' + escapeHtml(s.ciudad) : ''}</option>`).join('');
+      } else {
+        sucField.style.display = 'none';
+      }
+      hideCitaError();
+      citaModal.classList.add('open');
+    }
+
+    let citaSucursalIdOriginal = null;
+
+    window.abrirEditarCita = function(id) {
+      const c = citasCache.find(x => x.id === id);
+      if (!c) return;
+      citaEditandoId = id;
+      citaSucursalIdOriginal = c.sucursal_id || null;
+      document.getElementById('cita-modal-title').textContent = 'Editar cita';
+      document.getElementById('cita-paciente').value = c.paciente_nombre || '';
+      document.getElementById('cita-telefono').value = c.paciente_telefono || '';
+      document.getElementById('cita-doctor').value = c.doctor_id || '';
+      document.getElementById('cita-tratamiento').value = c.tratamiento_id || '';
+      document.getElementById('cita-fecha').value = c.fecha || '';
+      document.getElementById('cita-hora').value = c.hora?.slice(0,5) || '';
+      document.getElementById('cita-estado').value = c.estado || 'pendiente';
+      document.getElementById('cita-notas').value = c.notas || '';
+      // Sucursal
+      const sucField = document.querySelector('.owner-only-cita');
+      if (perfil.rol === 'owner') {
+        sucField.style.display = '';
+        const sel = document.getElementById('cita-sucursal');
+        sel.innerHTML = sucursalesCache.map(s => `<option value="${s.id}">${escapeHtml(s.nombre)}${s.ciudad ? ' · ' + escapeHtml(s.ciudad) : ''}</option>`).join('');
+        // Buscar la opción que coincida numéricamente
+        if (c.sucursal_id) {
+          const opciones = Array.from(sel.options);
+          const opcion = opciones.find(o => parseInt(o.value) === parseInt(c.sucursal_id));
+          if (opcion) sel.value = opcion.value;
+        }
+      } else {
+        sucField.style.display = 'none';
+      }
+      hideCitaError();
+      citaModal.classList.add('open');
+    };
+
+    window.cancelarCita = async function(id) {
+      if (!confirm('¿Cancelar esta cita? Esta acción se puede revertir editándola de nuevo.')) return;
+      const { error } = await sb.from('citas').update({ estado: 'cancelada' }).eq('id', id);
+      if (error) { alert('No se pudo cancelar la cita: ' + error.message); return; }
+      await cargarCitas();
+      actualizarResumen();
+    };
+
+    document.getElementById('open-add-cita').addEventListener('click', abrirNuevaCita);
+    document.getElementById('close-cita-modal').addEventListener('click', () => citaModal.classList.remove('open'));
+    document.getElementById('cancel-cita-modal').addEventListener('click', () => citaModal.classList.remove('open'));
+    citaModal.addEventListener('click', e => { if (e.target === citaModal) citaModal.classList.remove('open'); });
+
+    document.getElementById('save-cita-btn').addEventListener('click', async () => {
+      hideCitaError();
+
+      const paciente = document.getElementById('cita-paciente').value.trim();
+      const telefono = document.getElementById('cita-telefono').value.trim();
+      const doctorId = document.getElementById('cita-doctor').value;
+      const tratamientoId = document.getElementById('cita-tratamiento').value;
+      const fecha = document.getElementById('cita-fecha').value;
+      const hora = document.getElementById('cita-hora').value;
+      const estado = document.getElementById('cita-estado').value;
+      const notas = document.getElementById('cita-notas').value.trim();
+
+      if (!paciente || !doctorId || !fecha || !hora) {
+        showCitaError('Completa los campos obligatorios: paciente, doctor, fecha y hora.');
+        return;
+      }
+
+      const payload = {
+        paciente_nombre: paciente,
+        paciente_telefono: telefono || null,
+        doctor_id: doctorId,
+        tratamiento_id: tratamientoId,
+        fecha, hora, estado,
+        notas: notas || null,
+        origen: 'dashboard',
+      };
+
+      if (perfil.rol !== 'owner') {
+        payload.sucursal_id = perfil.sucursal_id;
+      } else {
+        const sel = document.getElementById('cita-sucursal');
+        const sucursalId = sel.value ? parseInt(sel.value) : null;
+        payload.sucursal_id = sucursalId || citaSucursalIdOriginal;
+      }
+
+      const saveBtn = document.getElementById('save-cita-btn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Guardando…';
+
+      let error;
+      if (citaEditandoId) {
+        ({ error } = await sb.from('citas').update(payload).eq('id', citaEditandoId));
+      } else {
+        ({ error } = await sb.from('citas').insert(payload));
+      }
+
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Guardar cita';
+
+      if (error) {
+        showCitaError('No se pudo guardar: ' + error.message);
+        return;
+      }
+
+      citaModal.classList.remove('open');
+      await cargarCitas();
+      actualizarResumen();
+    });
+
+    // =========================================================
+    // MODAL TRATAMIENTOS — listeners
+    // =========================================================
+    const tratamientoModal = document.getElementById('tratamiento-modal');
+    const tratamientoFormError = document.getElementById('tratamiento-form-error');
+    let tratamientoEditandoId = null;
+
+    function showTratError(msg) { tratamientoFormError.textContent = msg; tratamientoFormError.classList.add('show'); }
+    function hideTratError() { tratamientoFormError.classList.remove('show'); }
+
+    function abrirNuevoTratamiento() {
+      tratamientoEditandoId = null;
+      document.getElementById('tratamiento-modal-title').textContent = 'Nuevo tratamiento';
+      document.getElementById('trat-nombre').value = '';
+      document.getElementById('trat-especialidad').value = '';
+      document.getElementById('trat-icono').value = '🦷';
+      document.getElementById('trat-precio').value = '';
+      document.getElementById('trat-duracion').value = '30';
+      document.getElementById('trat-descripcion') && (document.getElementById('trat-descripcion').value = '');
+      document.getElementById('trat-activo').value = 'true';
+      document.getElementById('delete-tratamiento-btn').style.display = 'none';
+      hideTratError();
+      tratamientoModal.classList.add('open');
+    }
+
+    window.abrirEditarTratamiento = function(id) {
+      const t = tratamientosCache.find(x => x.id === id);
+      if (!t) return;
+      tratamientoEditandoId = id;
+      document.getElementById('tratamiento-modal-title').textContent = 'Editar tratamiento';
+      document.getElementById('trat-nombre').value = t.nombre || '';
+      document.getElementById('trat-especialidad').value = t.especialidad || '';
+      document.getElementById('trat-icono').value = t.icono || '🦷';
+      document.getElementById('trat-precio').value = t.precio || '';
+      document.getElementById('trat-duracion').value = t.duracion_min || 30;
+      document.getElementById('trat-descripcion') && (document.getElementById('trat-descripcion').value = t.descripcion || '');
+      document.getElementById('trat-activo').value = t.activo ? 'true' : 'false';
+      document.getElementById('delete-tratamiento-btn').style.display = '';
+      hideTratError();
+      tratamientoModal.classList.add('open');
+    };
+
+    window.eliminarTratamiento = async function(id, nombre) {
+      if (!confirm(`¿Eliminar el tratamiento "${nombre}"?`)) return;
+      const { error } = await sb.from('tratamientos').delete().eq('id', id);
+      if (error) { alert('No se pudo eliminar: ' + error.message); return; }
+      await cargarTratamientos();
+    };
+
+    document.getElementById('open-add-tratamiento').addEventListener('click', abrirNuevoTratamiento);
+    document.getElementById('close-tratamiento-modal').addEventListener('click', () => tratamientoModal.classList.remove('open'));
+    document.getElementById('cancel-tratamiento-modal').addEventListener('click', () => tratamientoModal.classList.remove('open'));
+    tratamientoModal.addEventListener('click', e => { if (e.target === tratamientoModal) tratamientoModal.classList.remove('open'); });
+
+    document.getElementById('delete-tratamiento-btn').addEventListener('click', async () => {
+      const nombre = document.getElementById('trat-nombre').value;
+      tratamientoModal.classList.remove('open');
+      await eliminarTratamiento(tratamientoEditandoId, nombre);
+    });
+
+    document.getElementById('save-tratamiento-btn').addEventListener('click', async () => {
+      hideTratError();
+      const nombre = document.getElementById('trat-nombre').value.trim();
+      const especialidad = document.getElementById('trat-especialidad').value.trim();
+      const icono = document.getElementById('trat-icono').value.trim();
+      const precio = parseFloat(document.getElementById('trat-precio').value);
+      const duracion = parseInt(document.getElementById('trat-duracion').value);
+      const activo = document.getElementById('trat-activo').value === 'true';
+
+      if (!nombre) { showTratError('El nombre del tratamiento es obligatorio.'); return; }
+      if (isNaN(precio) || precio < 0) { showTratError('El precio debe ser un número válido.'); return; }
+
+      const saveBtn = document.getElementById('save-tratamiento-btn');
+      saveBtn.disabled = true; saveBtn.textContent = 'Guardando…';
+
+      const payload = { nombre, especialidad: especialidad || null, icono: icono || '🦷', precio, duracion_min: duracion || 30, activo };
+      let error;
+      if (tratamientoEditandoId) {
+        ({ error } = await sb.from('tratamientos').update(payload).eq('id', tratamientoEditandoId));
+      } else {
+        ({ error } = await sb.from('tratamientos').insert(payload));
+      }
+
+      saveBtn.disabled = false; saveBtn.textContent = 'Guardar tratamiento';
+      if (error) { showTratError('No se pudo guardar: ' + error.message); return; }
+      tratamientoModal.classList.remove('open');
+      await cargarTratamientos();
+    });
+
+    // =========================================================
+    // UTILIDADES
+    // =========================================================
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatFecha(fechaStr) {
+      if (!fechaStr) return '—';
+      const [y, m, d] = fechaStr.split('-');
+      return `${d}/${m}/${y}`;
+    }
+
+    function estadoBadge(estado) {
+      const map = {
+        pendiente: ['badge-warning', '● Pendiente'],
+        confirmada: ['badge-success', '● Confirmada'],
+        atendida: ['badge-neutral', '● Atendida'],
+        cancelada: ['badge-danger', '● Cancelada'],
+      };
+      const [cls, label] = map[estado] || ['badge-neutral', estado];
+      return `<span class="badge ${cls}">${label}</span>`;
+    }
+  </script>
+</body>
+</html>

@@ -18,10 +18,8 @@
 body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.55}
 img{max-width:100%;display:block}
 h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
-
 .demo-ribbon{background:var(--teal-deep);color:var(--mint);text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.4px;padding:7px 14px}
 .demo-ribbon b{color:#fff}
-
 .ld-head{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid #eef2f4;display:flex;align-items:center;justify-content:space-between;padding:12px 26px;box-shadow:0 2px 14px rgba(20,136,204,.06)}
 .ld-logo{display:flex;align-items:center;gap:11px;font-family:'Poppins';font-weight:800;font-size:20px;color:var(--brand-deep);letter-spacing:.4px}
 .ld-logo .tooth{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--brand-deep));display:flex;align-items:center;justify-content:center;font-size:20px}
@@ -30,7 +28,6 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .ld-nav a:hover{color:var(--brand)}
 .ld-cta{background:var(--brand);color:#fff;padding:10px 20px;border-radius:24px;font-weight:600;font-size:14.5px;text-decoration:none}
 @media(max-width:840px){.ld-nav a{display:none}.ld-nav .ld-cta{display:inline-block}}
-
 .hero{background:linear-gradient(160deg,#EAF6FD 0%,#D3ECFA 100%);padding:64px 26px 78px;position:relative;overflow:hidden}
 .hero-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
 .hero h1{font-size:clamp(34px,5vw,56px);color:var(--brand-deep);font-weight:800;margin-bottom:18px}
@@ -46,43 +43,17 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .stars{color:#FFB400;font-size:22px;letter-spacing:3px}
 .hero-card .exp{margin-top:14px;font-size:13.5px;color:var(--muted)}
 @media(max-width:840px){.hero-inner{grid-template-columns:1fr;gap:30px}.hero-art{order:-1}}
-
 .section{max-width:1120px;margin:0 auto;padding:66px 26px}
 .kicker{text-align:center;color:var(--brand);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;margin-bottom:8px}
 .section h2{text-align:center;font-size:clamp(26px,3.4vw,38px);color:var(--ink);margin-bottom:38px}
-.serv-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.serv{background:#fff;border:1px solid #eaf1f5;border-radius:18px;padding:24px 16px;text-align:center;transition:.18s}
-.serv:hover{box-shadow:0 16px 36px rgba(14,107,168,.13);transform:translateY(-4px)}
-.serv .ic{width:84px;height:84px;border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;transition:.2s;box-shadow:0 8px 20px rgba(0,0,0,.08)}
-.serv:hover .ic{transform:translateY(-4px) scale(1.04)}
-.serv .ic svg{width:84px;height:84px}
-.serv h3{font-size:16px;color:var(--ink);margin-bottom:7px}
-.serv p{font-size:13px;color:var(--muted)}
-@media(max-width:900px){.serv-grid{grid-template-columns:repeat(2,1fr)}}
-
 .valband{background:linear-gradient(120deg,var(--brand-deep),var(--brand));color:#fff;text-align:center;padding:58px 26px}
 .valband h2{color:#fff;font-size:clamp(24px,3vw,34px);margin-bottom:14px}
 .valband p{max-width:60ch;margin:0 auto 24px;opacity:.93;font-size:16px}
 .valband .btn-wa{background:#fff;color:var(--brand-deep)}
-
-.faq{max-width:820px;margin:0 auto;padding:66px 26px}
-.faq-item{border-bottom:1px solid #e8eef1;padding:18px 4px}
-.faq-q{font-weight:600;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;cursor:pointer}
-.faq-a{font-size:14.5px;color:var(--muted);margin-top:9px;display:none}
-.faq-item.open .faq-a{display:block}
-.faq-item.open .faq-q span{transform:rotate(45deg)}
-.faq-q span{transition:.2s;color:var(--brand);font-weight:400}
-
 .ld-foot{background:#0E2A38;color:#cfe2ec;padding:46px 26px;text-align:center}
 .ld-foot .fl{font-family:'Poppins';font-weight:800;font-size:22px;color:#fff;margin-bottom:10px}
 .ld-foot p{font-size:14px;opacity:.8;max-width:50ch;margin:0 auto}
-.ld-foot .zones{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:18px;font-size:13.5px;opacity:.75}
-.ld-social{display:flex;gap:14px;justify-content:center;margin-top:22px}
-.ld-social a{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:.18s;text-decoration:none}
-.ld-social a:hover{background:var(--brand);transform:translateY(-3px)}
-.ld-social svg{width:20px;height:20px;fill:#fff}
 .ld-foot .copy{margin-top:24px;font-size:12.5px;opacity:.55}
-
 #wa-float{position:fixed;left:22px;bottom:22px;z-index:90;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 8px 26px rgba(37,211,102,.5);transition:transform .18s;animation:wapulse 2.4s infinite}
 #wa-float:hover{transform:scale(1.08)}
 #wa-float svg{width:34px;height:34px;fill:#fff}
@@ -95,7 +66,6 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .launcher-tip{position:fixed;right:96px;bottom:38px;z-index:89;background:#fff;color:var(--ink);font-size:13.5px;font-weight:600;padding:9px 14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.14);animation:fadein .4s ease}
 .launcher-tip::after{content:'';position:absolute;right:-7px;bottom:14px;border:7px solid transparent;border-left-color:#fff}
 @keyframes fadein{from{opacity:0;transform:translateX(8px)}to{opacity:1}}
-
 #chat-window{position:fixed;right:22px;bottom:22px;z-index:95;width:min(390px,calc(100vw - 32px));height:min(640px,calc(100vh - 60px));background:var(--wa-bg);border-radius:20px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 30px 80px rgba(7,63,67,.32);border:1px solid var(--line)}
 #chat-window.open{display:flex;animation:slideUp .28s cubic-bezier(.2,.8,.2,1)}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
@@ -114,7 +84,7 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .msg .t{display:block;font-size:10.5px;color:rgba(0,0,0,.4);text-align:right;margin-top:3px}
 .msg.me .t{color:rgba(255,255,255,.65)}
 .chips{display:flex;flex-wrap:wrap;gap:7px;align-self:flex-start;max-width:94%;animation:pop .25s ease}
-.chip{background:#fff;border:1.5px solid var(--teal);color:var(--teal);font-weight:600;font-size:13.5px;padding:8px 13px;border-radius:20px;cursor:pointer;font-family:inherit;transition:.13s}
+.chip{background:#fff;border:1.5px solid var(--teal);color:var(--teal);font-weight:600;font-size:13.5px;padding:8px 13px;border-radius:20px;cursor:pointer;font-family:inherit;transition:.13s;word-break:break-word;white-space:normal;text-align:center}
 .chip:hover{background:var(--teal);color:#fff}
 .chip.slot-busy{border-color:#cfcfcf;color:#b5b5b5;text-decoration:line-through;pointer-events:none;background:#fafafa}
 .typing{display:inline-flex;gap:4px;background:#fff;padding:12px 14px;border-radius:11px;border-top-left-radius:3px;align-self:flex-start;box-shadow:0 1px 1px rgba(0,0,0,.08)}
@@ -125,8 +95,7 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 .wa-input input{flex:1;border:1.5px solid var(--line);background:#FAFDFC;border-radius:22px;padding:11px 15px;font-size:14.5px;font-family:inherit;outline:none}
 .wa-input input:focus{border-color:var(--teal)}
 .wa-send{width:44px;height:44px;border-radius:50%;border:none;background:var(--wa-green);color:#fff;font-size:17px;cursor:pointer;flex-shrink:0}
-
-@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -150,7 +119,7 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
       <h1>Tu atención dental <span>a bajo costo.</span></h1>
       <p>Con más de 30 sucursales en el Noreste del país, estamos comprometidos con cada paciente, brindando una atención dental integral de calidad y a un precio justo.</p>
       <div class="hero-btns">
-        <a href="#" class="btn-wa" onclick="openChat();return false;">💬 Agendar mi cita</a>
+        <a href="#" class="btn-wa" onclick="openChat();return false;"><img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/9.0.0/whatsapp.svg" alt="WhatsApp" style="width:20px;height:20px;flex-shrink:0;filter:brightness(0) invert(1)"> Agendar mi cita</a>
         <a href="#sucursales" class="btn-out">Ver sucursales</a>
       </div>
     </div>
@@ -168,7 +137,7 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 <section class="valband">
   <h2>Agenda tu cita de valoración sin costo</h2>
   <p>Creemos que la prevención es clave para una sonrisa saludable. Nuestro equipo de expertos evaluará tu salud bucal y te dará un diagnóstico completo y personalizado, sin costo.</p>
-  <a href="#" class="btn-wa" onclick="openChat();return false;">💬 Hablar con el asistente</a>
+  <a href="#" class="btn-wa" onclick="openChat();return false;"><img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/9.0.0/whatsapp.svg" alt="WhatsApp" style="width:20px;height:20px;flex-shrink:0;filter:brightness(0) saturate(100%) invert(27%) sepia(51%) saturate(2878%) hue-rotate(182deg) brightness(85%) contrast(97%)"> Hablar con el asistente</a>
 </section>
 
 <footer class="ld-foot" id="sucursales">
@@ -209,78 +178,115 @@ h1,h2,h3{font-family:'Poppins',sans-serif;font-weight:700;line-height:1.12}
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzz4eewW_L4GPm_PfnkDwqsrOepCoNEaxTiEzbmEERFjkT0kcEufZ_RwAWmHL92TKEj3Q/exec";
 
-/* ================== CACHE de datos consultados ================== */
-let CACHE = {
-  ciudades: null,
-  sucursalesPorCiudad: {},
-  doctoresPorSucursal: {},
-  tratamientos: null
-};
+/* ================== CACHE ================== */
+let CACHE = { ciudades: null, sucursalesPorCiudad: {}, doctoresPorSucursal: {}, tratamientos: null };
 
-/* ================== HORAS FIJAS (etapa 1) ================== */
+/* ================== HORAS ================== */
 const HORAS = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','4:00 PM','5:00 PM','6:00 PM'];
 
-/* ================== FUNCIONES DE API ================== */
+/* ================== API ================== */
 async function apiCall(params) {
   try {
-    const response = await fetch(API_URL + "?" + new URLSearchParams(params).toString());
-    return await response.json();
-  } catch(e) {
-    console.log("Error API:", e);
-    return { status: "error", message: "Error de conexión" };
-  }
+    const r = await fetch(API_URL + "?" + new URLSearchParams(params).toString());
+    return await r.json();
+  } catch(e) { return { status: "error", message: "Error de conexión" }; }
 }
-
 async function obtenerCiudades() {
   if (CACHE.ciudades) return CACHE.ciudades;
   const r = await apiCall({ accion: "obtenerCiudades" });
   if (r.status === "ok") CACHE.ciudades = r.ciudades;
   return r.ciudades || [];
 }
-
 async function obtenerSucursales(ciudad) {
   if (CACHE.sucursalesPorCiudad[ciudad]) return CACHE.sucursalesPorCiudad[ciudad];
-  const r = await apiCall({ accion: "obtenerSucursalesPorCiudad", ciudad: ciudad });
+  const r = await apiCall({ accion: "obtenerSucursalesPorCiudad", ciudad });
   if (r.status === "ok") CACHE.sucursalesPorCiudad[ciudad] = r.sucursales;
   return r.sucursales || [];
 }
-
 async function obtenerDoctores(sucursal) {
   if (CACHE.doctoresPorSucursal[sucursal]) return CACHE.doctoresPorSucursal[sucursal];
-  const r = await apiCall({ accion: "obtenerDoctoresPorSucursal", sucursal: sucursal });
+  const r = await apiCall({ accion: "obtenerDoctoresPorSucursal", sucursal });
   if (r.status === "ok") CACHE.doctoresPorSucursal[sucursal] = r.doctores;
   return r.doctores || [];
 }
-
 async function obtenerTratamientos() {
   if (CACHE.tratamientos) return CACHE.tratamientos;
   const r = await apiCall({ accion: "obtenerTratamientos" });
   if (r.status === "ok") CACHE.tratamientos = r.tratamientos;
   return r.tratamientos || [];
 }
-
 async function guardarCitaDemo() {
   return await apiCall({
     accion: "guardarCitaCompleta",
-    nombre: st.nombre || "",
-    telefono: st.tel || "",
-    codigoPaciente: st.codigoPaciente || "",
-    codigoDoctor: st.codigoDoctor || "",
-    municipio: st.ciudad || "",
-    sucursal: st.sucursal || "",
-    tratamiento: st.servicio || "",
-    doctor: st.doctor || "",
-    fechaPreferida: st.fecha || "",
-    horaPreferida: st.hora || ""
+    nombre: st.nombre || "", telefono: st.tel || "",
+    codigoPaciente: st.codigoPaciente || "", codigoDoctor: st.codigoDoctor || "",
+    municipio: st.ciudad || "", sucursal: st.sucursal || "",
+    tratamiento: st.servicio || "", doctor: st.doctor || "",
+    fechaPreferida: st.fecha || "", horaPreferida: st.hora || ""
   });
 }
 
-async function buscarPacientePorTelefono(telefono) {
-  return await apiCall({ accion: "buscarPacientePorTelefono", telefono: telefono });
+/* ================== DETECCIÓN DE INTENCIONES ================== */
+function normalizar(txt) {
+  return txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
 }
 
-async function buscarPacientePorNombre(nombre) {
-  return await apiCall({ accion: "buscarPacientePorNombre", nombre: nombre });
+function detectarIntencion(txt) {
+  const t = normalizar(txt);
+
+  // Saludos
+  if (/^(hola|hello|buenas|buen(os|as)|hey|alo|que tal|como estan|hi\b|que onda|qtal|buenas tardes|buenas noches|buenos dias)/.test(t))
+    return 'saludo';
+
+  // Agradecimiento o despedida
+  if (/(gracias|muchas gracias|mil gracias|thank|bye|adios|hasta luego|nos vemos|chao|ciao|ok gracias|listo gracias)/.test(t))
+    return 'despedida';
+
+  // Preguntas de precio / costo
+  if (/(cuanto|precio|costo|cobran|vale|tarifa|cuanto cuesta|cuanto cobran|es caro|barato|cuanto me sale)/.test(t))
+    return 'precio';
+
+  // Preguntas de ubicación / dirección / sucursales
+  if (/(donde|direccion|ubicacion|sucursal|estan ubicados|como llego|mapa|colonia|calle|como los encuentro|donde quedan)/.test(t))
+    return 'ubicacion';
+
+  // Preguntas de horario / disponibilidad
+  if (/(horario|hora|cuando abren|cuando cierran|atienden|dias que trabajan|dias de atencion|que dias|abiertos|abren los|a que hora)/.test(t))
+    return 'horario';
+
+  // Quiere agendar / cita
+  if (/(agendar|cita|consulta|quiero ir|necesito ir|reservar|apartar|me pueden atender|turno|appointment)/.test(t))
+    return 'agendar';
+
+  // Cancelar cita
+  if (/(cancelar|cancel|borrar cita|ya no voy|no puedo ir|quitar cita)/.test(t))
+    return 'cancelar';
+
+  // Queja o mala experiencia
+  if (/(malo|pesimo|terrible|mal servicio|queja|mala atencion|no me gustó|decepcion|tardaron|tardarse|esperé mucho|muy caro|abuso)/.test(t))
+    return 'queja';
+
+  // Emergencia / dolor fuerte
+  if (/(dolor|me duele|urgente|emergencia|urgencia|ayuda|muela|molar|infeccion|inflamacion|hinchado|sangrando|fractura|se me rompio|se me cayó)/.test(t))
+    return 'urgencia';
+
+  // Pregunta sobre servicios / tratamientos
+  if (/(que servicios|que tratamientos|que hacen|que ofrecen|servicios tienen|ortodoncia|brackets|limpieza|blanqueamiento|implante|endodoncia|extraccion|relleno|corona|puente|protesis)/.test(t))
+    return 'servicios';
+
+  // Sí / confirmación
+  if (/^(si|sí|claro|ok|okey|dale|va|perfecto|esta bien|de acuerdo|por favor|porfavor|quiero|adelante|s[ií])$/.test(t))
+    return 'confirmar';
+
+  // No / negación
+  if (/^(no|nel|nope|negativo|mejor no|no gracias|paso)$/.test(t))
+    return 'negar';
+
+  // Números sueltos (posible teléfono o respuesta numérica)
+  if (/^\d[\d\s\-]{8,}$/.test(t))
+    return 'numero';
+
+  return 'desconocido';
 }
 
 /* ================== ESTADO ================== */
@@ -288,7 +294,11 @@ let st = {};
 let folio = 1041;
 const chat = document.getElementById('chat');
 
-function reset(){ st = { paso:'tipoPaciente', tipoPaciente:null, codigoPaciente:null, servicio:null, ciudad:null, sucursal:null, doctor:null, codigoDoctor:null, fecha:null, hora:null, nombre:null, tel:null }; }
+function reset() {
+  st = { paso:'tipoPaciente', tipoPaciente:null, codigoPaciente:null, servicio:null,
+         ciudad:null, sucursal:null, doctor:null, codigoDoctor:null,
+         fecha:null, hora:null, nombre:null, tel:null };
+}
 
 /* ================== UTILIDADES DE CHAT ================== */
 function hora(){ const d=new Date(); return d.toLocaleTimeString('es-MX',{hour:'numeric',minute:'2-digit'}); }
@@ -303,7 +313,8 @@ function botSay(txt, then){
   chat.appendChild(ty); scrollChat(); status.textContent='escribiendo…';
   setTimeout(()=>{
     ty.remove(); status.textContent='Responde al instante';
-    const d=document.createElement('div'); d.className='msg bot'; d.innerHTML=esc(txt)+'<span class="t">'+hora()+'</span>';
+    const d=document.createElement('div'); d.className='msg bot';
+    d.innerHTML=esc(txt)+'<span class="t">'+hora()+'</span>';
     chat.appendChild(d); scrollChat();
     if(then) then();
   }, 650 + Math.min(txt.length*9, 900));
@@ -321,44 +332,274 @@ function showChips(items, onPick, busySet){
   chat.appendChild(box); scrollChat();
 }
 
-/* ================== DISPONIBILIDAD SIMULADA (etapa 1) ================== */
+/* ================== DISPONIBILIDAD SIMULADA ================== */
 function proxDias(n){
   const out=[]; let d=new Date();
-  const diasSemana = ["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
-  const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const dias=["domingo","lunes","martes","miercoles","jueves","viernes","sabado"];
+  const meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
   while(out.length<n){
     d=new Date(d.getTime()+86400000);
-    if(d.getDay()!==0){
-      const diaSemana = diasSemana[d.getDay()];
-      const dia = d.getDate();
-      const mes = meses[d.getMonth()];
-      const anio = d.getFullYear();
-      out.push(diaSemana + " " + dia + " de " + mes + " de " + anio);
-    }
+    if(d.getDay()!==0) out.push(dias[d.getDay()]+" "+d.getDate()+" de "+meses[d.getMonth()]+" de "+d.getFullYear());
   }
   return out;
 }
-
 function ocupadasPara(doctor,fecha){
   let h=0; const s=doctor+fecha;
-  for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))>>>0; }
+  for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
   const busy=new Set();
   HORAS.forEach((hr,i)=>{ if(((h>>i)&3)===0) busy.add(hr); });
   if(busy.size>=HORAS.length) busy.delete(HORAS[0]);
   return busy;
 }
 
-/* ================== FLUJO ================== */
+/* ================== RESPUESTAS A INTENCIONES FUERA DEL FLUJO ================== */
+function responderIntencion(intencion, textoOriginal) {
+  const nombre = st.nombre ? st.nombre.split(' ')[0] : '';
+
+  switch(intencion) {
+
+    case 'saludo':
+      if(st.paso === 'listo' || !st.nombre) {
+        botSay('¡Hola! 😊 Bienvenido a Los Dentistas. ¿Te puedo ayudar a agendar una cita o tienes alguna pregunta?', ()=>{
+          showChips(['📅 Agendar una cita','❓ Tengo una pregunta'], pick=>{
+            if(pick.includes('Agendar')) inicio();
+            else botSay('¡Claro! Puedes preguntarme sobre precios, sucursales, horarios o servicios. ¿Qué necesitas saber? 😊');
+          });
+        });
+      } else {
+        botSay('¡Hola'+( nombre ? ' '+nombre : '')+'! 😊 Seguimos con tu cita, ¿todo bien?', ()=>{
+          retomarPaso();
+        });
+      }
+      break;
+
+    case 'despedida':
+      botSay('¡Hasta luego'+( nombre ? ' '+nombre : '')+'! 😊 Fue un gusto atenderte. Si necesitas algo, aquí estaremos. ¡Cuídate mucho! 🦷✨');
+      break;
+
+    case 'precio':
+      botSay('Los precios varían según el tratamiento y la sucursal. Aquí van algunos ejemplos orientativos:\n\n🦷 Limpieza dental: desde $250\n✨ Blanqueamiento: desde $380\n🔧 Resina/empaste: desde $180\n🦴 Endodoncia: desde $320\n\nPara un presupuesto exacto lo mejor es agendar una valoración sin costo 😊 ¿Te agendo una?', ()=>{
+        showChips(['✅ Sí, agendar valoración','❓ Más preguntas'], pick=>{
+          if(pick.includes('agendar')) inicio();
+          else mostrarMenuPreguntas();
+        });
+      });
+      break;
+
+    case 'ubicacion':
+      botSay('Déjame revisar nuestras sucursales disponibles... 🔍', async ()=>{
+        const ciudades = await obtenerCiudades();
+        if (!ciudades || ciudades.length === 0) {
+          botSay('Tenemos más de 30 sucursales en el Noreste del país 📍 Para ver la más cercana búscanos en Google Maps como "Los Dentistas". ¿Te agendo una cita?', ()=>{
+            showChips(['📅 Sí, agendar cita','❓ Más preguntas'], pick=>{
+              if(pick.includes('agendar')) inicio();
+              else mostrarMenuPreguntas();
+            });
+          });
+          return;
+        }
+        // Mostrar ciudades y preguntar cuál le interesa
+        botSay('Tenemos sucursales en estas ciudades 📍 ¿En cuál te encuentras?', ()=>{
+          showChips([...ciudades, '❓ Más preguntas'], async pick=>{
+            if(pick.includes('Más preguntas')){ mostrarMenuPreguntas(); return; }
+            // Mostrar sucursales de esa ciudad
+            const sucursales = await obtenerSucursales(pick);
+            if(!sucursales || sucursales.length === 0){
+              botSay('No encontré sucursales en '+pick+' 😔 ¿Quieres ver otra ciudad o agendar una cita?', ()=>{
+                showChips(['📅 Agendar cita','❓ Más preguntas'], pick2=>{
+                  if(pick2.includes('agendar')) inicio();
+                  else mostrarMenuPreguntas();
+                });
+              });
+              return;
+            }
+            const lista = sucursales.map(s => '📍 '+s.sucursal+(s.direccion ? '\n'+s.direccion : '')).join('\n\n');
+            botSay('Estas son nuestras sucursales en '+pick+':\n\n'+lista+'\n\n¿Te agendo una cita en alguna de ellas?', ()=>{
+              showChips(['📅 Sí, agendar cita','❓ Más preguntas'], pick2=>{
+                if(pick2.includes('agendar')) inicio();
+                else mostrarMenuPreguntas();
+              });
+            });
+          });
+        });
+      });
+      break;
+
+    case 'horario':
+      botSay('Nuestras sucursales atienden de lunes a sábado en horarios que varían por ubicación 🕘\n\nGeneralmente de 9:00 AM a 6:00 PM. Los domingos cerramos.\n\nPara el horario exacto de la sucursal más cercana, ¿te agendo una cita y te digo los horarios disponibles?', ()=>{
+        showChips(['📅 Ver disponibilidad','💬 Preguntar por WhatsApp','❓ Más preguntas'], pick=>{
+          if(pick.includes('Ver')) inicio();
+          else if(pick.includes('WhatsApp')) window.open('https://api.whatsapp.com/send?phone=5218123855727','_blank');
+          else mostrarMenuPreguntas();
+        });
+      });
+      break;
+
+    case 'agendar':
+      botSay('¡Claro que sí! 😊 Agendar una cita es muy rápido, solo necesito unos datos.', ()=>{ inicio(); });
+      break;
+
+    case 'cancelar':
+      if(st.tel && st.fecha) {
+        confirmarCancelacion();
+      } else {
+        botSay('Para cancelar una cita necesito verificar tus datos. ¿Me puedes decir el teléfono con el que te registraste?', ()=>{
+          st.paso = 'telefonoParaCancelar';
+        });
+      }
+      break;
+
+    case 'queja':
+      botSay('Lamento mucho que hayas tenido esa experiencia 😔 En Los Dentistas nos importa mucho la satisfacción de nuestros pacientes.\n\nTe conecto con un asesor para que pueda atenderte personalmente. ¿Te parece?', ()=>{
+        showChips(['💬 Hablar con un asesor','↩️ Continuar con mi cita'], pick=>{
+          if(pick.includes('asesor')){
+            const msg = encodeURIComponent('Hola, quisiera reportar una situación sobre mi atención en Los Dentistas.');
+            window.open('https://api.whatsapp.com/send?phone=5218123855727&text='+msg,'_blank');
+          } else retomarPaso();
+        });
+      });
+      break;
+
+    case 'urgencia':
+      botSay('¡Entendido, no te preocupes! 🚨 Para urgencias o dolores fuertes, lo mejor es contactarnos directamente para buscar el primer espacio disponible.\n\n¿Quieres que te conecte por WhatsApp con un asesor ahora mismo?', ()=>{
+        showChips(['✅ Sí, contactar ahora','📅 Agendar cita normal'], pick=>{
+          if(pick.includes('contactar')){
+            const msg = encodeURIComponent('Hola, tengo una urgencia dental y necesito atención lo antes posible.');
+            window.open('https://api.whatsapp.com/send?phone=5218123855727&text='+msg,'_blank');
+          } else inicio();
+        });
+      });
+      break;
+
+    case 'servicios':
+      botSay('En Los Dentistas ofrecemos una amplia variedad de tratamientos 🦷\n\n✅ Limpieza dental\n✅ Blanqueamiento\n✅ Resinas y empastes\n✅ Endodoncia (nervio)\n✅ Ortodoncia\n✅ Implantes dentales\n✅ Extracciones\n✅ Valoración sin costo\n\n¿Te gustaría agendar una cita para alguno de estos servicios?', ()=>{
+        showChips(['📅 Sí, agendar cita','❓ Más preguntas'], pick=>{
+          if(pick.includes('agendar')) inicio();
+          else mostrarMenuPreguntas();
+        });
+      });
+      break;
+
+    case 'confirmar':
+      // "Sí" genérico — retomar el paso actual
+      retomarPaso();
+      break;
+
+    case 'negar':
+      botSay('Sin problema 😊 ¿Hay algo más en lo que te pueda ayudar?', ()=>{
+        showChips(['📅 Agendar una cita','❓ Tengo una pregunta','👋 No, gracias'], pick=>{
+          if(pick.includes('Agendar')) inicio();
+          else if(pick.includes('pregunta')) botSay('¡Claro! Pregúntame lo que quieras 😊');
+          else botSay('¡Hasta luego! 😊 Que tengas un excelente día.');
+        });
+      });
+      break;
+
+    case 'numero':
+      // Podría ser un teléfono escrito directamente
+      const dig = textoOriginal.replace(/\D/g,'');
+      if(dig.length >= 10 && (st.paso === 'telefonoNuevo' || st.paso === 'telefonoRegular' || st.paso === 'telefonoParaCancelar')) {
+        manejarTelefono(dig.slice(-10));
+      } else {
+        retomarPaso();
+      }
+      break;
+
+    default:
+      // Respuesta humana para lo que no se entiende
+      const respuestasGenericas = [
+        'Mmm, no estoy seguro de entender bien 🤔 ¿Me lo puedes decir de otra forma?',
+        'Disculpa, creo que no entendí bien. ¿Quieres agendar una cita o tienes alguna pregunta sobre nuestros servicios?',
+        '¡Ups! No capté bien eso 😅 Puedo ayudarte a agendar una cita, darte información de precios, horarios o ubicaciones. ¿Qué necesitas?'
+      ];
+      const r = respuestasGenericas[Math.floor(Math.random() * respuestasGenericas.length)];
+      botSay(r, ()=>{
+        showChips(['📅 Agendar cita','💰 Precios','📍 Sucursales','🕘 Horarios'], pick=>{
+          if(pick.includes('Agendar')) inicio();
+          else if(pick.includes('Precios')) responderIntencion('precio','');
+          else if(pick.includes('Sucursales')) responderIntencion('ubicacion','');
+          else responderIntencion('horario','');
+        });
+      });
+  }
+}
+
+/* Menú de preguntas frecuentes */
+function mostrarMenuPreguntas() {
+  showChips(['💰 Precios','📍 Sucursales','🕘 Horarios','🦷 Servicios','📅 Agendar cita'], pick=>{
+    if(pick.includes('Precios')) responderIntencion('precio','');
+    else if(pick.includes('Sucursales')) responderIntencion('ubicacion','');
+    else if(pick.includes('Horarios')) responderIntencion('horario','');
+    else if(pick.includes('Servicios')) responderIntencion('servicios','');
+    else inicio();
+  });
+}
+
+/* Retoma el paso actual del flujo */
+function retomarPaso() {
+  if(st.paso === 'servicio') pasoServicio();
+  else if(st.paso === 'ciudad') pasoCiudad();
+  else if(st.paso === 'sucursal') pasoSucursal();
+  else if(st.paso === 'doctor') pasoDoctor();
+  else if(st.paso === 'fecha') pasoFecha();
+  else if(st.paso === 'hora') pasoHora();
+  else if(st.paso === 'confirmar') pasoConfirmar();
+  else inicio();
+}
+
+/* Maneja un número de teléfono según el paso actual */
+function manejarTelefono(tel) {
+  if(st.paso === 'telefonoNuevo') {
+    st.tel = tel;
+    st.codigoPaciente = 'TEL-' + tel;
+    botSay('¡Listo '+st.nombre.split(' ')[0]+'! 😊 Ya estás en nuestro sistema.', ()=>{ pasoServicio(); });
+  } else if(st.paso === 'telefonoRegular') {
+    buscarPacienteEnSistema(tel);
+  } else if(st.paso === 'telefonoParaCancelar') {
+    st.tel = tel;
+    botSay('Buscando tu cita... 🔍');
+    // Sin fecha registrada, pedimos más datos
+    botSay('Encontré tu número. ¿Me puedes decir la fecha y hora de la cita que quieres cancelar?', ()=>{
+      st.paso = 'fechaParaCancelar';
+    });
+  }
+}
+
+/* ================== FLUJO PRINCIPAL ================== */
+
+// Agendar otra cita conservando los datos del paciente (no vuelve a preguntar si es nuevo/regular)
+function agendarOtraCita() {
+  const nombreGuardado = st.nombre;
+  const telGuardado = st.tel;
+  const codigoGuardado = st.codigoPaciente;
+  const tipoGuardado = st.tipoPaciente;
+  reset();
+  st.nombre = nombreGuardado;
+  st.tel = telGuardado;
+  st.codigoPaciente = codigoGuardado;
+  st.tipoPaciente = tipoGuardado;
+  const primerNombre = nombreGuardado ? nombreGuardado.split(' ')[0] : '';
+  botSay('¡Perfecto '+primerNombre+'! 😊 Agendemos otra cita para ti.', ()=>{
+    pasoServicio();
+  });
+}
+
 function inicio(){
   reset();
   botSay('¡Hola! 😁 Soy el asistente virtual de Los Dentistas. Puedo agendarte una cita en menos de un minuto, y también responder tus dudas.\n\n¿Eres paciente nuevo o ya nos visitaste antes?', ()=>{
-    showChips(['🆕 Soy paciente nuevo','👋 Ya soy paciente regular'], pick=>{
-      if(pick.includes('nuevo')){
-        st.tipoPaciente = 'nuevo';
-        pasoNombreNuevo();
-      } else {
-        st.tipoPaciente = 'regular';
-        pasoTelefonoRegular();
+    showChips(['🆕 Soy paciente nuevo','👋 Ya soy paciente regular','❓ Tengo una pregunta'], pick=>{
+      if(pick.includes('nuevo')){ st.tipoPaciente='nuevo'; pasoNombreNuevo(); }
+      else if(pick.includes('regular')){ st.tipoPaciente='regular'; pasoTelefonoRegular(); }
+      else {
+        botSay('¡Claro! Puedo ayudarte con información sobre precios, sucursales, horarios o servicios. ¿Qué necesitas saber? 😊', ()=>{
+          showChips(['💰 Precios','📍 Sucursales','🕘 Horarios','🦷 Servicios','📅 Agendar cita'], pick2=>{
+            if(pick2.includes('Precios')) responderIntencion('precio','');
+            else if(pick2.includes('Sucursales')) responderIntencion('ubicacion','');
+            else if(pick2.includes('Horarios')) responderIntencion('horario','');
+            else if(pick2.includes('Servicios')) responderIntencion('servicios','');
+            else inicio();
+          });
+        });
       }
     });
   });
@@ -371,128 +612,105 @@ function pasoNombreNuevo(){
 
 function pasoTelefonoNuevo(){
   st.paso='telefonoNuevo';
-  botSay('Gracias '+st.nombre.split(' ')[0]+'. ¿Cuál es tu teléfono a 10 dígitos?');
+  botSay('Gracias '+st.nombre.split(' ')[0]+'. ¿Cuál es tu número de teléfono a 10 dígitos?');
 }
 
 function pasoTelefonoRegular(){
   st.paso='telefonoRegular';
-  botSay('¡Qué gusto verte de nuevo! 😊\n\n¿Cuál es tu teléfono?');
-}
-
-async function buscarPacienteEnSistema(telefono){
-  botSay('Déjame buscarte en el sistema un momento... 🔍');
-  
-  const resultado = await buscarPacientePorTelefono(telefono);
-  
-  if(resultado.status === 'ok'){
-    st.nombre = resultado.nombre;
-    st.tel = telefono;
-    st.codigoPaciente = resultado.codigoPaciente || 'TEL-' + telefono.replace(/\D/g,'');
-    botSay('¡Te encontré '+st.nombre+'! 😊 Vamos a agendar tu cita.', ()=>{
-      pasoServicio();
-    });
-  } else {
-    st.tel = telefono;
-    botSay('Mmm, no encuentro ese teléfono 🤔 ¿Será que cambiaste de número?\n\nDame tu nombre completo y te busco de otra forma.', ()=>{
-      st.paso = 'nombreParaBuscar';
-    });
-  }
-}
-
-async function buscarPacientePorNombreEnSistema(nombre){
-  botSay('Buscando... 🔍');
-  
-  const resultado = await buscarPacientePorNombre(nombre);
-  
-  if(resultado.status === 'ok'){
-    st.nombre = resultado.nombre;
-    st.codigoPaciente = resultado.codigoPaciente || 'TEL-' + st.tel.replace(/\D/g,'');
-    botSay('¡Te encontré '+st.nombre+'! 😊\n\nVeo que antes tu teléfono era '+resultado.telefonoAnterior+'. Voy a actualizarlo a tu teléfono nuevo. Continuemos con tu cita.', ()=>{
-      pasoServicio();
-    });
-  } else {
-    st.nombre = nombre;
-    st.codigoPaciente = 'TEL-' + st.tel.replace(/\D/g,'');
-    botSay('Parece que es la primera vez con nosotros 😊 Te creo un registro nuevo. Continuemos.', ()=>{
-      pasoServicio();
-    });
-  }
-}
-
-/* 🆕 PASO SERVICIO - ahora consulta tratamientos reales */
-async function pasoServicio(){
-  st.paso='servicio';
-  botSay('Estoy revisando nuestros servicios disponibles... 🔍', async ()=>{
-    const tratamientos = await obtenerTratamientos();
-    
-    if(!tratamientos || tratamientos.length === 0){
-      botSay('Disculpa 😔 no hay tratamientos disponibles en este momento. Intenta más tarde o contáctanos por WhatsApp.');
-      return;
-    }
-    
-    const nombres = tratamientos.map(t => t.tratamiento);
-    botSay('¿Qué servicio te interesa?', ()=>{
-      showChips(nombres, pick=>{
-        st.servicio = pick;
-        pasoCiudad();
+  botSay('¡Qué gusto verte de nuevo! 😊\n\n¿Cuál es tu número de teléfono?', ()=>{
+    showChips(['No recuerdo mi número 🤔'], ()=>{
+      botSay('Sin problema 😊 ¿Me dices tu nombre completo y te busco así?', ()=>{
+        st.paso = 'nombreParaBuscar';
       });
     });
   });
 }
 
-/* 🆕 PASO CIUDAD - ahora consulta ciudades reales */
-async function pasoCiudad(){
-  st.paso='ciudad';
-  botSay('Permíteme revisar nuestras sucursales... 🔍', async ()=>{
-    const ciudades = await obtenerCiudades();
-    
-    if(!ciudades || ciudades.length === 0){
-      botSay('Disculpa 😔 no hay sucursales disponibles en este momento.');
+async function buscarPacienteEnSistema(telefono){
+  botSay('Dame un momento, te estoy buscando en el sistema... 🔍');
+  const resultado = await apiCall({ accion: "buscarPacientePorTelefono", telefono });
+  if(resultado.status === 'ok'){
+    st.nombre = resultado.nombre;
+    st.tel = telefono;
+    st.codigoPaciente = resultado.codigoPaciente || 'TEL-'+telefono.replace(/\D/g,'');
+    botSay('¡Te encontré, '+st.nombre.split(' ')[0]+'! 😊 Qué gusto tenerte de vuelta. Vamos a agendar tu cita.', ()=>{ pasoServicio(); });
+  } else {
+    st.tel = telefono;
+    botSay('Hmm, no encontré ese número en nuestros registros 🤔 Puede ser que hayas cambiado de número, o que sea tu primera vez con nosotros.\n\n¿Me dices tu nombre completo para buscarte de otra forma?', ()=>{ st.paso='nombreParaBuscar'; });
+  }
+}
+
+async function buscarPacientePorNombreEnSistema(nombre){
+  botSay('Buscando... 🔍');
+  const resultado = await apiCall({ accion: "buscarPacientePorNombre", nombre });
+  if(resultado.status === 'ok'){
+    st.nombre = resultado.nombre;
+    st.codigoPaciente = resultado.codigoPaciente || 'TEL-'+st.tel.replace(/\D/g,'');
+    botSay('¡Te encontré, '+st.nombre.split(' ')[0]+'! 😊 Veo que tenemos tu teléfono anterior como '+resultado.telefonoAnterior+'. Lo actualizaré con el nuevo. ¡Vamos con tu cita!', ()=>{ pasoServicio(); });
+  } else {
+    st.nombre = nombre;
+    st.codigoPaciente = 'TEL-'+st.tel.replace(/\D/g,'');
+    botSay('Parece que es tu primera visita con nosotros 😊 ¡Bienvenido! Te creo un registro nuevo. ¡Vamos a agendar!', ()=>{ pasoServicio(); });
+  }
+}
+
+async function pasoServicio(){
+  st.paso='servicio';
+  botSay('Perfecto, revisando los servicios disponibles... 🔍', async ()=>{
+    const tratamientos = await obtenerTratamientos();
+    if(!tratamientos || tratamientos.length === 0){
+      botSay('Disculpa 😔 no hay tratamientos disponibles en este momento. Puedes contactarnos por WhatsApp para ayudarte.', ()=>{
+        showChips(['💬 Contactar por WhatsApp'], ()=> window.open('https://api.whatsapp.com/send?phone=5218123855727','_blank'));
+      });
       return;
     }
-    
+    const nombres = tratamientos.map(t => t.tratamiento);
+    botSay('¿Qué servicio te interesa?', ()=>{ showChips(nombres, pick=>{ st.servicio=pick; pasoCiudad(); }); });
+  });
+}
+
+async function pasoCiudad(){
+  st.paso='ciudad';
+  botSay('Revisando sucursales disponibles... 🔍', async ()=>{
+    const ciudades = await obtenerCiudades();
+    if(!ciudades || ciudades.length === 0){
+      botSay('Disculpa 😔 no pude cargar las ciudades. Intenta de nuevo en un momento.'); return;
+    }
     botSay('¡Perfecto! Tenemos sucursales en varias ciudades. ¿En cuál te queda mejor?', ()=>{
       showChips(ciudades, pick=>{ st.ciudad=pick; pasoSucursal(); });
     });
   });
 }
 
-/* 🆕 PASO SUCURSAL - ahora consulta sucursales reales */
 async function pasoSucursal(){
   st.paso='sucursal';
   botSay('Buscando sucursales en '+st.ciudad+'... 🔍', async ()=>{
     const sucursales = await obtenerSucursales(st.ciudad);
-    
     if(!sucursales || sucursales.length === 0){
-      botSay('Disculpa 😔 no hay sucursales disponibles en '+st.ciudad+' por el momento.', ()=>{
-        showChips(['Elegir otra ciudad'], ()=>pasoCiudad());
+      botSay('Hmm, no hay sucursales disponibles en '+st.ciudad+' en este momento 😔', ()=>{
+        showChips(['↩️ Elegir otra ciudad'], ()=>pasoCiudad());
       });
       return;
     }
-    
     const nombres = sucursales.map(s => s.sucursal);
-    botSay('Estas son nuestras sucursales en '+st.ciudad+'. ¿Cuál prefieres?', ()=>{
+    botSay('Estas son nuestras sucursales en '+st.ciudad+'. ¿Cuál te queda más cerca?', ()=>{
       showChips(nombres, pick=>{ st.sucursal=pick; pasoDoctor(); });
     });
   });
 }
 
-/* 🆕 PASO DOCTOR - ahora consulta doctores reales */
 async function pasoDoctor(){
   st.paso='doctor';
-  botSay('Revisando doctores disponibles... 🔍', async ()=>{
+  botSay('Revisando doctores disponibles en esa sucursal... 🔍', async ()=>{
     const doctores = await obtenerDoctores(st.sucursal);
-    
     if(!doctores || doctores.length === 0){
-      botSay('Disculpa 😔 no hay doctores disponibles en esa sucursal por el momento.', ()=>{
-        showChips(['Elegir otra sucursal'], ()=>pasoSucursal());
+      botSay('No hay doctores disponibles en esa sucursal por el momento 😔', ()=>{
+        showChips(['↩️ Elegir otra sucursal'], ()=>pasoSucursal());
       });
       return;
     }
-    
-    const opciones = doctores.map(d => d.nombreDoctor + (d.especialidad ? ' · ' + d.especialidad : ''));
+    const opciones = doctores.map(d => d.nombreDoctor + (d.especialidad ? ' · '+d.especialidad : ''));
     opciones.push('El primero disponible 👍');
-    
     botSay('En '+st.sucursal+' te pueden atender:', ()=>{
       showChips(opciones, pick=>{
         if(pick.startsWith('El primero')){
@@ -501,8 +719,7 @@ async function pasoDoctor(){
         } else {
           const nombreElegido = pick.split(' · ')[0];
           const doc = doctores.find(d => d.nombreDoctor === nombreElegido);
-          st.doctor = doc.nombreDoctor;
-          st.codigoDoctor = doc.codigoDoctor;
+          if(doc){ st.doctor=doc.nombreDoctor; st.codigoDoctor=doc.codigoDoctor; }
         }
         pasoFecha();
       });
@@ -512,7 +729,7 @@ async function pasoDoctor(){
 
 function pasoFecha(){
   st.paso='fecha';
-  botSay('¿Qué día te gustaría? Estos son los próximos días con atención (domingos cerramos):', ()=>{
+  botSay('¿Qué día te gustaría venir? Aquí están los próximos días disponibles (cerramos los domingos):', ()=>{
     showChips(proxDias(5), pick=>{ st.fecha=pick; pasoHora(); });
   });
 }
@@ -520,174 +737,141 @@ function pasoFecha(){
 function pasoHora(){
   st.paso='hora';
   const busy=ocupadasPara(st.doctor,st.fecha);
-  botSay('Disponibilidad de '+st.doctor+' para el '+st.fecha+' (los tachados ya están ocupados):', ()=>{
+  botSay('Disponibilidad de '+st.doctor+' para el '+st.fecha+'.\nLos tachados ya están ocupados:', ()=>{
     showChips(HORAS, pick=>{ st.hora=pick; pasoConfirmar(); }, busy);
   });
 }
 
 function pasoConfirmar(){
   st.paso='confirmar';
-  botSay('Confírmame por favor:\n\n🦷 '+st.servicio+'\n📍 '+st.sucursal+' ('+st.ciudad+')\n👩‍⚕️ '+st.doctor+'\n📅 '+st.fecha+' · '+st.hora+'\n🙋 '+st.nombre+'\n📞 '+st.tel+'\n\n¿Agendamos así?', ()=>{
-    showChips(['✅ Sí, confirmar','✏️ Cambiar algo'], pick=>{
+  botSay('Perfecto, aquí está el resumen de tu cita:\n\n🦷 '+st.servicio+'\n📍 '+st.sucursal+' · '+st.ciudad+'\n👩‍⚕️ '+st.doctor+'\n📅 '+st.fecha+' a las '+st.hora+'\n🙋 '+st.nombre+'\n📞 '+st.tel+'\n\n¿Confirmamos así?', ()=>{
+    showChips(['✅ Sí, confirmar','✏️ Quiero cambiar algo'], pick=>{
       if(pick.startsWith('✅')) agendar();
-      else { botSay('Sin problema, empecemos de nuevo 😊'); setTimeout(inicio, 1200); }
+      else botSay('Sin problema 😊 ¿Qué quieres cambiar?', ()=>{
+        showChips(['🦷 El servicio','📍 La sucursal o ciudad','👩‍⚕️ El doctor','📅 La fecha','🕐 La hora'], pick2=>{
+          botSay('Nota: la cita anterior no quedó registrada, vamos a armarla de nuevo. 😊', ()=>{
+            if(pick2.includes('servicio'))      { st.servicio=null; st.ciudad=null; st.sucursal=null; st.doctor=null; st.fecha=null; st.hora=null; pasoServicio(); }
+            else if(pick2.includes('sucursal')) { st.ciudad=null; st.sucursal=null; st.doctor=null; st.fecha=null; st.hora=null; pasoCiudad(); }
+            else if(pick2.includes('doctor'))   { st.doctor=null; st.fecha=null; st.hora=null; pasoDoctor(); }
+            else if(pick2.includes('fecha'))    { st.fecha=null; st.hora=null; pasoFecha(); }
+            else if(pick2.includes('hora'))     { st.hora=null; pasoHora(); }
+          });
+        });
+      });
     });
   });
 }
 
 async function agendar(){
   st.paso='listo';
-
-  botSay('Estoy registrando tu solicitud en el sistema... 😊');
-
+  botSay('Registrando tu solicitud... 😊');
   const resultado = await guardarCitaDemo();
-  
-  /* ================== CANCELAR CITA ================== */
-if(resultado.status === 'duplicado'){
-    botSay('Veo que ya tienes una cita registrada 📋\n\n📅 '+st.fecha+'\n🕐 '+st.hora+'\n📍 '+st.sucursal+'\n👩‍⚕️ '+st.doctor+'\n\n¿Qué te gustaría hacer?', ()=>{
-      showChips(
-        ['📅 Cambiar fecha/hora', '❌ Cancelar mi cita', '💬 Hablar con asistente'],
-        pick=>{
-          if(pick.startsWith('📅')){
-            // Re-agendar
-            botSay('¡Perfecto! Vamos a buscarte un nuevo horario 😊', ()=>{
-              st.fecha = null;
-              st.hora = null;
-              pasoFecha();
-            });
-          } else if(pick.startsWith('❌')){
-            // Cancelar la cita REAL (en la BD)
-            confirmarCancelacion();
-          } else {
-            // Hablar con asistente
-            const mensaje = encodeURIComponent(
-              'Hola, soy ' + st.nombre + ' (tel: ' + st.tel + '). ' +
-              'Tengo una cita registrada para el ' + st.fecha + ' a las ' + st.hora +
-              ' en ' + st.sucursal + ' con ' + st.doctor + '. ' +
-              'Me gustaría hablar con un asistente antes de hacer cambios. ¿Me pueden ayudar?'
-            );
-            const urlWhatsApp = 'https://api.whatsapp.com/send?phone=5218123855727&text=' + mensaje;
-            botSay('¡Claro! Te abro WhatsApp con un mensaje listo. Solo da clic en "Enviar" cuando se abra. 😊', ()=>{
-              window.open(urlWhatsApp, '_blank');
-              showChips(['Agendar otra cita'], ()=>inicio());
-            });
-          }
+
+  if(resultado.status === 'duplicado'){
+    botSay('Veo que ya tienes una cita registrada 📋\n\n📅 '+st.fecha+'\n🕐 '+st.hora+'\n📍 '+st.sucursal+'\n👩‍⚕️ '+st.doctor+'\n\n¿Qué quieres hacer?', ()=>{
+      showChips(['📅 Cambiar fecha/hora','❌ Cancelar mi cita','💬 Hablar con un asesor'], pick=>{
+        if(pick.startsWith('📅')){
+          botSay('¡Perfecto! Busquemos otro horario 😊', ()=>{ st.fecha=null; st.hora=null; pasoFecha(); });
+        } else if(pick.startsWith('❌')){
+          confirmarCancelacion();
+        } else {
+          const msg = encodeURIComponent('Hola, soy '+st.nombre+' (tel: '+st.tel+'). Tengo una cita para el '+st.fecha+' a las '+st.hora+' en '+st.sucursal+' con '+st.doctor+'. Quisiera hablar con un asesor.');
+          botSay('¡Claro! Te abro WhatsApp con el mensaje listo. 😊', ()=>{ window.open('https://api.whatsapp.com/send?phone=5218123855727&text='+msg,'_blank'); showChips(['Agendar otra cita'],()=>agendarOtraCita()); });
         }
-      );
+      });
     });
     return;
   }
-  
+
   const f = resultado.codigoCita || 'LD-'+(folio++);
-
-  botSay(
-    '¡Listo! 🎉 Tu solicitud quedó registrada.\n\n' +
-    'Folio: ' + f +
-    '\n📍 ' + st.sucursal +
-    '\n📅 ' + st.fecha +
-    ' a las ' + st.hora +
-    '\n👩‍⚕️ ' + st.doctor +
-    '\n\nUna asesora revisará la solicitud y te contactará para confirmar. 😁',
-    ()=>{
-      showChips(['Agendar otra cita'], ()=>inicio());
-    }
-  );
-}
-
-/* ================== TEXTO LIBRE ================== */
-function sendFree(){
-  const inp=document.getElementById('user-in');
-  const v=inp.value.trim(); if(!v) return;
-  inp.value=''; removeChips(); addMe(v);
-  const low=v.toLowerCase();
-
-  if(st.paso==='nombreNuevo'){
-    if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
-    st.nombre = v;
-    pasoTelefonoNuevo();
-    return;
-  }
-  
-  if(st.paso==='telefonoNuevo'){
-    const dig=v.replace(/\D/g,'');
-    if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos? (ej. 8112345678)'); return; }
-    st.tel = dig.slice(-10);
-    st.codigoPaciente = 'TEL-' + st.tel;
-    botSay('¡Listo '+st.nombre.split(' ')[0]+'! 😊 Ya estás en nuestro sistema.', ()=>{
-      pasoServicio();
+  botSay('¡Listo! 🎉 Tu solicitud quedó registrada.\n\nFolio: '+f+'\n📍 '+st.sucursal+'\n📅 '+st.fecha+' a las '+st.hora+'\n👩‍⚕️ '+st.doctor+'\n\nUna asesora te contactará para confirmar tu cita. ¡Nos vemos pronto! 😁', ()=>{
+    showChips(['Agendar otra cita','👋 Listo, gracias'], pick=>{
+      if(pick.includes('Agendar')) agendarOtraCita();
+      else botSay('¡Hasta pronto! Que tengas un excelente día 😊🦷');
     });
-    return;
-  }
-  
-  if(st.paso==='telefonoRegular'){
-    const dig=v.replace(/\D/g,'');
-    if(dig.length<10){ botSay('Mmm, ese número se ve incompleto. ¿Me lo compartes a 10 dígitos?'); return; }
-    const telLimpio = dig.slice(-10);
-    buscarPacienteEnSistema(telLimpio);
-    return;
-  }
-  
-  if(st.paso==='nombreParaBuscar'){
-    if(v.length<3){ botSay('¿Me lo repites? Necesito el nombre completo, por favor 🙏'); return; }
-    buscarPacientePorNombreEnSistema(v);
-    return;
-  }
-
-  // Por defecto, regresar al inicio
-  botSay('Para agendar tu cita, sigue las opciones que te muestro 👇', ()=>{
-    if(st.paso === 'servicio') pasoServicio();
-    else if(st.paso === 'ciudad') pasoCiudad();
-    else if(st.paso === 'sucursal') pasoSucursal();
-    else if(st.paso === 'doctor') pasoDoctor();
-    else if(st.paso === 'fecha') pasoFecha();
-    else if(st.paso === 'hora') pasoHora();
-    else inicio();
   });
 }
 
 /* ================== CANCELAR CITA ================== */
 function confirmarCancelacion(){
-  botSay('Para confirmar, ¿estás seguro de cancelar tu cita?\n\n📅 '+st.fecha+'\n🕐 '+st.hora+'\n📍 '+st.sucursal, ()=>{
-    showChips(
-      ['✅ Sí, cancelar mi cita', '↩️ No, déjala como está'],
-      async pick=>{
-        if(pick.startsWith('✅')){
-          botSay('Cancelando tu cita... 🔄');
-          
-          const resultado = await apiCall({
-            accion: "cancelarCitaPorDatos",
-            telefono: st.tel,
-            fechaPreferida: st.fecha,
-            horaPreferida: st.hora,
-            sucursal: st.sucursal
+  botSay('¿Seguro que quieres cancelar esta cita?\n\n📅 '+st.fecha+'\n🕐 '+st.hora+'\n📍 '+st.sucursal, ()=>{
+    showChips(['✅ Sí, cancelar','↩️ No, déjala'], async pick=>{
+      if(pick.startsWith('✅')){
+        botSay('Cancelando tu cita... 🔄');
+        const r = await apiCall({ accion:"cancelarCitaPorDatos", telefono:st.tel, fechaPreferida:st.fecha, horaPreferida:st.hora, sucursal:st.sucursal });
+        if(r.status === 'ok'){
+          botSay('✅ Tu cita fue cancelada exitosamente.\n\nSi cambias de opinión, puedes agendar una nueva cita cuando quieras. 😊', ()=>{
+            showChips(['📅 Agendar nueva cita','👋 Gracias, hasta luego'], pick2=>{
+              if(pick2.includes('Agendar')) agendarOtraCita();
+              else botSay('¡Hasta luego! Que te vaya muy bien 😊');
+            });
           });
-          
-          if(resultado.status === 'ok'){
-            botSay('✅ Tu cita ha sido cancelada exitosamente.\n\nUna asesora será notificada del cambio. Si deseas, puedes agendar una nueva cita cuando gustes. 😊', ()=>{
-              showChips(['Agendar nueva cita', 'Salir'], pick2=>{
-                if(pick2.startsWith('Agendar')) inicio();
-                else botSay('¡Gracias por contactarnos! 😊 Que tengas un excelente día.');
-              });
-            });
-          } else {
-            botSay('Hubo un problema al cancelar 😔 Por favor escríbenos por WhatsApp para que te ayudemos.', ()=>{
-              showChips(['Agendar otra cita'], ()=>inicio());
-            });
-          }
         } else {
-          botSay('Perfecto, tu cita sigue activa 😊', ()=>{
-            showChips(['Agendar nueva cita', 'Salir'], pick2=>{
-              if(pick2.startsWith('Agendar')) inicio();
-              else botSay('¡Gracias! Que tengas un excelente día 😊');
-            });
+          botSay('Hubo un problema al cancelar 😔 Te conectamos con un asesor para que te ayude.', ()=>{
+            const msg = encodeURIComponent('Hola, quisiera cancelar mi cita del '+st.fecha+' a las '+st.hora+' en '+st.sucursal+'.');
+            showChips(['💬 Contactar asesor'],()=> window.open('https://api.whatsapp.com/send?phone=5218123855727&text='+msg,'_blank'));
           });
         }
+      } else {
+        botSay('¡Perfecto, tu cita sigue activa! 😊', ()=>{
+          showChips(['📅 Agendar otra cita','👋 Listo, gracias'], pick2=>{
+            if(pick2.includes('Agendar')) inicio();
+            else botSay('¡Hasta luego! 😊');
+          });
+        });
       }
-    );
+    });
   });
 }
 
-/* control de apertura/cierre */
+/* ================== TEXTO LIBRE (mejorado) ================== */
+function sendFree(){
+  const inp = document.getElementById('user-in');
+  const v = inp.value.trim(); if(!v) return;
+  inp.value = ''; removeChips(); addMe(v);
+
+  const intencion = detectarIntencion(v);
+
+  /* --- Pasos donde esperamos texto escrito específico --- */
+  if(st.paso === 'nombreNuevo'){
+    if(v.length < 3){ botSay('Hmm, parece muy corto 🤔 ¿Me puedes dar tu nombre completo, por favor?'); return; }
+    st.nombre = v;
+    pasoTelefonoNuevo();
+    return;
+  }
+
+  if(st.paso === 'telefonoNuevo'){
+    const dig = v.replace(/\D/g,'');
+    if(dig.length < 10){ botSay('Ese número se ve incompleto 🤔 Necesito los 10 dígitos, algo como: 8112345678'); return; }
+    manejarTelefono(dig.slice(-10));
+    return;
+  }
+
+  if(st.paso === 'telefonoRegular'){
+    const dig = v.replace(/\D/g,'');
+    if(dig.length < 10){ botSay('Ese número no tiene 10 dígitos 🤔 ¿Me lo repites? Algo así: 8112345678'); return; }
+    buscarPacienteEnSistema(dig.slice(-10));
+    return;
+  }
+
+  if(st.paso === 'nombreParaBuscar'){
+    if(v.length < 3){ botSay('¿Me puedes dar tu nombre completo, por favor? 🙏'); return; }
+    buscarPacientePorNombreEnSistema(v);
+    return;
+  }
+
+  if(st.paso === 'telefonoParaCancelar'){
+    const dig = v.replace(/\D/g,'');
+    if(dig.length < 10){ botSay('Necesito los 10 dígitos de tu teléfono 🙏'); return; }
+    manejarTelefono(dig.slice(-10));
+    return;
+  }
+
+  /* --- Para cualquier otro texto, detectar intención y responder --- */
+  responderIntencion(intencion, v);
+}
+
+/* ================== CONTROL APERTURA/CIERRE ================== */
 var _started=false;
 function openChat(){
   document.getElementById('chat-window').classList.add('open');
@@ -700,7 +884,7 @@ function closeChat(){
   document.getElementById('chat-window').classList.remove('open');
   document.getElementById('chat-launcher').style.display='flex';
 }
-setTimeout(function(){ var t=document.getElementById('launcher-tip'); if(t && !_started) t.style.display='none'; }, 9000);
+setTimeout(function(){ var t=document.getElementById('launcher-tip'); if(t&&!_started) t.style.display='none'; }, 9000);
 </script>
 </body>
 </html>
