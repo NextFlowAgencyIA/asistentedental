@@ -1138,8 +1138,7 @@
         <div class="form-error" id="usuario-form-error"></div>
         <div class="field">
           <label>Nombre *</label>
-          <input type="text" id="usr-nombre" placeholder="Ej. Admin San Pedro" />
-        </div>
+          <input type="text" id="usr-nombre" placeholder="Ej. Admin San Pedro" />        </div>
         <div class="field">
           <label>Correo *</label>
           <input type="email" id="usr-email" placeholder="Ej. sanpedro@losdentistas.mx" />
@@ -2198,32 +2197,34 @@
 
       if (!nombre || !email) { showUsuarioError('Nombre y correo son obligatorios.'); return; }
       if (!usuarioEditandoId && !password) { showUsuarioError('La contraseña temporal es obligatoria al crear un usuario nuevo.'); return; }
-      if (rol !== 'owner' && !sucursalId) { showUsuarioError('Selecciona la sucursal que administrará este usuario.'); return; }
+      if (!usuarioEditandoId && rol !== 'owner' && !sucursalId) { showUsuarioError('Selecciona la sucursal que administrará este usuario.'); return; }
 
       const saveBtn = document.getElementById('save-usuario-btn');
       saveBtn.disabled = true;
       saveBtn.textContent = 'Guardando…';
 
-      let error;
       if (usuarioEditandoId) {
-        // Solo actualiza el perfil en usuarios_admin (el correo y contraseña
-        // en Auth hay que cambiarlos desde Supabase directamente por ahora)
-        ({ error } = await sb.from('usuarios_admin').update({
+        // Editar usuario existente
+        const { error } = await sb.from('usuarios_admin').update({
           nombre, email, rol, sucursal_id: sucursalId
-        }).eq('id', usuarioEditandoId));
-      } else {
-        // Crear usuario nuevo: primero en Auth (requiere service_role desde el cliente,
-        // por eso aquí solo insertamos en usuarios_admin y mostramos instrucciones)
-        showUsuarioError('Para crear usuarios nuevos usa el script altas_masivas.js o el panel de Supabase Auth → Users → Add user. Luego edítalo aquí para asignarle sucursal y rol.');
+        }).eq('id', usuarioEditandoId);
         saveBtn.disabled = false;
         saveBtn.textContent = 'Guardar';
-        return;
+        if (error) { showUsuarioError('No se pudo guardar: ' + error.message); return; }
+      } else {
+        // Crear usuario nuevo via función RPC
+        const { data, error } = await sb.rpc('crear_usuario_sucursal', {
+          p_email: email,
+          p_password: password,
+          p_nombre: nombre,
+          p_rol: rol,
+          p_sucursal_id: sucursalId ? parseInt(sucursalId) : null
+        });
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Guardar';
+        if (error) { showUsuarioError('Error al crear usuario: ' + error.message); return; }
+        if (data && data.status === 'error') { showUsuarioError(data.message); return; }
       }
-
-      saveBtn.disabled = false;
-      saveBtn.textContent = 'Guardar';
-
-      if (error) { showUsuarioError('No se pudo guardar: ' + error.message); return; }
 
       usuarioModal.classList.remove('open');
       await cargarUsuarios();
