@@ -998,7 +998,6 @@
         <section class="view" data-view="usuarios">
           <div class="toolbar">
             <p style="margin:0;color:var(--muted)">Accesos al panel administrativo.</p>
-            <button class="btn btn-primary" id="open-add-usuario">+ Invitar usuario</button>
           </div>
           <div class="card">
             <table>
@@ -1144,10 +1143,10 @@
           <input type="email" id="usr-email" placeholder="Ej. sanpedro@losdentistas.mx" />
           <div class="field-hint" id="usr-email-hint">Este será su usuario para iniciar sesión.</div>
         </div>
-        <div class="field" id="usr-password-field">
-          <label>Contraseña temporal *</label>
+        <div class="field" id="usr-password-field" style="display:none">
+          <label id="usr-password-label">Contraseña temporal *</label>
           <input type="text" id="usr-password" placeholder="Ej. Dentista2026!" />
-          <div class="field-hint">El usuario podrá cambiarla después de su primer acceso.</div>
+          <div class="field-hint" id="usr-password-hint">El usuario podrá cambiarla después de su primer acceso.</div>
         </div>
         <div class="field">
           <label>Rol *</label>
@@ -2152,6 +2151,8 @@
       document.getElementById('usr-nombre').value = u.nombre || '';
       document.getElementById('usr-email').value = u.email || '';
       document.getElementById('usr-password').value = '';
+      document.getElementById('usr-password-label').textContent = 'Nueva contraseña (opcional)';
+      document.getElementById('usr-password-hint').textContent = 'Déjalo vacío si no quieres cambiarla.';
       document.getElementById('usr-rol').value = u.rol || 'sucursal';
       document.getElementById('usr-password-field').style.display = '';
       document.getElementById('usr-email-hint').textContent = 'Cambia el correo si lo necesitas.';
@@ -2176,7 +2177,6 @@
       await cargarUsuarios();
     };
 
-    document.getElementById('open-add-usuario').addEventListener('click', abrirNuevoUsuario);
     document.getElementById('close-usuario-modal').addEventListener('click', () => usuarioModal.classList.remove('open'));
     document.getElementById('cancel-usuario-modal').addEventListener('click', () => usuarioModal.classList.remove('open'));
     usuarioModal.addEventListener('click', e => { if (e.target === usuarioModal) usuarioModal.classList.remove('open'); });
@@ -2211,6 +2211,19 @@
         saveBtn.disabled = false;
         saveBtn.textContent = 'Guardar';
         if (error) { showUsuarioError('No se pudo guardar: ' + error.message); return; }
+
+        // Si escribió contraseña nueva, cambiarla via RPC
+        if (password) {
+          const { data: rpcData, error: rpcError } = await sb.rpc('cambiar_password_usuario', {
+            p_user_id: usuarioEditandoId,
+            p_password: password
+          });
+          if (rpcError || (rpcData && rpcData.status === 'error')) {
+            showUsuarioError('Usuario guardado pero error al cambiar contraseña: ' + (rpcError?.message || rpcData?.message));
+            await cargarUsuarios();
+            return;
+          }
+        }
       } else {
         // Crear usuario nuevo via función RPC
         const { data, error } = await sb.rpc('crear_usuario_sucursal', {
