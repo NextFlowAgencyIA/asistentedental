@@ -2151,10 +2151,8 @@
       document.getElementById('usr-nombre').value = u.nombre || '';
       document.getElementById('usr-email').value = u.email || '';
       document.getElementById('usr-password').value = '';
-      document.getElementById('usr-password-label').textContent = 'Nueva contraseña (opcional)';
-      document.getElementById('usr-password-hint').textContent = 'Déjalo vacío si no quieres cambiarla.';
       document.getElementById('usr-rol').value = u.rol || 'sucursal';
-      document.getElementById('usr-password-field').style.display = '';
+      document.getElementById('usr-password-field').style.display = 'none';
       document.getElementById('usr-email-hint').textContent = 'Cambia el correo si lo necesitas.';
       document.getElementById('usr-sucursal-field').style.display = u.rol === 'owner' ? 'none' : '';
       llenarSelectSucursales();
